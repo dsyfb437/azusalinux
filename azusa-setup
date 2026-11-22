@@ -20,7 +20,7 @@ STATE_DIR="/var/lib/azusalinux"
 BACKUP_DIR="$STATE_DIR/backup"
 
 APPLY=0
-NEW_HOST="$DEFAULT_HOST"
+NEW_HOST=""   # 空 = 看一下现状再决定，不擅自动用户取好的名字
 
 usage() {
     sed -n '2,10p' "$0" | sed 's/^# \{0,1\}//'
@@ -78,6 +78,24 @@ fi
 if [ -z "$BASE_VERSION" ]; then
     echo "azusa-setup: 读不到 Ubuntu 版本，这不像是 Ubuntu" >&2
     exit 1
+fi
+
+# 主机名策略：用户显式给了 --hostname 才改；否则只有当前是安装器默认的
+# 通用名字（ubuntu / localhost）才换成 azusalinux，其余一律保留。
+CUR_HOST="$(hostname)"
+if [ -z "$NEW_HOST" ]; then
+    case "$CUR_HOST" in
+        ubuntu|localhost|localhost.localdomain|"")
+            NEW_HOST="$DEFAULT_HOST"
+            HOST_REASON="默认名，替换为 $DEFAULT_HOST"
+            ;;
+        *)
+            NEW_HOST="$CUR_HOST"
+            HOST_REASON="保留你现有的主机名"
+            ;;
+    esac
+else
+    HOST_REASON="由 --hostname 指定"
 fi
 
 # ---------------------------------------------------------------- 输出样式
@@ -188,9 +206,9 @@ done
 printf '\n%s\n' "  主机名"
 cur_host="$(hostname)"
 if [ "$cur_host" = "$NEW_HOST" ]; then
-    printf '  %s %-24s 已是 %s\n' "$(ok)" "hostname" "$NEW_HOST"
+    printf '  %s %-24s 已是 %s（%s）\n' "$(ok)" "hostname" "$NEW_HOST" "$HOST_REASON"
 else
-    printf '  %s %-24s %s → %s\n' "$(todo)" "hostname" "$cur_host" "$NEW_HOST"
+    printf '  %s %-24s %s → %s（%s）\n' "$(todo)" "hostname" "$cur_host" "$NEW_HOST" "$HOST_REASON"
     if [ "$APPLY" -eq 1 ]; then
         hostnamectl set-hostname "$NEW_HOST"
     fi
