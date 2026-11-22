@@ -56,13 +56,25 @@ contains "深色壁纸" "mascot-dark" "$(gs org.gnome.desktop.background picture
 contains "浅色壁纸" "mascot-light" "$(gs org.gnome.desktop.background picture-uri)"
 
 head_ "字体与图标"
-for pkg in fonts-inter fastfetch papirus-icon-theme; do
+for pkg in fonts-inter fonts-jetbrains-mono fastfetch papirus-icon-theme; do
     if dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null | grep -q "install ok installed"; then
         ok "包 $pkg" "已安装"
     else
         bad "包 $pkg" "未安装"
     fi
 done
+# 光看 gsettings 不够：字体没装时值照样能设进去，只是渲染时回退
+if fc-match -f '%{family}' "JetBrains Mono" 2>/dev/null | grep -qi '^JetBrains Mono'; then
+    ok "等宽字体实际可用" "JetBrains Mono"
+else
+    bad "等宽字体实际可用" "fc-match 回退了，装 fonts-jetbrains-mono"
+fi
+if fc-match -f '%{family}' "Inter" 2>/dev/null | grep -qi '^Inter'; then
+    ok "界面字体实际可用" "Inter"
+else
+    bad "界面字体实际可用" "fc-match 回退了，装 fonts-inter"
+fi
+
 if grep -q "#7e57c2" /usr/share/icons/Papirus-Dark/48x48/places/folder.svg 2>/dev/null; then
     ok "文件夹颜色" "violet (#7e57c2)"
 else

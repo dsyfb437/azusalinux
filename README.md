@@ -131,7 +131,7 @@ sudo ./bin/azusa-apply --grub --apply  # GRUB 配色 + update-grub
 
 ```bash
 # 1. 依赖（只需一次）
-sudo apt install fonts-inter fastfetch papirus-icon-theme
+sudo apt install fonts-inter fonts-jetbrains-mono fastfetch papirus-icon-theme
 
 # 2. 用户级：终端配色、字体、强调色、壁纸、图标主题（不需要 sudo）
 ./bin/azusa-mascot

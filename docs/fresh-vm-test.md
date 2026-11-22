@@ -22,7 +22,7 @@ cd azusalinux
 ## 2. 按 README 跑
 
 ```bash
-sudo apt install fonts-inter fastfetch papirus-icon-theme
+sudo apt install fonts-inter fonts-jetbrains-mono fastfetch papirus-icon-theme
 ./bin/azusa-mascot
 python3 bin/azusa-apply --all --apply
 sudo ./bin/azusa-apply --system --apply

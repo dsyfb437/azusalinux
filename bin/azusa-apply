@@ -228,12 +228,23 @@ def apply_gnome(apply: bool) -> None:
 
 
 # titlebar-font 不在 interface schema 下，GNOME 把它放在 wm.preferences
+# 每项: (schema, key) -> (设定值, 所属包, 家族名)
 FONTS = {
-    ("org.gnome.desktop.interface", "font-name"): ("Inter 11", "fonts-inter"),
-    ("org.gnome.desktop.interface", "document-font-name"): ("Inter 11", "fonts-inter"),
-    ("org.gnome.desktop.interface", "monospace-font-name"): ("JetBrains Mono 11", "fonts-jetbrains-mono"),
-    ("org.gnome.desktop.wm.preferences", "titlebar-font"): ("Inter Bold 11", "fonts-inter"),
+    ("org.gnome.desktop.interface", "font-name"):
+        ("Inter 11", "fonts-inter", "Inter"),
+    ("org.gnome.desktop.interface", "document-font-name"):
+        ("Inter 11", "fonts-inter", "Inter"),
+    ("org.gnome.desktop.interface", "monospace-font-name"):
+        ("JetBrains Mono 11", "fonts-jetbrains-mono", "JetBrains Mono"),
+    ("org.gnome.desktop.wm.preferences", "titlebar-font"):
+        ("Inter Bold 11", "fonts-inter", "Inter"),
 }
+
+
+def font_available(family: str) -> bool:
+    """fc-match 会把缺失的字体回退成别的家族，所以只能比对结果。"""
+    rc, out, _ = run(["fc-match", "-f", "%{family}", family])
+    return rc == 0 and out.strip().lower().startswith(family.lower())
 
 
 def apply_fonts(apply: bool) -> None:
@@ -245,10 +256,13 @@ def apply_fonts(apply: bool) -> None:
         print(f"   {warn('没有 DBus 会话，跳过（需在桌面会话里运行）')}")
         return
 
-    for (schema, key), (value, pkg) in FONTS.items():
+    for (schema, key), (value, pkg, family) in FONTS.items():
         rc, installed, _ = run(["dpkg-query", "-W", "-f=${Status}", pkg])
         if rc != 0 or "install ok installed" not in installed:
-            print(f"   {warn(f'{key}：{pkg} 未安装，跳过')}")
+            print(f"   {warn(f'{key}：{pkg} 未安装，跳过 —— sudo apt install {pkg}')}")
+            continue
+        if not font_available(family):
+            print(f"   {warn(f'{key}：字体 {family} 不可用（{pkg} 装了但 fc-match 找不到）')}")
             continue
         rc, current, _ = run(["gsettings", "get", schema, key])
         current = current.strip().strip("'")
