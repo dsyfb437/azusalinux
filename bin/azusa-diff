@@ -11,6 +11,12 @@ set -uo pipefail
 
 ACTION="${1:-dump}"
 
+# 必需包：缺了就是 provision.sh 漏装；其余包差异多半是开发工具噪音
+REQUIRED_PKGS="fonts-inter fonts-jetbrains-mono fastfetch papirus-icon-theme python3 git curl"
+
+# 机器特有的 gsettings（uuid / 窗口尺寸 / 会话状态），比对时忽略
+IGNORE_GSET="default-profile-uuid profile-uuids window-size last-selected"
+
 # 所有条目必须是三个字段：section <TAB> key <TAB> value
 # 两字段会被 compare 当成空 key，同一 section 的所有条目会塌缩成一条。
 emit() { printf '%s\t%s\t%s\n' "$1" "$2" "$3"; }
@@ -95,9 +101,15 @@ do_dump() {
 
 do_compare() {
     local a="$1" b="$2"
-    python3 - "$a" "$b" <<'PY'
+    REQUIRED_PKGS="$REQUIRED_PKGS" IGNORE_GSET="$IGNORE_GSET" \
+        python3 - "$a" "$b" <<'PY'
 import sys
 from pathlib import Path
+
+import os
+REQUIRED = set(os.environ.get("REQUIRED_PKGS", "").split())
+IGNORE = tuple(os.environ.get("IGNORE_GSET", "").split())
+
 
 def load(p):
     d = {}
@@ -114,9 +126,36 @@ for key in sorted(set(a) | set(b)):
     if va != vb:
         sections.setdefault(key[0], []).append((key[1], va, vb))
 
+# pkg 拆成必需/其他；gset 过滤掉机器特有项
+ignored = 0
+if "gset" in sections:
+    kept = []
+    for name, va, vb in sections["gset"]:
+        if any(tok in name for tok in IGNORE):
+            ignored += 1
+        else:
+            kept.append((name, va, vb))
+    if kept:
+        sections["gset"] = kept
+    else:
+        del sections["gset"]
+
+noise = 0
+if "pkg" in sections:
+    req = [(n, va, vb) for n, va, vb in sections["pkg"]
+           if n in REQUIRED]
+    noise = len(sections["pkg"]) - len(req)
+    if req:
+        sections["pkg(必需)"] = req
+    del sections["pkg"]
+
 total = sum(len(v) for v in sections.values())
-if not total:
-    print("两台机器的状态完全一致。")
+if ignored:
+    print(f"（已忽略 {ignored} 项机器特有的 gsettings）")
+if noise:
+    print(f"（{noise} 个非必需包差异，通常是开发工具，略过）")
+if total == 0:
+    print("\n两台机器的状态完全一致。")
     sys.exit(0)
 
 print(f"共 {total} 处差异：\n")
