@@ -12,12 +12,12 @@
 
 ## 1. 把代码带进去
 
-在宿主机上打包（已有 `azusalinux-0.1.tar.gz`），通过 VMware 共享文件夹或拖拽进 VM，然后：
-
 ```bash
-tar xzf azusalinux-0.1.tar.gz
+git clone https://github.com/dsyfb437/azusalinux.git
 cd azusalinux
 ```
+
+（离线环境才用 tar.gz 备用包。）
 
 ## 2. 按 README 跑
 
