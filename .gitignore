@@ -5,3 +5,11 @@ iso/work/
 iso/work.cache.keep/
 iso/build.out
 iso/build.log
+iso-mkosi/*.raw
+iso-mkosi/*.vmdk
+iso-mkosi/build.out
+iso-mkosi/mkosi.cache/
+iso-mkosi/mkosi.builddir/
+iso-mkosi/*.vmlinuz
+iso-mkosi/*.initrd
+iso-mkosi/*.zst

@@ -1,0 +1,23 @@
+// 由 AzusaLinux 提供：只列信息，不画 logo（logo 交给 azusa-logo 打印吉祥物）
+{
+  "logo": { "type": "none" },
+  "display": {
+    "separator": "  ",
+    "key": { "width": 12 }
+  },
+  "modules": [
+    { "type": "title", "color": { "user": "green", "host": "magenta" } },
+    { "type": "os",       "key": "OS",        "keyColor": "magenta" },
+    { "type": "kernel",   "key": "Kernel",    "keyColor": "magenta" },
+    { "type": "de",       "key": "DE",        "keyColor": "magenta" },
+    { "type": "wm",       "key": "WM",        "keyColor": "magenta" },
+    { "type": "terminal", "key": "Terminal",  "keyColor": "magenta" },
+    { "type": "shell",    "key": "Shell",     "keyColor": "magenta" },
+    { "type": "packages", "key": "Packages",  "keyColor": "magenta" },
+    { "type": "font",     "key": "Font",      "keyColor": "magenta" },
+    { "type": "cpu",      "key": "CPU",       "keyColor": "magenta" },
+    { "type": "gpu",      "key": "GPU",       "keyColor": "magenta" },
+    { "type": "memory",   "key": "Memory",    "keyColor": "magenta" },
+    { "type": "uptime",   "key": "Uptime",    "keyColor": "magenta" }
+  ]
+}
