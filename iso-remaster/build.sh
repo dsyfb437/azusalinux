@@ -32,7 +32,7 @@ prepare)
     python3 - "$ISO_ROOT" <<'PY'
 import pathlib, sys, re
 root = pathlib.Path(sys.argv[1])
-params = "autoinstall ds=nocloud;s=/cdrom/nocloud/"
+params = "autoinstall ds=nocloud;s=/cdrom/nocloud/ console=ttyS0,115200n8"
 changed = []
 for cfg in list(root.glob("boot/grub/grub.cfg")) + list(root.glob("isolinux/*.cfg")):
     text = cfg.read_text(errors="replace")
@@ -56,8 +56,17 @@ pack)
     # 原 ISO 的 -e 参数写死了 EFI 分区的起始 LBA；重打包后位置会变，
     # 死偏移会指向错误数据（UEFI 启动报 "can't find command grub_platform"）。
     # 改成让 xorriso 解析实际位置。
-    OPTS="$(tr '\n' ' ' < "$WORK/eltorito.opts" | sed -E "s/-e '--interval:appended_partition_2_start_[0-9]+s_size_[0-9]+d:all::'/-e '--interval:appended_partition_2:all::'/")"
-    eval "xorriso -as mkisofs $OPTS -V AZUSALINUX -o '$OUT' '$ISO_ROOT'" 2>&1 | tail -3
+    # 不用追加分区：EFI 镜像作为文件放进 ISO 树，El Torito 直接引用它，
+    # 避免分区起始 LBA 变化导致的错位。
+    # 用 -indev/-outdev + -boot_image replay：在原镜像上替换文件，
+    # 引导结构由 xorriso 原样复制，不重建 El Torito。
+    cp "$ISO_ROOT/boot/grub/grub.cfg" "$WORK/grub-patched.cfg"
+    rm -f "$OUT"
+    xorriso -indev "$SRC_ISO" -outdev "$OUT" \
+        -map "$WORK/grub-patched.cfg" /boot/grub/grub.cfg \
+        -map "$ISO_ROOT/nocloud" /nocloud \
+        -map "$ISO_ROOT/azusa-debs" /azusa-debs \
+        -boot_image any replay -commit 2>&1 | tail -2
     ls -lh "$OUT"
     ;;
 all) "$0" extract; "$0" prepare; "$0" pack ;;
