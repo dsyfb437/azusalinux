@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+# azusa-verify — 检查这台机器是不是「配置完整的 AzusaLinux」
+#
+# 只读，不改任何东西。用来验证可复现性：
+# 在一台全新机器上跑完 README 的步骤后，这里应该全绿。
+#
+#   azusa-verify          # 全部检查
+#   azusa-verify --quiet  # 只输出失败项
+set -uo pipefail
+
+QUIET=0
+[ "${1:-}" = "--quiet" ] && QUIET=1
+
+pass=0; fail=0; skip=0
+
+ok()   { [ $QUIET -eq 0 ] && printf '  \033[32m✓\033[0m %-30s %s\n' "$1" "$2"; pass=$((pass+1)); }
+bad()  { printf '  \033[31m✗\033[0m %-30s %s\n' "$1" "$2"; fail=$((fail+1)); }
+skip_() { [ $QUIET -eq 0 ] && printf '  \033[2m-\033[0m %-30s %s\n' "$1" "$2"; skip=$((skip+1)); }
+head_() { [ $QUIET -eq 0 ] && printf '\n  \033[1m%s\033[0m\n' "$1"; }
+
+expect() {  # 名称 期望值 实际值
+    if [ "$2" = "$3" ]; then ok "$1" "$3"; else bad "$1" "期望 [$2] 实际 [$3]"; fi
+}
+
+contains() {  # 名称 子串 实际值
+    case "$3" in
+        *"$2"*) ok "$1" "$3" ;;
+        *) bad "$1" "应包含 [$2]，实际 [$3]" ;;
+    esac
+}
+
+gs() { gsettings get "$1" "$2" 2>/dev/null | tr -d "'"; }
+
+head_ "系统身份"
+expect "os-release ID" "azusalinux" "$(sed -n 's/^ID=//p' /etc/os-release | head -1)"
+expect "os-release UBUNTU_CODENAME" "resolute" \
+    "$(sed -n 's/^UBUNTU_CODENAME=//p' /etc/os-release | head -1)"
+if sh -c '. /etc/os-release' 2>/dev/null; then
+    ok "os-release 可 source" "合法 shell"
+else
+    bad "os-release 可 source" "语法错误（ID_LIKE 缺引号会这样）"
+fi
+if grep -q "menuentry 'AzusaLinux" /boot/grub/grub.cfg 2>/dev/null; then
+    ok "GRUB 菜单" "AzusaLinux GNU/Linux"
+else
+    skip_ "GRUB 菜单" "读不到 grub.cfg（需要 sudo 或未跑 update-grub）"
+fi
+
+head_ "外观设置"
+expect "强调色" "purple" "$(gs org.gnome.desktop.interface accent-color)"
+expect "配色方案" "prefer-dark" "$(gs org.gnome.desktop.interface color-scheme)"
+expect "界面字体" "Inter 11" "$(gs org.gnome.desktop.interface font-name)"
+expect "等宽字体" "JetBrains Mono 11" "$(gs org.gnome.desktop.interface monospace-font-name)"
+expect "图标主题" "Papirus-Dark" "$(gs org.gnome.desktop.interface icon-theme)"
+contains "深色壁纸" "mascot-dark" "$(gs org.gnome.desktop.background picture-uri-dark)"
+contains "浅色壁纸" "mascot-light" "$(gs org.gnome.desktop.background picture-uri)"
+
+head_ "字体与图标"
+for pkg in fonts-inter fastfetch papirus-icon-theme; do
+    if dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null | grep -q "install ok installed"; then
+        ok "包 $pkg" "已安装"
+    else
+        bad "包 $pkg" "未安装"
+    fi
+done
+if grep -q "#7e57c2" /usr/share/icons/Papirus-Dark/48x48/places/folder.svg 2>/dev/null; then
+    ok "文件夹颜色" "violet (#7e57c2)"
+else
+    bad "文件夹颜色" "不是 violet，跑 sudo azusa-apply --system --apply"
+fi
+
+head_ "终端"
+PAL="${XDG_DATA_HOME:-$HOME/.local/share}/org.gnome.Ptyxis/palettes/azusa.palette"
+[ -f "$PAL" ] && ok "Ptyxis 调色板" "azusa.palette" || bad "Ptyxis 调色板" "缺失"
+uuid=$(gsettings get org.gnome.Ptyxis default-profile-uuid 2>/dev/null | tr -d "'")
+if [ -n "$uuid" ]; then
+    expect "Ptyxis profile 配色" "azusa" \
+        "$(gsettings get "org.gnome.Ptyxis.Profile:/org/gnome/Ptyxis/Profiles/$uuid/" palette 2>/dev/null | tr -d "'")"
+else
+    skip_ "Ptyxis profile" "没有 profile uuid"
+fi
+expect "Ptyxis 等宽字体" "JetBrains Mono 11" "$(gsettings get org.gnome.Ptyxis font-name 2>/dev/null | tr -d "'")"
+
+head_ "工具"
+for cmd in azusa-fetch azusa-apply azusa-palette azusa-mascot; do
+    if command -v "$cmd" >/dev/null 2>&1; then
+        ok "命令 $cmd" "$(command -v "$cmd")"
+    else
+        bad "命令 $cmd" "不在 PATH（跑 ./install.sh）"
+    fi
+done
+
+head_ "文件"
+[ -f "$HOME/.local/share/backgrounds/azusa/mascot-dark-2880x1800.jpg" ] \
+    && ok "壁纸文件" "用户目录" || bad "壁纸文件" "缺失"
+[ -f "${XDG_DATA_HOME:-$HOME/.local/share}/icons/Azusa/index.theme" ] \
+    && bad "自定义图标主题" "不该存在（v1 已弃用）" || ok "自定义图标主题" "已清理"
+
+printf '\n  \033[2m──────────────────────────────────────────\033[0m\n'
+printf '  %d 项通过 · %d 项失败 · %d 项跳过\n\n' "$pass" "$fail" "$skip"
+[ "$fail" -eq 0 ] && exit 0 || exit 1
