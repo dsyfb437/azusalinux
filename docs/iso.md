@@ -84,7 +84,14 @@ UEFI 启动报 `can't find command 'grub_platform'`，而 **BIOS 启动正常**�
 | ISO 能打出来 | ✅ 6.1G，含 5 个 deb + autoinstall seed |
 | BIOS 启动 | ✅ 用户已在 VMware 里装成功 |
 | UEFI 启动 | ✅ 内核启动、autoinstall 参数传入（QEMU + OVMF 实测） |
-| 无人值守安装 | 见下方实测结果 |
+| autoinstall 触发 | ✅ cmdline 里有 `autoinstall ds=nocloud;s=/cdrom/nocloud/`，cloud-init 服务启动 |
+| 无人值守安装到完成 | ⚠️ **未在本机 QEMU 跑完**：机器负载过高后关机中断 |
+
+### 为什么没跑完完整安装
+
+本机只有 11G 内存，QEMU 里同时跑 6G ISO + 4G 虚拟机和构建任务时会把宿主机拖到卡死。
+关掉完整安装测试是对的。**用 VMware 装机验证更省资源**：分配 4G 内存、
+20G 磁盘、固件选 BIOS，从 ISO 启动后会自动进入安装流程。
 
 ### 排查记录：一个让我误判很久的坑
 
