@@ -5,6 +5,23 @@
 不是从零写内核，是在 Ubuntu 之上把「默认值」换成自己的：身份、桌面、预装、安装体验。
 生态照单全收——apt、PPA、Flatpak、deb 全都继续能用。
 
+## 用 deb 安装（0.1.0 起）
+
+```bash
+# 构建
+dpkg-buildpackage -b -us -uc
+
+# 安装（把 deb 放在同一目录）
+sudo apt install /path/to/azusa-desktop_0.1.0_all.deb /path/to/azusa-*.deb
+
+# 卸载
+sudo apt purge azusa-desktop azusa-settings azusa-artwork azusa-tools
+```
+
+**已有用户的设置不会被覆盖**——gsettings 默认值只影响新用户。要把配色、字体、
+壁纸套用到当前用户，继续用 `azusa-apply`。Ptyxis 调色板也需要它（profile 是可重定位
+schema，包里的 override 选不中）。
+
 ## 现在是什么状态
 
 **第 1 层：身份。已完成。**

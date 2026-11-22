@@ -28,3 +28,9 @@ Depends: ${misc:Depends}, azusa-artwork, fonts-inter, fonts-jetbrains-mono, papi
 Description: AzusaLinux desktop defaults
  GSettings overrides for accent colour, fonts, wallpaper and icon theme,
  plus system-wide kitty colours and a Ptyxis palette for new users.
+
+Package: azusa-desktop
+Architecture: all
+Depends: ${misc:Depends}, azusa-tools, azusa-artwork, azusa-settings, fastfetch
+Description: AzusaLinux desktop (metapackage)
+ Installs the AzusaLinux tools, artwork and desktop defaults on Ubuntu.

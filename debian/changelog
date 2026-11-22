@@ -1,5 +1,6 @@
 azusalinux (0.1.0) resolute; urgency=medium
 
   * Initial packaging: azusa-tools, azusa-artwork.
+  * Add azusa-settings and azusa-desktop.
 
  -- azusa <dsyfb437@users.noreply.github.com>  Sun, 22 Nov 2026 15:41:57 +0800
