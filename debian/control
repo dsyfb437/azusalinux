@@ -24,7 +24,7 @@ Description: AzusaLinux wallpapers
 
 Package: azusa-settings
 Architecture: all
-Depends: ${misc:Depends}, azusa-artwork, fonts-inter, fonts-jetbrains-mono, papirus-icon-theme
+Depends: ${misc:Depends}, azusa-artwork, azusa-icons, fonts-inter, fonts-jetbrains-mono
 Description: AzusaLinux desktop defaults
  GSettings overrides for accent colour, fonts, wallpaper and icon theme,
  plus system-wide kitty colours and a Ptyxis palette for new users.
@@ -34,3 +34,11 @@ Architecture: all
 Depends: ${misc:Depends}, azusa-tools, azusa-artwork, azusa-settings, fastfetch
 Description: AzusaLinux desktop (metapackage)
  Installs the AzusaLinux tools, artwork and desktop defaults on Ubuntu.
+
+Package: azusa-icons
+Architecture: all
+Depends: ${misc:Depends}, papirus-icon-theme
+Description: Azusa folder colours for Papirus
+ An icon theme inheriting Papirus-Dark that overrides only the folder icons
+ with Papirus' built-in violet variants, so folder colours survive upgrades
+ of papirus-icon-theme (unlike running papirus-folders over the system theme).

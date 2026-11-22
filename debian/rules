@@ -8,6 +8,7 @@ override_dh_auto_build:
 	mkdir -p $(BUILD)/root
 	cp -r branding $(BUILD)/root/
 	AZUSA_ROOT=$(BUILD)/root python3 bin/azusa-palette --emit
+	python3 packaging/gen-icon-theme.py $(BUILD)/icons
 	AZUSA_ROOT=$(BUILD)/root python3 bin/azusa-mascot --size 2880x1800 --out $(BUILD)/wallpapers
 
 override_dh_installgsettings:

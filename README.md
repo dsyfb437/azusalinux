@@ -166,6 +166,7 @@ SRC_ISO=/path/to/ubuntu-26.04.1-desktop-amd64.iso DEBS=/tmp/azusa-debs ./build.s
 | L0.9 | 从清单构建、可引导、启动自检通过 | ✅ |
 | L0.95 | deb 化，可在干净 Ubuntu 上装/卸 | ✅ |
 | L1 | 从 ISO 安装到硬盘（官方安装器 + autoinstall） | ✅ |
+| L1.1 | 紫色文件夹独立主题，不再依赖 papirus-folders | ✅ |
 
 ## 相关项目
 

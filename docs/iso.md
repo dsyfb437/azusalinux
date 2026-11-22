@@ -54,3 +54,25 @@ rm -rf /root/azusa-debs
 - 桌面首次登录会走 GNOME 初始设置，壁纸/强调色要重新登录一次才完全生效
 - 紫色文件夹图标仍是 `papirus-folders` 手工染色，干净安装不会带上（B4 未做）
 - 安装器界面是英文（subiquity 的 locale 不影响安装界面语言）
+
+## 两个已修的坑（都是实测暴露的）
+
+### EFI 分区偏移
+
+原 ISO 的 `-e` 参数写死了 EFI 分区的起始 LBA（`appended_partition_2_start_3162499s`）。
+重打包后 ISO 变大，EFI 分区实际落到 LBA 3163984，死偏移就指向了错误数据，
+UEFI 启动报 `can't find command 'grub_platform'`，而 **BIOS 启动正常**——
+所以只要不测 UEFI 就发现不了。
+
+修法：把 `-e` 换成 `--interval:appended_partition_2:all::`，让 xorriso 自己解析实际位置。
+
+### 紫色文件夹（B4）
+
+`papirus-folders` 是直接改 `papirus-icon-theme` 包里的文件，升级即还原。
+改成独立主题 `Azusa-Papirus`：
+
+- `Inherits=Papirus-Dark,Papirus,Adwaita,hicolor`
+- 只在 5 个尺寸的 `places/` 下放 385 个相对软链，指向 Papirus 自带的 violet 变体
+- 命名是**前缀式**（`folder-violet-documents.svg`），不是后缀式——第一版全拼错，405 个里只有 1 个能解析
+- 有 4 个名字（`folder-violet-desktop` 等）在 Papirus 里没有对应变体，已从清单剔除
+- 包只有 4.6 KB

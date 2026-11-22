@@ -53,7 +53,10 @@ PY
 pack)
     mkdir -p "$(dirname "$OUT")"
     # eltorito.opts 是带引号的 shell 片段，必须 eval 才不丢引号
-    OPTS="$(tr '\n' ' ' < "$WORK/eltorito.opts")"
+    # 原 ISO 的 -e 参数写死了 EFI 分区的起始 LBA；重打包后位置会变，
+    # 死偏移会指向错误数据（UEFI 启动报 "can't find command grub_platform"）。
+    # 改成让 xorriso 解析实际位置。
+    OPTS="$(tr '\n' ' ' < "$WORK/eltorito.opts" | sed -E "s/-e '--interval:appended_partition_2_start_[0-9]+s_size_[0-9]+d:all::'/-e '--interval:appended_partition_2:all::'/")"
     eval "xorriso -as mkisofs $OPTS -V AZUSALINUX -o '$OUT' '$ISO_ROOT'" 2>&1 | tail -3
     ls -lh "$OUT"
     ;;
