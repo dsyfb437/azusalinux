@@ -1,7 +1,7 @@
-PRETTY_NAME="AzusaLinux 0.1 (resolute)"
+PRETTY_NAME="AzusaLinux 0.4 (resolute)"
 NAME="AzusaLinux"
-VERSION_ID="0.1"
-VERSION="0.1 (resolute)"
+VERSION_ID="0.4"
+VERSION="0.4 (resolute)"
 VERSION_CODENAME=azusa
 ID=azusalinux
 ID_LIKE="ubuntu debian"

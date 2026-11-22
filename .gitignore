@@ -13,3 +13,6 @@ iso-mkosi/mkosi.builddir/
 iso-mkosi/*.vmlinuz
 iso-mkosi/*.initrd
 iso-mkosi/*.zst
+iso-mkosi/serial.log
+iso-mkosi/vars.fd
+iso-mkosi/*.log

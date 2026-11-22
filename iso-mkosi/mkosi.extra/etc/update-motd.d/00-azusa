@@ -1,0 +1,5 @@
+#!/bin/sh
+echo
+echo "  AzusaLinux $(. /etc/os-release && echo "$VERSION_ID")  ·  $(uname -r)"
+echo "  基于 Ubuntu $(. /etc/os-release && echo "$UBUNTU_CODENAME")，身份属于 AzusaLinux"
+echo

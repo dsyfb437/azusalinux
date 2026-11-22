@@ -1,0 +1,10 @@
+[Unit]
+Description=AzusaLinux self test
+After=multi-user.target
+[Service]
+Type=oneshot
+StandardOutput=tty
+TTYPath=/dev/ttyS0
+ExecStart=/bin/sh -c '/usr/bin/echo AZUSA_SELFTEST_BEGIN; /usr/bin/head -3 /etc/os-release; /usr/bin/uname -r; /usr/bin/whoami; /bin/ls -A /root; /usr/bin/echo AZUSA_SELFTEST_END; /usr/bin/poweroff'
+[Install]
+WantedBy=multi-user.target
