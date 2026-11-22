@@ -69,3 +69,24 @@ sudo ./azusa-setup --apply
 ## 通过了之后
 
 L0.5 → 具备做 L1（ISO）的前提：所有改动都有脚本可复现。
+
+## deb 验收（2026-11-22）
+
+在已有测试 VM（Ubuntu 26.04，主机名 `test`）里跑 `verify-deb.sh`，
+用**新建用户**隔离此前的用户级手工改动。
+
+| 检查项 | 结果 |
+|---|---|
+| `sudo apt install azusa-*.deb` | ✅ 4 个包正常安装 |
+| 新用户 `accent-color` | ✅ `'purple'` |
+| 新用户 `font-name` | ✅ `'Inter 11'` |
+| 新用户 `icon-theme` | ✅ `'Papirus-Dark'` |
+| 新用户 `picture-uri-dark` | ✅ Azusa 壁纸 |
+| `/etc/xdg/kitty/kitty.conf` | ✅ |
+| `20_azusa-settings.gschema.override` | ✅ |
+| 壁纸 XML 注册 | ✅ |
+| `apt purge` 后新用户 | ✅ `'orange'`（回退干净） |
+
+已知小问题：`azusa-fetch` 检查显示 `/usr/local/bin/azusa-fetch`——那是这台 VM
+早前跑 `install.sh` 留下的，优先级高于包里的 `/usr/bin/azusa-fetch`。
+干净环境不会有这个问题；要复测需先 `sudo rm /usr/local/bin/azusa*`。
