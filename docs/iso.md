@@ -77,29 +77,32 @@ UEFI 启动报 `can't find command 'grub_platform'`，而 **BIOS 启动正常**�
 - 有 4 个名字（`folder-violet-desktop` 等）在 Papirus 里没有对应变体，已从清单剔除
 - 包只有 4.6 KB
 
-## 当前状态（2026-11-22）
+## 当前状态
 
 | 项 | 状态 |
 |---|---|
 | ISO 能打出来 | ✅ 6.1G，含 5 个 deb + autoinstall seed |
-| BIOS 启动 + 安装 | ✅ 用户已在 VMware 里装成功 |
-| UEFI 启动 | ❌ **未通过** |
+| BIOS 启动 | ✅ 用户已在 VMware 里装成功 |
+| UEFI 启动 | ✅ 内核启动、autoinstall 参数传入（QEMU + OVMF 实测） |
+| 无人值守安装 | 见下方实测结果 |
 
-### UEFI 的问题（未解决）
+### 排查记录：一个让我误判很久的坑
 
-QEMU + OVMF 实测：GRUB 菜单能出现，选中后正常倒计时，但**内核没有启动**
-（串口里没有任何 `Linux version`，casper 也不加载）。而菜单项的 `linux /casper/vmlinuz`
-在这一步静默失败。
+前面的结论一度写成「UEFI 启动失败，内核起不来」。**那是错的。**
 
-已排除的原因：
+真实情况：内核一直在正常启动，但官方 ISO 的 cmdline 带 `quiet`，
+内核日志被压掉，而**官方 ISO 本来也不把日志输出到串口**。
+我拿「串口没有输出」当成了「没有启动」，于是把引导链上每一环都怀疑了一遍。
 
-- 不是 `grub_platform` 报错造成的——那行裸命令**在官方原版 ISO 的 grub.cfg 里就有**，
-  报错后 GRUB 仍继续解析（后面的菜单项都定义出来了）。
-- 不是 EFI 分区偏移——换成 `-boot_image any replay` 后引导结构完全照抄原版，仍然失败。
-- 不是缺文件——重打包后的 ISO 里 `/casper/vmlinuz`、`/casper/initrd` 都在，
-  casper 目录条目数和原版一致（167）。
+定位方法：在 `grub.cfg` 的菜单项里插 `echo`，确认 `linux` / `initrd` 命令
+返回正常（A/B/C/D 四个标记都打印出来），再把 `quiet splash` 换成 `loglevel=7`
+——内核日志立刻出现在串口里。
 
-下一步排查方向：在 grub.cfg 的菜单项里插 `echo` / `ls ($root)/casper`，
-打印出 GRUB 实际看到的 root 设备和目录内容，确认是 `root` 没指向 ISO 还是别的原因。
+教训：**静默不等于失败**。调试启动问题，先确保你有一条能看见的通道
+（`console=ttyS0` + `loglevel=7`），再去怀疑别的。
 
-**在此之前，请用 BIOS 启动安装**（VMware 里把固件类型设为 BIOS）。
+### 关于 `ds=nocloud;s=...` 里的分号
+
+一度怀疑 GRUB 把 `;` 当命令分隔符、截断了后面的 `console=` 参数。
+实测：加不加引号，内核 cmdline 里 `ds=nocloud;s=/cdrom/nocloud/` 都完整保留，
+后面参数也都在。**分号不是问题**。引号保留着无害，但不必要。
