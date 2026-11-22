@@ -1,0 +1,18 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: zh_CN.UTF-8
+  keyboard:
+    layout: us
+  identity:
+    hostname: azusalinux
+    username: azusa
+    password: "$6$xBTJnT.niJ4sS0y4$C.7GUJCAfTJavZ/q7znYG1yn7J/pb/zGPLDk/qVilqvQdpvm9PJ7sfhVMi.DIn1u7zQCI/fJT5xKUmoLoRLBt."
+  ssh:
+    install-server: false
+  packages: []
+  late-commands:
+    - cp -r /cdrom/azusa-debs /target/root/azusa-debs
+    - curtin in-target -- apt-get update
+    - curtin in-target -- apt-get install -y /root/azusa-debs/azusa-tools_0.1.0_all.deb /root/azusa-debs/azusa-artwork_0.1.0_all.deb /root/azusa-debs/azusa-settings_0.1.0_all.deb /root/azusa-debs/azusa-desktop_0.1.0_all.deb
+    - curtin in-target -- rm -rf /root/azusa-debs
