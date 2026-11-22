@@ -21,3 +21,10 @@ Depends: ${misc:Depends}
 Description: AzusaLinux wallpapers
  Mascot wallpapers (light and dark) generated from the AzusaLinux palette,
  registered in the GNOME wallpaper picker.
+
+Package: azusa-settings
+Architecture: all
+Depends: ${misc:Depends}, azusa-artwork, fonts-inter, fonts-jetbrains-mono, papirus-icon-theme
+Description: AzusaLinux desktop defaults
+ GSettings overrides for accent colour, fonts, wallpaper and icon theme,
+ plus system-wide kitty colours and a Ptyxis palette for new users.

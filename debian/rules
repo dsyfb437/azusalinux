@@ -10,5 +10,12 @@ override_dh_auto_build:
 	AZUSA_ROOT=$(BUILD)/root python3 bin/azusa-palette --emit
 	AZUSA_ROOT=$(BUILD)/root python3 bin/azusa-mascot --size 2880x1800 --out $(BUILD)/wallpapers
 
+override_dh_installgsettings:
+	dh_installgsettings --priority=20
+
+execute_after_dh_install:
+	install -D -m 0644 $(BUILD)/root/dist/kitty-azusa.conf \
+		debian/azusa-settings/etc/xdg/kitty/kitty.conf
+
 override_dh_auto_clean:
 	rm -rf $(BUILD)
