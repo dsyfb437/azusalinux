@@ -30,11 +30,23 @@ sudo ./azusa-setup --apply
 ./install.sh
 ```
 
-## 3. 验收
+## 3. 验收（两层证据）
+
+第一层：自检表
 
 ```bash
 ./bin/azusa-verify
 ```
+
+第二层：和开发机做状态差分——这才是独立证据
+
+```bash
+./bin/azusa-diff compare docs/state-baseline.tsv <(./bin/azusa-diff dump)
+```
+
+期望：`[gset]` / `[file]` / `[font]` / `[icon]` / `[bin]` 全部无差异；
+`[pkg]` 只报「非必需包差异」的数量（开发工具噪音）；
+`[pkg(必需)]` 必须为空。
 
 **期望：0 项失败。** 如果有失败项，把输出贴回来——那就是流程缺的东西。
 
