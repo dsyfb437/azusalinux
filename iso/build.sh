@@ -41,6 +41,8 @@ if true; then   # 总是重跑：否则改了参数但 auto/config 已存在时�
         --distribution resolute \
         --architectures amd64 \
         --binary-images iso-hybrid \
+        --bootloader grub \
+        --syslinux-theme false \
         --archive-areas "main restricted universe multiverse" \
         --mirror-bootstrap https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ \
         --mirror-chroot   https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ \

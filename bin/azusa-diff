@@ -1,0 +1,125 @@
+#!/usr/bin/env bash
+# azusa-diff — 导出/对比系统状态，用来验证「两台机器是否真的等价」
+#
+#   azusa-diff dump > state.tsv        # 在机器 A 上导出
+#   azusa-diff dump > state-b.tsv      # 在机器 B 上导出
+#   azusa-diff compare state.tsv state-b.tsv
+#
+# 为什么需要它：azusa-verify 检查的是「我写了什么」，属于自证。
+# 只有把两台机器的实际状态摊开做差分，才能发现「我漏了什么」。
+set -uo pipefail
+
+ACTION="${1:-dump}"
+
+dump_packages() {
+    # 只比包名，不比版本（版本差异是噪音）
+    dpkg-query -W -f='${Package}\n' 2>/dev/null | sort -u | sed 's/^/pkg\t/'
+}
+
+dump_gsettings() {
+    for schema in org.gnome.desktop.interface \
+                  org.gnome.desktop.background \
+                  org.gnome.desktop.wm.preferences \
+                  org.gnome.Ptyxis; do
+        gsettings list-recursively "$schema" 2>/dev/null \
+            | sed "s/^/gset\t/"
+    done
+    # ptyxis profile（uuid 每台机器不同，只取内容）
+    uuid=$(gsettings get org.gnome.Ptyxis default-profile-uuid 2>/dev/null | tr -d "'")
+    [ -n "$uuid" ] && gsettings list-recursively \
+        "org.gnome.Ptyxis.Profile:/org/gnome/Ptyxis/Profiles/$uuid/" 2>/dev/null \
+        | sed 's/^/gset\t/'
+}
+
+dump_files() {
+    for f in /etc/os-release /etc/lsb-release /etc/issue /etc/issue.net \
+             /etc/default/grub; do
+        [ -f "$f" ] && printf 'file\t%s\t%s\n' "$f" "$(sha256sum "$f" | cut -c1-16)"
+    done
+    # 只关心和 Azusa 有关的行，避免整文件比对被系统更新干扰
+    [ -f /etc/default/grub ] && grep '^GRUB_COLOR' /etc/default/grub 2>/dev/null \
+        | sed 's/^/grubcolor\t/'
+}
+
+dump_paths() {
+    ls /usr/local/bin 2>/dev/null | grep '^azusa' | sed 's/^/bin\t/'
+    ls /usr/share/backgrounds/azusa 2>/dev/null | sed 's/^/wallpaper\t/'
+    [ -f "$HOME/.local/share/backgrounds/azusa/"*.jpg ] 2>/dev/null
+    ls "$HOME/.local/share/backgrounds/azusa" 2>/dev/null | sed 's/^/user-wallpaper\t/'
+    [ -f "$HOME/.local/share/org.gnome.Ptyxis/palettes/azusa.palette" ] \
+        && echo -e "file\tptyxis-palette\t$(sha256sum "$HOME/.local/share/org.gnome.Ptyxis/palettes/azusa.palette" | cut -c1-16)"
+    [ -f "$HOME/.config/kitty/azusa.conf" ] \
+        && echo -e "file\tkitty-config\t$(sha256sum "$HOME/.config/kitty/azusa.conf" | cut -c1-16)"
+}
+
+dump_fonts() {
+    for fam in "Inter" "JetBrains Mono" "Noto Sans CJK SC"; do
+        got=$(fc-match -f '%{family}' "$fam" 2>/dev/null | head -1)
+        printf 'font\t%s\t%s\n' "$fam" "${got:-缺失}"
+    done
+}
+
+dump_icons() {
+    local svg=/usr/share/icons/Papirus-Dark/48x48/places/folder.svg
+    if [ -f "$svg" ]; then
+        col=$(grep -oE '#7e57c2|#5294e2|#[0-9a-f]{6}' "$svg" | head -1)
+        printf 'icon\tfolder-color\t%s\n' "$col"
+    else
+        printf 'icon\tfolder-color\t(papirus 未安装)\n'
+    fi
+}
+
+do_dump() {
+    dump_packages
+    dump_gsettings
+    dump_files
+    dump_paths
+    dump_fonts
+    dump_icons
+}
+
+do_compare() {
+    local a="$1" b="$2"
+    python3 - "$a" "$b" <<'PY'
+import sys
+from pathlib import Path
+
+def load(p):
+    d = {}
+    for line in Path(p).read_text(errors="replace").splitlines():
+        parts = line.split("\t")
+        if len(parts) >= 2:
+            d[(parts[0], parts[1] if len(parts) > 2 else "")] = parts[-1]
+    return d
+
+a, b = load(sys.argv[1]), load(sys.argv[2])
+sections = {}
+for key in sorted(set(a) | set(b)):
+    va, vb = a.get(key), b.get(key)
+    if va != vb:
+        sections.setdefault(key[0], []).append((key[1], va, vb))
+
+total = sum(len(v) for v in sections.values())
+if not total:
+    print("两台机器的状态完全一致。")
+    sys.exit(0)
+
+print(f"共 {total} 处差异：\n")
+for sec, items in sections.items():
+    print(f"[{sec}]  {len(items)} 处")
+    for name, va, vb in items[:12]:
+        short = lambda v: (v[:40] + "…") if v and len(v) > 40 else (v or "(缺失)")
+        print(f"  {name}")
+        print(f"    A: {short(va)}")
+        print(f"    B: {short(vb)}")
+    if len(items) > 12:
+        print(f"  …还有 {len(items) - 12} 处")
+    print()
+PY
+}
+
+case "$ACTION" in
+    dump)    do_dump ;;
+    compare) do_compare "${2:?用法: azusa-diff compare A B}" "${3:?用法: azusa-diff compare A B}" ;;
+    *) echo "用法: azusa-diff [dump|compare A B]" >&2; exit 2 ;;
+esac
