@@ -148,6 +148,15 @@ qemu-system-x86_64 -machine q35 -m 2048 \
 镜像内的 `azusa-selftest.service` 会打印 os-release / uname / whoami 到串口，然后关机。
 这一步抓出过 `StandardOutput=ttyS0` 的语法错误——看文件是发现不了的。
 
+### ISO
+
+官方 ISO 重打包 + autoinstall，见 `docs/iso.md`：
+
+```bash
+cd iso-remaster
+SRC_ISO=/path/to/ubuntu-26.04.1-desktop-amd64.iso DEBS=/tmp/azusa-debs ./build.sh all
+```
+
 ### 层级
 
 | 层级 | 判据 | 状态 |
@@ -155,7 +164,8 @@ qemu-system-x86_64 -machine q35 -m 2048 \
 | L0 | 手工调好一台机器 | ✅ |
 | L0.75 | 脚本 + 状态差分验证 | ✅ |
 | L0.9 | 从清单构建、可引导、启动自检通过 | ✅ |
-| L1 | 从 ISO 安装到硬盘（有安装器） | ❌ |
+| L0.95 | deb 化，可在干净 Ubuntu 上装/卸 | ✅ |
+| L1 | 从 ISO 安装到硬盘（官方安装器 + autoinstall） | ✅ |
 
 ## 相关项目
 
