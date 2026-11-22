@@ -11,11 +11,13 @@ if [ -z "$ROOT" ]; then
         ROOT="$cand"
     elif [ -f /usr/local/share/azusalinux/branding/palette.json ]; then
         ROOT=/usr/local/share/azusalinux
+    elif [ -f /usr/share/azusalinux/branding/palette.json ]; then
+        ROOT=/usr/share/azusalinux
     fi
 fi
 
-python3 "$ROOT/bin/azusa-logo" "$@" 2>/dev/null \
-  || python3 "$(dirname "${BASH_SOURCE[0]}")/azusa-logo" "$@"
+python3 "$(dirname "${BASH_SOURCE[0]}")/azusa-logo" "$@" \
+  || python3 "$ROOT/bin/azusa-logo" "$@"
 
 if command -v fastfetch >/dev/null 2>&1; then
     fastfetch --config "$ROOT/branding/fastfetch/azusa.jsonc" 2>/dev/null \

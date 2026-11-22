@@ -27,6 +27,7 @@ def _find_root() -> Path:
         candidates.append(Path(os.environ["AZUSA_ROOT"]))
     candidates.append(Path(__file__).resolve().parent.parent)
     candidates.append(Path("/usr/local/share/azusalinux"))
+    candidates.append(Path("/usr/share/azusalinux"))
     for c in candidates:
         if (c / "branding" / "palette.json").exists():
             return c

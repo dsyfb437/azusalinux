@@ -34,6 +34,7 @@ def _find_root() -> Path:
         candidates.append(Path(os.environ["AZUSA_ROOT"]))
     candidates.append(Path(__file__).resolve().parent.parent)
     candidates.append(Path("/usr/local/share/azusalinux"))
+    candidates.append(Path("/usr/share/azusalinux"))
     for c in candidates:
         if (c / "branding" / "palette.json").exists():
             return c
@@ -43,7 +44,8 @@ def _find_root() -> Path:
 ROOT = _find_root()
 PALETTE = ROOT / "branding" / "palette.json"
 DIST = ROOT / "dist"
-PALETTE_TOOL = ROOT / "bin" / "azusa-palette"
+_SIBLING = Path(__file__).resolve().parent / "azusa-palette"
+PALETTE_TOOL = _SIBLING if _SIBLING.exists() else ROOT / "bin" / "azusa-palette"
 
 TTY = sys.stdout.isatty()
 
@@ -109,6 +111,9 @@ def user_session_ok() -> bool:
 
 
 def generate() -> None:
+    # 装到 /usr/share 后普通用户写不了 ROOT/dist，改用包里已经生成好的那份
+    if not os.access(ROOT, os.W_OK) or not PALETTE_TOOL.exists():
+        return
     rc, _, err = run([sys.executable, str(PALETTE_TOOL), "--emit"])
     if rc != 0:
         sys.exit(f"azusa-apply: 生成配色失败：{err}")
@@ -429,7 +434,8 @@ def main(argv: list[str] | None = None) -> int:
     }
     if not any(targets.values()):
         targets = {"terminal": True, "gnome": True, "grub": True,
-                   "fonts": True, "wallpaper": True, "icons": True}
+                   "fonts": True, "wallpaper": True, "icons": True,
+                   "system": False}
 
     if args.dest_root:
         dest_root = Path(args.dest_root).expanduser()
