@@ -16,3 +16,10 @@ iso-mkosi/*.zst
 iso-mkosi/serial.log
 iso-mkosi/vars.fd
 iso-mkosi/*.log
+build/
+debian/.debhelper/
+debian/azusa-*/
+debian/files
+debian/*.substvars
+debian/debhelper-build-stamp
+debian/*.debhelper.log

@@ -1,0 +1,12 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: azusalinux
+Source: https://github.com/dsyfb437/azusalinux
+
+Files: *
+Copyright: 2026 azusa
+License: MIT
+
+Files: branding/mascot/*
+Copyright: 2026 azusa
+Comment: AI-generated original characters, see branding/mascot/SOURCES.md
+License: MIT

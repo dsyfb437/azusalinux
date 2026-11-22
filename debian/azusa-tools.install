@@ -1,0 +1,9 @@
+bin/azusa-fetch usr/bin
+bin/azusa-logo usr/bin
+bin/azusa-palette usr/bin
+bin/azusa-apply usr/bin
+bin/azusa-mascot usr/bin
+bin/azusa-abstract usr/bin
+bin/azusa-wallpaper usr/bin
+branding usr/share/azusalinux
+build/root/dist/* usr/share/azusalinux/dist

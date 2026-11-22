@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+BUILD := $(CURDIR)/build
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	mkdir -p $(BUILD)/root
+	cp -r branding $(BUILD)/root/
+	AZUSA_ROOT=$(BUILD)/root python3 bin/azusa-palette --emit
+	AZUSA_ROOT=$(BUILD)/root python3 bin/azusa-mascot --size 2880x1800 --out $(BUILD)/wallpapers
+
+override_dh_auto_clean:
+	rm -rf $(BUILD)

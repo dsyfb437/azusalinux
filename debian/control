@@ -1,0 +1,23 @@
+Source: azusalinux
+Section: misc
+Priority: optional
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Build-Depends: debhelper-compat (= 13), python3, python3-pil
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+Homepage: https://github.com/dsyfb437/azusalinux
+
+Package: azusa-tools
+Architecture: all
+Depends: ${misc:Depends}, python3, python3-pil
+Recommends: fastfetch
+Description: AzusaLinux command-line tools
+ azusa-fetch, azusa-logo, azusa-palette, azusa-apply and the wallpaper
+ generators, with the shared palette and mascot under /usr/share/azusalinux.
+
+Package: azusa-artwork
+Architecture: all
+Depends: ${misc:Depends}
+Description: AzusaLinux wallpapers
+ Mascot wallpapers (light and dark) generated from the AzusaLinux palette,
+ registered in the GNOME wallpaper picker.
