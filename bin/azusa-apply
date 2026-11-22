@@ -1,0 +1,473 @@
+#!/usr/bin/env python3
+"""azusa-apply — 把 Azusa 色板套到系统各处
+
+默认只预览。真正写入需要 --apply，且改文件前会备份。
+
+用法：
+    ./bin/azusa-apply                      # 预览会做什么
+    ./bin/azusa-apply --terminal --apply   # 只改终端
+    ./bin/azusa-apply --all --apply        # 终端 + GNOME + GRUB
+
+测试用（不碰真实家目录）：
+    ./bin/azusa-apply --terminal --apply --dest-root /tmp/fakehome
+
+说明：
+    * 终端配置写到用户目录，不需要 root；
+    * GNOME 强调色用官方 gsettings 接口，不是改主题文件；
+    * GRUB 会改 /etc/default/grub 并调用 update-grub，需要 root。
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+def _find_root() -> Path:
+    """仓库布局用 script/..，安装后用 /usr/local/share/azusalinux。"""
+    import os
+    candidates = []
+    if os.environ.get("AZUSA_ROOT"):
+        candidates.append(Path(os.environ["AZUSA_ROOT"]))
+    candidates.append(Path(__file__).resolve().parent.parent)
+    candidates.append(Path("/usr/local/share/azusalinux"))
+    for c in candidates:
+        if (c / "branding" / "palette.json").exists():
+            return c
+    return Path(__file__).resolve().parent.parent
+
+
+ROOT = _find_root()
+PALETTE = ROOT / "branding" / "palette.json"
+DIST = ROOT / "dist"
+PALETTE_TOOL = ROOT / "bin" / "azusa-palette"
+
+TTY = sys.stdout.isatty()
+
+
+def c(code: str, text: str) -> str:
+    return f"\033[{code}m{text}\033[0m" if TTY else text
+
+
+def ok(text: str = "") -> str:
+    return c("32", "✓") + (f" {text}" if text else "")
+
+
+def todo(text: str = "") -> str:
+    return c("33", "·") + (f" {text}" if text else "")
+
+
+def warn(text: str = "") -> str:
+    return c("33", "!") + (f" {text}" if text else "")
+
+
+def backup(path: Path, backup_dir: Path) -> None:
+    if not path.exists():
+        return
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    dest = backup_dir / path.name
+    if not dest.exists():
+        shutil.copy2(path, dest)
+
+
+def ensure_include(path: Path, line: str, backup_dir: Path, apply: bool) -> str:
+    """给已有配置文件补一行 include，不覆盖原内容。"""
+    if not path.exists():
+        return "skipped（文件不存在）"
+    text = path.read_text(errors="replace")
+    if line.strip() in text:
+        return "已包含"
+    if not apply:
+        return f"将追加一行：{line}"
+    backup(path, backup_dir)
+    if not text.endswith("\n"):
+        text += "\n"
+    path.write_text(text + line + "\n")
+    return "已追加 include"
+
+
+def run(cmd: list[str]) -> tuple[int, str, str]:
+    try:
+        p = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
+        return p.returncode, p.stdout.strip(), p.stderr.strip()
+    except (OSError, subprocess.SubprocessError) as exc:
+        return 127, "", str(exc)
+
+
+def user_session_ok() -> bool:
+    """gsettings 需要普通用户的 DBus 会话；sudo 下会静默失败。"""
+    if os.geteuid() == 0:
+        print(f"   {warn('当前是 root：gsettings 需要普通用户会话，请去掉 sudo 重跑本项')}")
+        return False
+    if not os.environ.get("DBUS_SESSION_BUS_ADDRESS"):
+        print(f"   {warn('没有 DBus 会话，跳过')}")
+        return False
+    return True
+
+
+def generate() -> None:
+    rc, _, err = run([sys.executable, str(PALETTE_TOOL), "--emit"])
+    if rc != 0:
+        sys.exit(f"azusa-apply: 生成配色失败：{err}")
+
+
+def apply_ptyxis(dest_root: Path, backup_dir: Path, apply: bool) -> None:
+    """Ptyxis 是 Ubuntu 26.04 的默认终端，kitty/foot 的配置它不认。
+
+    做法：把调色板文件放进 ~/.local/share/org.gnome.Ptyxis/palettes/，
+    再把当前 profile 的 palette 指向它。
+    """
+    if not shutil.which("ptyxis"):
+        return
+    src = DIST / "ptyxis-azusa.palette"
+    if not src.exists():
+        print(f"   {warn('Ptyxis：找不到生成的调色板')}")
+        return
+
+    dest = dest_root / ".local/share/org.gnome.Ptyxis/palettes/azusa.palette"
+    if dest.exists() and dest.read_text() == src.read_text():
+        print(f"   {ok(f'Ptyxis：{dest.name} 已是最新')}")
+    elif apply:
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, dest)
+        print(f"   {ok(f'Ptyxis：调色板写入 {dest}')}")
+    else:
+        print(f"   {todo(f'Ptyxis：将写入 {dest}')}")
+
+    rc, uuid, _ = run(["gsettings", "get", "org.gnome.Ptyxis", "default-profile-uuid"])
+    uuid = uuid.strip().strip("'")
+    if rc != 0 or not uuid:
+        print(f"   {warn('Ptyxis：读不到 profile uuid')}")
+        return
+    profile = f"org.gnome.Ptyxis.Profile:/org/gnome/Ptyxis/Profiles/{uuid}/"
+
+    # palette 在 profile 里，font-name 在全局 schema 上——踩过一次
+    changes = [(profile, "palette", "azusa"),
+               ("org.gnome.Ptyxis", "font-name", "JetBrains Mono 11")]
+    for schema, key, value in changes:
+        rc, current, _ = run(["gsettings", "get", schema, key])
+        current = current.strip().strip("'")
+        if current == value:
+            print(f"   {ok(f'Ptyxis {key}：已是 {value}')}")
+        elif apply:
+            rc, _, err = run(["gsettings", "set", schema, key, value])
+            print(ok(f"Ptyxis {key}：{current} → {value}") if rc == 0
+                  else warn(f"Ptyxis {key}：写入失败 {err}"))
+        else:
+            print(f"   {todo(f'Ptyxis {key}：{current} → {value}')}")
+
+    rc, sys_font, _ = run(["gsettings", "get", "org.gnome.Ptyxis", "use-system-font"])
+    if sys_font.strip() == "true" and apply:
+        run(["gsettings", "set", "org.gnome.Ptyxis", "use-system-font", "false"])
+        print(ok("Ptyxis：关闭「使用系统字体」，等宽改用 JetBrains Mono"))
+
+
+def apply_terminal(dest_root: Path, backup_dir: Path, apply: bool) -> None:
+    """终端配置：kitty / foot / Ptyxis。写独立文件 + 在已有配置里加 include。"""
+    configs = {
+        "kitty": (dest_root / ".config/kitty/azusa.conf", "kitty-azusa.conf",
+                  dest_root / ".config/kitty/kitty.conf", "include azusa.conf"),
+        "foot": (dest_root / ".config/foot/azusa.ini", "foot-azusa.ini",
+                 dest_root / ".config/foot/foot.ini",
+                 "include=~/.config/foot/azusa.ini"),
+    }
+
+    apply_ptyxis(dest_root, backup_dir, apply)
+
+    for name, (dest, source, main_conf, include_line) in configs.items():
+        src = DIST / source
+        if not src.exists():
+            print(f"   {warn(f'{name}：找不到生成的 {source}')}")
+            continue
+
+        if dest.exists() and dest.read_text() == src.read_text():
+            print(f"   {ok(f'{name}：{dest} 已是最新')}")
+        elif apply:
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            backup(dest, backup_dir)
+            shutil.copy2(src, dest)
+            print(f"   {ok(f'{name}：写入 {dest}')}")
+        else:
+            print(f"   {todo(f'{name}：将写入 {dest}')}")
+
+        state = ensure_include(main_conf, include_line, backup_dir, apply)
+        print(f"      {c('2', f'{main_conf.name}：{state}')}")
+
+
+def apply_gnome(apply: bool) -> None:
+    """GNOME 强调色走官方接口，不碰主题文件。"""
+    if not shutil.which("gsettings"):
+        print(f"   {warn('没有 gsettings，跳过 GNOME')}")
+        return
+    if not os.environ.get("DBUS_SESSION_BUS_ADDRESS"):
+        print(f"   {warn('没有 DBus 会话，跳过 GNOME（需要在桌面会话里运行）')}")
+        return
+
+    settings = [
+        ("org.gnome.desktop.interface", "accent-color", "purple"),
+        ("org.gnome.desktop.interface", "color-scheme", "prefer-dark"),
+    ]
+    for schema, key, value in settings:
+        rc, current, _ = run(["gsettings", "get", schema, key])
+        current = current.strip().strip("'")
+        if rc != 0:
+            print(f"   {warn(f'{schema} {key}：读取失败')}")
+            continue
+        if current == value:
+            print(f"   {ok(f'{key}：已是 {value}')}")
+        elif apply:
+            rc, _, err = run(["gsettings", "set", schema, key, value])
+            print(ok(f"{key}：{current} → {value}") if rc == 0
+                  else warn(f"{key}：写入失败 {err}"))
+        else:
+            print(f"   {todo(f'{key}：{current} → {value}')}")
+
+
+
+# titlebar-font 不在 interface schema 下，GNOME 把它放在 wm.preferences
+FONTS = {
+    ("org.gnome.desktop.interface", "font-name"): ("Inter 11", "fonts-inter"),
+    ("org.gnome.desktop.interface", "document-font-name"): ("Inter 11", "fonts-inter"),
+    ("org.gnome.desktop.interface", "monospace-font-name"): ("JetBrains Mono 11", "fonts-jetbrains-mono"),
+    ("org.gnome.desktop.wm.preferences", "titlebar-font"): ("Inter Bold 11", "fonts-inter"),
+}
+
+
+def apply_fonts(apply: bool) -> None:
+    """界面字体走 GNOME 的设置项，中文回退由 fontconfig 负责，不在这里改。"""
+    if not shutil.which("gsettings"):
+        print(f"   {warn('没有 gsettings，跳过')}")
+        return
+    if not os.environ.get("DBUS_SESSION_BUS_ADDRESS"):
+        print(f"   {warn('没有 DBus 会话，跳过（需在桌面会话里运行）')}")
+        return
+
+    for (schema, key), (value, pkg) in FONTS.items():
+        rc, installed, _ = run(["dpkg-query", "-W", "-f=${Status}", pkg])
+        if rc != 0 or "install ok installed" not in installed:
+            print(f"   {warn(f'{key}：{pkg} 未安装，跳过')}")
+            continue
+        rc, current, _ = run(["gsettings", "get", schema, key])
+        current = current.strip().strip("'")
+        if current == value:
+            print(f"   {ok(f'{key}：已是 {value}')}")
+        elif apply:
+            rc, _, err = run(["gsettings", "set", schema, key, value])
+            print(ok(f"{key}：{current} → {value}") if rc == 0
+                  else warn(f"{key}：写入失败 {err}"))
+        else:
+            print(f"   {todo(f'{key}：{current} → {value}')}")
+
+
+
+def apply_wallpaper(dest_root: Path, apply: bool) -> None:
+    """壁纸装到用户目录并设为背景（明暗分开），不需要 root。"""
+    wallpaper_dir = dest_root / ".local/share/backgrounds/azusa"
+    pairs = {
+        "picture-uri-dark": DIST / "wallpapers/mascot-dark-2880x1800.jpg",
+        "picture-uri": DIST / "wallpapers/mascot-light-2880x1800.jpg",
+    }
+    missing = [p.name for p in pairs.values() if not p.exists()]
+    if missing:
+        print(f"   {warn(f'缺壁纸 {missing}，先跑 azusa-mascot')}")
+        return
+
+    installed: dict[str, Path] = {}
+    for key, src in pairs.items():
+        dest = wallpaper_dir / src.name
+        if dest.exists() and dest.read_bytes() == src.read_bytes():
+            print(f"   {ok(f'{src.name} 已就位')}")
+        elif apply:
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dest)
+            print(f"   {ok(f'复制 {dest}')}")
+        else:
+            print(f"   {todo(f'将复制到 {dest}')}")
+        installed[key] = dest
+
+    if not user_session_ok():
+        return
+    for key, dest in installed.items():
+        want = f"file://{dest}"
+        rc, current, _ = run(["gsettings", "get", "org.gnome.desktop.background", key])
+        if current.strip().strip("'") == want:
+            print(f"   {ok(f'{key} 已指向 {dest.name}')}")
+        elif apply:
+            rc, _, err = run(["gsettings", "set", "org.gnome.desktop.background", key, want])
+            print(ok(f"{key} → {dest.name}") if rc == 0 else warn(f"{key} 设置失败：{err}"))
+        else:
+            print(f"   {todo(f'{key} → {dest.name}')}")
+    if apply:
+        run(["gsettings", "set", "org.gnome.desktop.background", "picture-options", "zoom"])
+
+
+def apply_icons(root: Path, apply: bool) -> None:
+    """图标：用 Papirus + 紫色文件夹，而不是自己画。"""
+    rc, status, _ = run(["dpkg-query", "-W", "-f=${Status}", "papirus-icon-theme"])
+    if rc != 0 or "install ok installed" not in status:
+        print(f"   {warn('未安装 papirus-icon-theme')}")
+        print(f"      {c('2', 'sudo apt install papirus-icon-theme')}")
+        return
+
+    if not apply:
+        print(f"   {todo('文件夹染色需要 sudo，见 --system')}")
+    elif os.geteuid() != 0:
+        print(f"   {warn('写 /usr/share/icons 需要 root，请 sudo 跑 --system')}")
+
+    if not user_session_ok():
+        return
+
+    rc, current, _ = run(["gsettings", "get", "org.gnome.desktop.interface", "icon-theme"])
+    current = current.strip().strip("'")
+    if current == "Papirus-Dark":
+        print(f"   {ok('icon-theme 已是 Papirus-Dark')}")
+    elif apply:
+        run(["gsettings", "set", "org.gnome.desktop.interface",
+             "icon-theme", "Papirus-Dark"])
+        print(ok(f"icon-theme：{current} → Papirus-Dark"))
+    else:
+        print(f"   {todo(f'icon-theme：{current} → Papirus-Dark')}")
+
+
+def recolor_folders(root: Path, apply: bool) -> None:
+    """把 Papirus 的文件夹图标染成 violet。写的是 /usr/share/icons，需要 root。"""
+    script = root / "vendor" / "papirus-folders"
+    if not script.exists():
+        print(f"   {warn('缺少 vendor/papirus-folders')}")
+        return
+    if os.geteuid() != 0:
+        print(f"   {warn('需要 root，请 sudo ./bin/azusa-apply --system --apply')}")
+        return
+    if not apply:
+        print(f"   {todo('将把 Papirus-Dark 的文件夹染成 violet')}")
+        return
+    rc, _, err = run([str(script), "-C", "violet", "--theme", "Papirus-Dark"])
+    print(ok("文件夹已染成 violet") if rc == 0 else warn(f"染色失败：{err}"))
+
+
+def apply_grub(etc_root: Path, backup_dir: Path, apply: bool) -> None:
+    """GRUB 菜单配色。改的是 /etc/default/grub，改完要 update-grub。"""
+    pal = json.loads(PALETTE.read_text())["dark"]
+    grub_file = etc_root / "default" / "grub"
+
+    if not grub_file.exists():
+        print(f"   {warn(f'{grub_file} 不存在，跳过')}")
+        return
+
+    normal = f"light-gray/{pal['bg']}"
+    highlight = f"{pal['text']}/{pal['primary']}"
+    wanted = [
+        f'GRUB_COLOR_NORMAL="{normal}"',
+        f'GRUB_COLOR_HIGHLIGHT="{highlight}"',
+    ]
+
+    text = grub_file.read_text(errors="replace")
+    missing = [line for line in wanted if line not in text]
+
+    if not missing:
+        print(f"   {ok('GRUB 配色已是最新')}")
+        return
+
+    for line in missing:
+        print(f"   {todo(f'GRUB 追加：{line}')}" if not apply else "")
+
+    if apply:
+        backup(grub_file, backup_dir)
+        if not text.endswith("\n"):
+            text += "\n"
+        grub_file.write_text(text + "\n" + "\n".join(missing) + "\n")
+        print(f"   {ok('GRUB 配色已写入')}")
+        if etc_root == Path("/etc"):
+            rc, _, err = run(["update-grub"])
+            print(ok("update-grub 完成") if rc == 0 else warn(f"update-grub 失败：{err}"))
+        else:
+            print(f"      {c('2', '（测试目录，未调用 update-grub）')}")
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        prog="azusa-apply", description="把 Azusa 色板套到终端 / GNOME / GRUB")
+    parser.add_argument("--all", action="store_true", help="全部目标")
+    parser.add_argument("--terminal", action="store_true", help="终端配置（kitty / foot）")
+    parser.add_argument("--gnome", action="store_true", help="GNOME 强调色")
+    parser.add_argument("--grub", action="store_true", help="GRUB 菜单配色")
+    parser.add_argument("--fonts", action="store_true", help="界面字体（Inter / JetBrains Mono）")
+    parser.add_argument("--wallpaper", action="store_true", help="壁纸装到系统并设为背景")
+    parser.add_argument("--icons", action="store_true", help="Papirus-Dark + 紫色文件夹")
+    parser.add_argument("--apply", action="store_true", help="真正写入（默认只预览）")
+    parser.add_argument("--system", action="store_true", help="系统级（GRUB 配色 / 图标染色），需 sudo")
+    parser.add_argument("--dest-root", default=None,
+                        help="用户目录根；默认当前用户（sudo 下取 SUDO_USER）")
+    parser.add_argument("--etc-root", default="/etc", help="/etc 根，测试时用")
+    args = parser.parse_args(argv)
+
+    targets = {
+        "terminal": args.terminal or args.all,
+        "gnome": args.gnome or args.all,
+        "grub": args.grub or args.all,
+        "fonts": args.fonts or args.all,
+        "wallpaper": args.wallpaper or args.all,
+        "icons": args.icons or args.all,
+        "system": args.system,
+    }
+    if not any(targets.values()):
+        targets = {"terminal": True, "gnome": True, "grub": True,
+                   "fonts": True, "wallpaper": True, "icons": True}
+
+    if args.dest_root:
+        dest_root = Path(args.dest_root).expanduser()
+    else:
+        sudo_user = os.environ.get("SUDO_USER")
+        base = os.path.expanduser(f"~{sudo_user}") if sudo_user else os.path.expanduser("~")
+        dest_root = Path(base)
+    etc_root = Path(args.etc_root)
+    backup_dir = dest_root / ".local/state/azusalinux/backup"
+
+    print()
+    print(f"  Azusa 配色 · {'写入' if args.apply else '预览'}")
+    print(c("2", "  " + "─" * 52))
+    print(c("2", f"  用户目录 {dest_root}"))
+
+    generate()
+
+    if targets["terminal"]:
+        print(c("1", "\n  终端"))
+        apply_terminal(dest_root, backup_dir, args.apply)
+
+    if targets["gnome"]:
+        print(c("1", "\n  GNOME"))
+        apply_gnome(args.apply)
+
+    if targets["wallpaper"]:
+        print(c("1", "\n  壁纸"))
+        apply_wallpaper(dest_root, args.apply)
+
+    if targets["icons"]:
+        print(c("1", "\n  图标"))
+        apply_icons(ROOT, args.apply)
+
+    if targets["fonts"]:
+        print(c("1", "\n  字体"))
+        apply_fonts(args.apply)
+
+    if targets["system"]:
+        print(c("1", "\n  系统级"))
+        recolor_folders(ROOT, args.apply)
+        apply_grub(etc_root, backup_dir, args.apply)
+
+    print()
+    print(c("2", "  " + "─" * 52))
+    if args.apply:
+        print(f"  完成。备份在 {backup_dir}")
+        print(c("2", "  终端需要新开窗口才生效。"))
+    else:
+        print(c("2", "  以上仅为预览。加 --apply 生效。"))
+    print()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

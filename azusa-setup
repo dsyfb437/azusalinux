@@ -1,0 +1,206 @@
+#!/usr/bin/env bash
+# azusa-setup — 把一台干净的 Ubuntu 变成 AzusaLinux（身份层）
+#
+# 默认只预览，不改任何文件；加 --apply 才写入，写入前会备份。
+#
+# 用法：
+#   ./azusa-setup                     # 预览会改什么
+#   sudo ./azusa-setup --apply        # 真的改
+#   sudo ./azusa-setup --apply --hostname my-azusa
+set -euo pipefail
+
+NAME="AzusaLinux"
+VERSION="0.1"
+CODENAME="azusa"
+HOME_URL="https://azusaaa.com"
+ISSUES_URL="https://github.com/dsyfb437/azusalinux/issues"
+DEFAULT_HOST="azusalinux"
+
+STATE_DIR="/var/lib/azusalinux"
+BACKUP_DIR="$STATE_DIR/backup"
+
+APPLY=0
+NEW_HOST="$DEFAULT_HOST"
+
+usage() {
+    sed -n '2,10p' "$0" | sed 's/^# \{0,1\}//'
+}
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --apply)    APPLY=1 ;;
+        --hostname) NEW_HOST="${2:-}"; shift ;;
+        -h|--help)  usage; exit 0 ;;
+        *)          echo "azusa-setup: 未知参数 $1" >&2; exit 2 ;;
+    esac
+    shift
+done
+
+if [ "$APPLY" -eq 1 ] && [ "$(id -u)" -ne 0 ]; then
+    echo "azusa-setup: --apply 需要 root，请用 sudo 运行" >&2
+    exit 1
+fi
+
+# ---------------------------------------------------------------- 基础信息
+base_file="/usr/lib/os-release"
+[ -f "$base_file" ] || base_file="/etc/os-release"
+
+STATE_BASE="$STATE_DIR/base.env"
+
+# 只从文件里取值，不 source（os-release 的语法不保证是合法 shell）
+read_base_from() {
+    sed -n "s/^$1=//p" "$2" 2>/dev/null | head -n1 | tr -d '"'
+}
+
+# 幂等关键：第一次运行后把真实基底记在 state 里。
+# 否则第二次运行会把自己写过的 os-release 当成基底，UBUNTU_CODENAME 会被污染。
+read_base() {
+    if [ -f "$STATE_BASE" ]; then
+        read_base_from "$1" "$STATE_BASE"
+    else
+        read_base_from "$1" "$base_file"
+    fi
+}
+
+BASE_VERSION="$(read_base VERSION_ID)"
+BASE_CODENAME="$(read_base VERSION_CODENAME)"
+BASE_PRETTY="$(read_base PRETTY_NAME)"
+
+if [ "$APPLY" -eq 1 ] && [ ! -f "$STATE_BASE" ]; then
+    mkdir -p "$STATE_DIR"
+    {
+        printf 'VERSION_ID="%s"\n' "$BASE_VERSION"
+        printf 'VERSION_CODENAME="%s"\n' "$BASE_CODENAME"
+        printf 'PRETTY_NAME="%s"\n' "$BASE_PRETTY"
+    } > "$STATE_BASE"
+fi
+
+if [ -z "$BASE_VERSION" ]; then
+    echo "azusa-setup: 读不到 Ubuntu 版本，这不像是 Ubuntu" >&2
+    exit 1
+fi
+
+# ---------------------------------------------------------------- 输出样式
+if [ -t 1 ]; then
+    C_DIM=$'\033[2m'; C_OK=$'\033[32m'; C_WARN=$'\033[33m'; C_OFF=$'\033[0m'
+else
+    C_DIM=""; C_OK=""; C_WARN=""; C_OFF=""
+fi
+
+ok()   { printf '%s✓%s' "$C_OK" "$C_OFF"; }
+todo() { printf '%s·%s' "$C_WARN" "$C_OFF"; }
+
+# ---------------------------------------------------------------- 目标内容
+target_os_release() {
+    cat <<EOF
+PRETTY_NAME="$NAME $VERSION ($BASE_CODENAME)"
+NAME="$NAME"
+VERSION_ID="$VERSION"
+VERSION="$VERSION ($BASE_CODENAME)"
+VERSION_CODENAME=$CODENAME
+ID=azusalinux
+ID_LIKE="ubuntu debian"
+HOME_URL="$HOME_URL"
+SUPPORT_URL="$ISSUES_URL"
+BUG_REPORT_URL="$ISSUES_URL"
+PRIVACY_POLICY_URL="$HOME_URL"
+UBUNTU_CODENAME=$BASE_CODENAME
+LOGO=azusalinux-logo
+EOF
+}
+
+target_lsb_release() {
+    cat <<EOF
+DISTRIB_ID=$NAME
+DISTRIB_RELEASE=$VERSION
+DISTRIB_CODENAME=$CODENAME
+DISTRIB_DESCRIPTION="$NAME $VERSION"
+EOF
+}
+
+target_issue() {
+    printf '%s %s \\n \\l\n' "$NAME" "$VERSION"
+}
+
+backup() {
+    local path="$1"
+    [ -f "$path" ] || return 0
+    mkdir -p "$BACKUP_DIR"
+    local dest="$BACKUP_DIR/$(echo "$path" | tr '/' '_')"
+    [ -f "$dest" ] || cp -a "$path" "$dest"
+}
+
+# 比较并（可选）写入一个文件
+emit_file() {
+    local path="$1" content="$2"
+    local real="$path"
+
+    # /etc/os-release 在 Ubuntu 上是软链到 /usr/lib/os-release
+    if [ -L "$path" ]; then
+        real="$(readlink -f "$path")"
+    fi
+
+    local cur=""
+    [ -f "$real" ] && cur="$(cat "$real")"
+
+    if [ "$cur" = "$content" ]; then
+        printf '  %s %-24s 已是最新\n' "$(ok)" "$path"
+        return 0
+    fi
+
+    printf '  %s %-24s 待修改\n' "$(todo)" "$path"
+    diff -u --label "$path (当前)" --label "$path (AzusaLinux)" \
+        <(printf '%s\n' "$cur") <(printf '%s\n' "$content") \
+        | tail -n +3 | sed "s/^/     ${C_DIM}/;s/\$/${C_OFF}/" || true
+
+    if [ "$APPLY" -eq 1 ]; then
+        backup "$real"
+        printf '%s\n' "$content" > "$real"
+    fi
+}
+
+# ---------------------------------------------------------------- 执行
+printf '\n%s\n' "  AzusaLinux $VERSION · 身份层"
+printf '%s\n' "$C_DIM  ──────────────────────────────────────────────$C_OFF"
+printf '  基底：%s\n' "${BASE_PRETTY:-Ubuntu $BASE_VERSION}"
+
+printf '\n%s\n' "  系统身份"
+emit_file "/etc/os-release" "$(target_os_release)"
+emit_file "/etc/lsb-release" "$(target_lsb_release)"
+
+# PRETTY_NAME 也影响 /etc/issue（登录时的横幅）
+printf '\n%s\n' "  登录横幅"
+issue_content="$(target_issue)"
+for f in /etc/issue /etc/issue.net; do
+    cur=""
+    [ -f "$f" ] && cur="$(cat "$f")"
+    if [ "$cur" = "$issue_content" ]; then
+        printf '  %s %-24s 已是最新\n' "$(ok)" "$f"
+    else
+        printf '  %s %-24s 待修改\n' "$(todo)" "$f"
+        if [ "$APPLY" -eq 1 ]; then
+            backup "$f"
+            printf '%s\n' "$issue_content" > "$f"
+        fi
+    fi
+done
+
+printf '\n%s\n' "  主机名"
+cur_host="$(hostname)"
+if [ "$cur_host" = "$NEW_HOST" ]; then
+    printf '  %s %-24s 已是 %s\n' "$(ok)" "hostname" "$NEW_HOST"
+else
+    printf '  %s %-24s %s → %s\n' "$(todo)" "hostname" "$cur_host" "$NEW_HOST"
+    if [ "$APPLY" -eq 1 ]; then
+        hostnamectl set-hostname "$NEW_HOST"
+    fi
+fi
+
+printf '\n%s\n' "$C_DIM  ──────────────────────────────────────────────$C_OFF"
+if [ "$APPLY" -eq 1 ]; then
+    printf '  已写入。备份在 %s\n' "$BACKUP_DIR"
+    printf '  %s重新登录后 /etc/issue 等才会刷新。\n' "$C_DIM"
+    printf '%s\n\n' "$C_OFF"
+else
+    printf '  %s以上仅为预览，未修改任何文件。加 --apply 生效。%s\n\n' "$C_DIM" "$C_OFF"
+fi

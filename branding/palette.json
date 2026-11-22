@@ -1,0 +1,84 @@
+{
+  "name": "Azusa",
+  "source": "角色（参考作品）banner + 7 张立绘，8 张图取样 487500 像素统计得出",
+  "note": "紫色是主色（眼睛、牵牛花）；深靛是翅膀与夜空；银白是头发与高光；蓝来自制服与天空；粉是点缀。",
+  "light": {
+    "bg": "#fbf7fc",
+    "surface": "#ffffff",
+    "overlay": "#f2ebf7",
+    "text": "#241d2e",
+    "muted": "#6d6480",
+    "border": "#e0d7ea",
+    "primary": "#70577f",
+    "on_primary": "#ffffff",
+    "accent": "#4c6ac3",
+    "pink": "#f3bdc4",
+    "danger": "#c04a5a",
+    "warning": "#b8863b",
+    "success": "#4a8a6b"
+  },
+  "dark": {
+    "bg": "#181430",
+    "surface": "#211b3d",
+    "overlay": "#2a234a",
+    "text": "#ece8f6",
+    "muted": "#9b93b5",
+    "border": "#342c57",
+    "primary": "#b296cc",
+    "on_primary": "#1a1030",
+    "accent": "#7f9be0",
+    "pink": "#e9a8b6",
+    "danger": "#e06c7e",
+    "warning": "#d6a45a",
+    "success": "#6fbf9a"
+  },
+  "terminal": {
+    "note": "终端 16 色是独立设计的，不从语义色机械派生——那样在深靛底上会糊成僵尸色。",
+    "dark": {
+      "background": "#181430",
+      "foreground": "#e6e1f2",
+      "cursor": "#c678dd",
+      "colors": [
+        "#221d3d",
+        "#f07178",
+        "#8ce99a",
+        "#ffd479",
+        "#7aa2f7",
+        "#c678dd",
+        "#56d4c8",
+        "#cfc9e2",
+        "#3d3560",
+        "#ff8fa3",
+        "#a9f0b5",
+        "#ffe9a8",
+        "#9dc0ff",
+        "#dda0ff",
+        "#7ef0e2",
+        "#f5f2fd"
+      ]
+    },
+    "light": {
+      "background": "#fbf7fc",
+      "foreground": "#241d2e",
+      "cursor": "#70577f",
+      "colors": [
+        "#2a2338",
+        "#b0334c",
+        "#2f7a56",
+        "#9a6b12",
+        "#3a5cc4",
+        "#7b3fa0",
+        "#17707f",
+        "#d8d1e6",
+        "#6b6280",
+        "#c94a62",
+        "#3f9169",
+        "#b3821f",
+        "#4f74d8",
+        "#9455b5",
+        "#2a8a99",
+        "#ffffff"
+      ]
+    }
+  }
+}

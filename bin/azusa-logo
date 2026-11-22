@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+"""azusa-logo — 在终端里用真彩色半块字符打印吉祥物
+
+原理：每个字符位置画一个 "▀"，上半部分是前景色、下半部分是背景色，
+等于把垂直分辨率翻倍。34 列就能画出可辨认的角色。
+
+要求终端支持 24 位色（Ptyxis / kitty / foot 都支持）。
+
+用法：
+    ./bin/azusa-logo              # 默认 34 列
+    ./bin/azusa-logo --width 48
+    ./bin/azusa-logo --ascii      # 不支持真彩色时的降级版本
+"""
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+from PIL import Image, ImageDraw
+
+def _find_root() -> Path:
+    """仓库布局用 script/..，安装后用 /usr/local/share/azusalinux。"""
+    import os
+    candidates = []
+    if os.environ.get("AZUSA_ROOT"):
+        candidates.append(Path(os.environ["AZUSA_ROOT"]))
+    candidates.append(Path(__file__).resolve().parent.parent)
+    candidates.append(Path("/usr/local/share/azusalinux"))
+    for c in candidates:
+        if (c / "branding" / "palette.json").exists():
+            return c
+    return Path(__file__).resolve().parent.parent
+
+
+ROOT = _find_root()
+MASCOT = ROOT / "branding" / "mascot" / "azusa-v1.png"
+
+
+def cutout(path: Path) -> Image.Image:
+    im = Image.open(path).convert("RGBA")
+    w, h = im.size
+    for corner in ((0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1)):
+        ImageDraw.floodfill(im, corner, (0, 0, 0, 0), thresh=40)
+    bbox = im.getbbox()
+    return im.crop(bbox) if bbox else im
+
+
+def head_crop(mascot: Image.Image) -> Image.Image:
+    """从全身立绘里裁出头部方形区域。
+
+    直接拿全身图缩到 48 列，脸只占几个像素，完全认不出来，
+    所以必须先裁头再画。
+    """
+    head = mascot.crop((0, 0, mascot.width, int(mascot.height * 0.46)))
+    side = min(head.size)
+    left = (head.width - side) // 2
+    return head.crop((left, 0, left + side, side))
+
+
+def render(mascot: Image.Image, width: int) -> list[str]:
+    head = head_crop(mascot)
+
+    # 字符宽高比约 1:2，所以纵向像素取两倍
+    px_w = width
+    px_h = width  # 每个字符吃掉 2 行像素，正方形区域正好 width 行字符
+    small = head.resize((px_w, px_h), Image.LANCZOS)
+
+    lines: list[str] = []
+    for row in range(0, px_h, 2):
+        line = []
+        for col in range(px_w):
+            top = small.getpixel((col, row))
+            bottom = small.getpixel((col, min(row + 1, px_h - 1)))
+            t_alpha = top[3] > 40
+            b_alpha = bottom[3] > 40
+            if not t_alpha and not b_alpha:
+                line.append("\033[0m ")
+            elif t_alpha and b_alpha:
+                line.append(f"\033[38;2;{top[0]};{top[1]};{top[2]}m"
+                            f"\033[48;2;{bottom[0]};{bottom[1]};{bottom[2]}m▀")
+            elif t_alpha:
+                line.append(f"\033[38;2;{top[0]};{top[1]};{top[2]}m\033[49m▀")
+            else:
+                line.append(f"\033[38;2;{bottom[0]};{bottom[1]};{bottom[2]}m"
+                            f"\033[49m▄")
+        line.append("\033[0m")
+        lines.append("".join(line))
+    return lines
+
+
+ASCII_RAMP = " .:-=+*#%@"
+
+
+def render_ascii(mascot: Image.Image, width: int) -> list[str]:
+    head = head_crop(mascot)
+    px_h = width // 2
+    small = head.resize((width, px_h), Image.LANCZOS)
+    out = []
+    for y in range(px_h):
+        row = []
+        for x in range(width):
+            r, g, b, a = small.getpixel((x, y))
+            if a < 40:
+                row.append(" ")
+                continue
+            lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+            row.append(ASCII_RAMP[min(len(ASCII_RAMP) - 1, int((1 - lum) * len(ASCII_RAMP)))])
+        out.append("".join(row).rstrip())
+    return out
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(prog="azusa-logo", description="终端里的吉祥物")
+    ap.add_argument("--width", type=int, default=48)
+    ap.add_argument("--mascot", default=str(MASCOT))
+    ap.add_argument("--ascii", action="store_true", help="降级为纯字符")
+    args = ap.parse_args(argv)
+
+    mascot = cutout(Path(args.mascot))
+    lines = render_ascii(mascot, args.width) if args.ascii else render(mascot, args.width)
+    print()
+    for line in lines:
+        print("   " + line)
+    print()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

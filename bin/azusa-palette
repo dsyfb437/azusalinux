@@ -1,0 +1,247 @@
+#!/usr/bin/env python3
+"""azusa-palette — 从 palette.json 派生出各种格式的配色
+
+用法：
+    ./bin/azusa-palette                 # 打印色板 + 终端实色预览
+    ./bin/azusa-palette --emit          # 同时写到 dist/
+
+派生出来的东西：
+    gtk-azusa.css        GTK 的 @define-color
+    kitty-azusa.conf     kitty 终端配色（暗色为主）
+    foot-azusa.ini       foot 终端配色
+    grub-azusa.cfg       GRUB 菜单配色
+
+一条原则：所有颜色都从 palette.json 来，不允许在别处硬编码色值。
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+def _find_root() -> Path:
+    """仓库布局用 script/..，安装后用 /usr/local/share/azusalinux。"""
+    import os
+    candidates = []
+    if os.environ.get("AZUSA_ROOT"):
+        candidates.append(Path(os.environ["AZUSA_ROOT"]))
+    candidates.append(Path(__file__).resolve().parent.parent)
+    candidates.append(Path("/usr/local/share/azusalinux"))
+    for c in candidates:
+        if (c / "branding" / "palette.json").exists():
+            return c
+    return Path(__file__).resolve().parent.parent
+
+
+ROOT = _find_root()
+PALETTE = ROOT / "branding" / "palette.json"
+DIST = ROOT / "dist"
+
+
+def hex_to_rgb(value: str) -> tuple[int, int, int]:
+    value = value.lstrip("#")
+    return tuple(int(value[i:i + 2], 16) for i in (0, 2, 4))  # type: ignore[return-value]
+
+
+def rgb_to_hex(rgb: tuple[int, int, int]) -> str:
+    return "#" + "".join(f"{max(0, min(255, c)):02x}" for c in rgb)
+
+
+def mix(a: str, b: str, t: float) -> str:
+    ra, ga, ba = hex_to_rgb(a)
+    rb, gb, bb = hex_to_rgb(b)
+    return rgb_to_hex((
+        round(ra + (rb - ra) * t),
+        round(ga + (gb - ga) * t),
+        round(ba + (bb - ba) * t),
+    ))
+
+
+def lighten(color: str, t: float) -> str:
+    return mix(color, "#ffffff", t)
+
+
+def darken(color: str, t: float) -> str:
+    return mix(color, "#000000", t)
+
+
+def luminance(color: str) -> float:
+    r, g, b = hex_to_rgb(color)
+    return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255
+
+
+def ansi_palette(theme: dict[str, str], pal: dict | None = None,
+                 name: str | None = None) -> list[str]:
+    """优先用 palette.json 里手调的 terminal 段；没有才退回公式派生。"""
+    if pal and name and "terminal" in pal:
+        return list(pal["terminal"][name]["colors"])
+    return _derived_ansi(theme)
+
+
+def _derived_ansi(theme: dict[str, str]) -> list[str]:
+    """16 色 ANSI，从语义色派生。
+
+    0-7 是正常色，8-15 是亮色。基调沿用主题的冷暖，而不是塞标准 RGB，
+    否则终端和系统其它部分会像两个软件。
+    """
+    bg = theme["bg"]
+    dark_theme = luminance(bg) < 0.5
+
+    def tone(base: str, amount: float = 0.18) -> str:
+        # 暗色底上提亮、亮色底上压暗，保证在背景上可读
+        return lighten(base, amount) if dark_theme else darken(base, amount)
+
+    normal = [
+        mix(bg, theme["text"], 0.28),          # black
+        tone(theme["danger"]),                 # red
+        tone(theme["success"]),                # green
+        tone(theme["warning"]),                # yellow
+        tone(theme["accent"]),                 # blue
+        tone(theme["primary"]),                # magenta
+        tone(theme["accent"], 0.32),           # cyan
+        mix(bg, theme["text"], 0.78),          # white
+    ]
+    bright = [
+        mix(bg, theme["text"], 0.45),
+        lighten(theme["danger"], 0.18),
+        lighten(theme["success"], 0.18),
+        lighten(theme["warning"], 0.18),
+        lighten(theme["accent"], 0.18),
+        lighten(theme["primary"], 0.18),
+        lighten(theme["accent"], 0.42),
+        theme["text"],
+    ]
+    return normal + bright
+
+
+def emit_gtk(pal: dict) -> str:
+    lines = ["/* 由 azusa-palette 生成，不要手改。源文件：branding/palette.json */", ""]
+    for name in ("light", "dark"):
+        theme = pal[name]
+        lines.append(f"/* {name} */")
+        for key, value in theme.items():
+            lines.append(f"@define-color azusa_{key} {value};")
+        lines.append("")
+    return "\n".join(lines)
+
+
+def emit_kitty(pal: dict) -> str:
+    theme = pal["dark"]
+    term = pal["terminal"]["dark"]
+    colors = list(term["colors"])
+    out = [
+        "# 由 azusa-palette 生成，源文件 branding/palette.json",
+        f"background            {term['background']}",
+        f"foreground            {term['foreground']}",
+        f"cursor                {term['cursor']}",
+        f"cursor_text_color     {term['background']}",
+        f"selection_background  {theme['overlay']}",
+        f"selection_foreground  {theme['text']}",
+        "",
+    ]
+    for i, color in enumerate(colors):
+        out.append(f"color{i:<2}              {color}")
+    return "\n".join(out) + "\n"
+
+
+def emit_foot(pal: dict) -> str:
+    theme = pal["dark"]
+    term = pal["terminal"]["dark"]
+    colors = list(term["colors"])
+    out = ["[colors]", f"background={term['background']}", f"foreground={term['foreground']}",
+           f"cursor={term['background']} {term['cursor']}",
+           f"selection-foreground={theme['text']}", f"selection-background={theme['overlay']}", ""]
+    for i, color in enumerate(colors):
+        out.append(f"regular{i}={color}")
+    return "\n".join(out) + "\n"
+
+
+
+def emit_ptyxis(pal: dict) -> str:
+    """Ptyxis（Ubuntu 26.04 默认终端）的调色板格式。
+
+    格式是从 ptyxis 二进制的 gresource 里抄出来的：
+        [Palette] Name=...
+        [Light] / [Dark] 各自一组 Background/Foreground/Cursor/Color0..15
+    """
+    lines = ["[Palette]", f"Name={pal['name']}", ""]
+    for name, label in (("light", "Light"), ("dark", "Dark")):
+        term = pal["terminal"][name]
+        colors = list(term["colors"])
+        lines.append(f"[{label}]")
+        lines.append(f"Background={term['background']}")
+        lines.append(f"Foreground={term['foreground']}")
+        lines.append(f"Cursor={term['cursor']}")
+        for i, color in enumerate(colors):
+            lines.append(f"Color{i}={color}")
+        lines.append("")
+    return "\n".join(lines)
+
+
+def emit_grub(pal: dict) -> str:
+    theme = pal["dark"]
+    return "\n".join([
+        "# 由 azusa-palette 生成，源文件 branding/palette.json",
+        f"set menu_color_normal=light-gray/{theme['bg']}",
+        f"set menu_color_highlight={theme['text']}/{theme['primary']}",
+        "",
+    ])
+
+
+def preview(pal: dict) -> None:
+    print()
+    print(f"  {pal['name']} 色板")
+    print("  " + "─" * 58)
+
+    for name in ("light", "dark"):
+        theme = pal[name]
+        label = "浅色" if name == "light" else "暗色"
+        print(f"\n  {label}")
+        for key, value in theme.items():
+            r, g, b = hex_to_rgb(value)
+            # 24 位色块（终端不支持时只会显示空白，不影响阅读）
+            block = f"\033[48;2;{r};{g};{b}m      \033[0m"
+            print(f"    {block} {key:<12} {value}")
+
+    print()
+    print("  ANSI 16 色预览（暗色主题）")
+    print("  " + "─" * 58)
+    colors = ansi_palette(pal["dark"], pal, "dark")
+    for row, indices in (("normal", range(0, 8)), ("bright", range(8, 16))):
+        cells = []
+        for i in indices:
+            r, g, b = hex_to_rgb(colors[i])
+            cells.append(f"\033[48;2;{r};{g};{b}m\033[30m {i:2} \033[0m")
+        print(f"    {row:<7}" + "".join(cells))
+    print()
+    print("    文字效果：" + "".join(
+        f"\033[38;2;{hex_to_rgb(colors[i])[0]};{hex_to_rgb(colors[i])[1]};{hex_to_rgb(colors[i])[2]}m■■■\033[0m"
+        for i in (1, 2, 3, 4, 5, 6)
+    ))
+    print()
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(prog="azusa-palette", description="从 palette.json 派生配色")
+    parser.add_argument("--emit", action="store_true", help="写入 dist/")
+    args = parser.parse_args(argv)
+
+    pal = json.loads(PALETTE.read_text())
+    preview(pal)
+
+    if args.emit:
+        DIST.mkdir(exist_ok=True)
+        (DIST / "gtk-azusa.css").write_text(emit_gtk(pal))
+        (DIST / "kitty-azusa.conf").write_text(emit_kitty(pal))
+        (DIST / "foot-azusa.ini").write_text(emit_foot(pal))
+        (DIST / "grub-azusa.cfg").write_text(emit_grub(pal))
+        (DIST / "ptyxis-azusa.palette").write_text(emit_ptyxis(pal))
+        print(f"  已写入 {DIST.relative_to(ROOT.parent)}/  （5 个文件）")
+        print()
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

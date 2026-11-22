@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# azusa-fetch — 打印吉祥物 + 系统信息
+# 为什么不用 neofetch：那个项目 2024 年已归档，不再维护；fastfetch 是接替者。
+set -euo pipefail
+
+# 找到资源根目录：AZUSA_ROOT > 仓库布局 > 安装位置
+ROOT="${AZUSA_ROOT:-}"
+if [ -z "$ROOT" ]; then
+    cand="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." 2>/dev/null && pwd)"
+    if [ -f "$cand/branding/palette.json" ]; then
+        ROOT="$cand"
+    elif [ -f /usr/local/share/azusalinux/branding/palette.json ]; then
+        ROOT=/usr/local/share/azusalinux
+    fi
+fi
+
+python3 "$ROOT/bin/azusa-logo" "$@" 2>/dev/null \
+  || python3 "$(dirname "${BASH_SOURCE[0]}")/azusa-logo" "$@"
+
+if command -v fastfetch >/dev/null 2>&1; then
+    fastfetch --config "$ROOT/branding/fastfetch/azusa.jsonc" 2>/dev/null \
+      || fastfetch --logo none
+else
+    echo "  提示：装 fastfetch 后可以显示系统信息（apt install fastfetch）"
+fi

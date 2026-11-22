@@ -1,0 +1,198 @@
+#!/usr/bin/env python3
+"""azusa-mascot — 用吉祥物生成萌系壁纸
+
+背景是程序化生成的 pastel（mochi 风格）：柔和渐变 + 圆润色块 + 星点，
+角色从 branding/mascot/ 里的白底图抠出来放右侧。
+
+版权上的意义：这个概念图是 AI 生成的原创角色，不涉及第三方作品，
+所以它和抽象壁纸一样可以进 ISO。
+
+用法：
+    ./bin/azusa-mascot                        # 深/浅两版，2880x1800
+    ./bin/azusa-mascot --size 2560x1440
+    ./bin/azusa-mascot --avatar               # 顺便导出头像
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import random
+import sys
+from pathlib import Path
+
+from PIL import Image, ImageDraw, ImageFilter
+
+def _find_root() -> Path:
+    """仓库布局用 script/..，安装后用 /usr/local/share/azusalinux。"""
+    import os
+    candidates = []
+    if os.environ.get("AZUSA_ROOT"):
+        candidates.append(Path(os.environ["AZUSA_ROOT"]))
+    candidates.append(Path(__file__).resolve().parent.parent)
+    candidates.append(Path("/usr/local/share/azusalinux"))
+    for c in candidates:
+        if (c / "branding" / "palette.json").exists():
+            return c
+    return Path(__file__).resolve().parent.parent
+
+
+ROOT = _find_root()
+PALETTE = ROOT / "branding" / "palette.json"
+MASCOT = ROOT / "branding" / "mascot" / "azusa-v1.png"
+OUT = ROOT / "dist" / "wallpapers"
+
+
+def hex_to_rgb(v: str) -> tuple[int, int, int]:
+    v = v.lstrip("#")
+    return tuple(int(v[i:i + 2], 16) for i in (0, 2, 4))  # type: ignore[return-value]
+
+
+def vertical_gradient(size: tuple[int, int], top: str, bottom: str) -> Image.Image:
+    w, h = size
+    strip = Image.new("RGB", (1, h))
+    px = strip.load()
+    a, b = hex_to_rgb(top), hex_to_rgb(bottom)
+    for y in range(h):
+        t = y / max(1, h - 1)
+        px[0, y] = tuple(round(a[i] + (b[i] - a[i]) * t) for i in range(3))
+    return strip.resize(size)
+
+
+def soft_circle(canvas: Image.Image, center: tuple[float, float], radius: float,
+                color: str, alpha: int) -> Image.Image:
+    w, h = canvas.size
+    cx, cy = center[0] * w, center[1] * h
+    r = radius * min(w, h)
+    mask = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(mask).ellipse([cx - r, cy - r, cx + r, cy + r], fill=alpha)
+    mask = mask.filter(ImageFilter.GaussianBlur(r * 0.8))
+    layer = Image.new("RGBA", (w, h), hex_to_rgb(color) + (0,))
+    layer.putalpha(mask)
+    return Image.alpha_composite(canvas.convert("RGBA"), layer)
+
+
+def sparkle(canvas: Image.Image, x: float, y: float, size: float,
+            color: str, alpha: int) -> None:
+    """四角星，萌系壁纸的常见点缀。"""
+    d = ImageDraw.Draw(canvas)
+    s = size
+    pts = [(x, y - s), (x + s * 0.22, y - s * 0.22), (x + s, y),
+           (x + s * 0.22, y + s * 0.22), (x, y + s),
+           (x - s * 0.22, y + s * 0.22), (x - s, y),
+           (x - s * 0.22, y - s * 0.22)]
+    d.polygon(pts, fill=hex_to_rgb(color) + (alpha,))
+
+
+def cutout(path: Path) -> Image.Image:
+    """白底四角泛洪填充。AI 出的图边缘干净，这一步效果很好。"""
+    im = Image.open(path).convert("RGBA")
+    w, h = im.size
+    for corner in ((0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1)):
+        ImageDraw.floodfill(im, corner, (0, 0, 0, 0), thresh=40)
+    bbox = im.getbbox()
+    return im.crop(bbox) if bbox else im
+
+
+def build(palette: dict, dark: bool, size: tuple[int, int],
+          mascot: Image.Image, rng: random.Random,
+          height_ratio: float = 0.72) -> Image.Image:
+    w, h = size
+    p = palette["dark"] if dark else palette["light"]
+
+    if dark:
+        base = vertical_gradient(size, "#141028", "#2a2048")
+        tints = [(p["primary"], 70), (p["accent"], 55), (p["pink"], 45)]
+        star_color = "#e9e2ff"
+    else:
+        base = vertical_gradient(size, "#fffbff", "#ece2f8")
+        tints = [(p["primary"], 40), (p["accent"], 30), (p["pink"], 55)]
+        star_color = "#b7a3d6"
+
+    for (color, alpha), (cx, cy, r) in zip(tints, ((0.15, 0.15, 0.45),
+                                                   (0.9, 0.25, 0.4),
+                                                   (0.25, 0.9, 0.5))):
+        base = soft_circle(base, (cx, cy), r, color, alpha)
+
+    # 星点
+    layer = Image.new("RGBA", size, (0, 0, 0, 0))
+    for _ in range(26):
+        sparkle(layer, rng.uniform(0.05, 0.95) * w, rng.uniform(0.05, 0.9) * h,
+                rng.uniform(0.006, 0.016) * min(w, h), star_color,
+                rng.randint(70, 160) if dark else rng.randint(50, 110))
+    base = Image.alpha_composite(base.convert("RGBA"), layer)
+
+    # 角色：默认占高 72%。之前是 92%，顶天立地，没有呼吸感。
+    scale = (h * height_ratio) / mascot.height
+    m = mascot.resize((round(mascot.width * scale), round(mascot.height * scale)),
+                      Image.LANCZOS)
+    cx = w * 0.68
+    x = round(cx - m.width / 2)
+    # 脚底对齐一条「地面线」，人物就不是飘着的
+    ground = h * 0.87
+    y = round(ground - m.height)
+
+    # 柔光托底
+    glow = Image.new("RGBA", size, (0, 0, 0, 0))
+    gd = ImageDraw.Draw(glow)
+    gr = m.height * 0.55
+    gd.ellipse([cx - gr, ground - m.height * 0.75 - gr * 0.6,
+                cx + gr, ground - m.height * 0.75 + gr * 0.9],
+               fill=hex_to_rgb(p["primary"]) + (55 if dark else 35,))
+    base = Image.alpha_composite(base, glow.filter(ImageFilter.GaussianBlur(gr / 2)))
+
+    # 脚下投影，落地感
+    shadow = Image.new("RGBA", size, (0, 0, 0, 0))
+    sw, sh = m.width * 0.42, m.height * 0.035
+    ImageDraw.Draw(shadow).ellipse(
+        [cx - sw, ground - sh, cx + sw, ground + sh],
+        fill=(0, 0, 0, 90 if dark else 55))
+    base = Image.alpha_composite(base, shadow.filter(ImageFilter.GaussianBlur(sh * 2)))
+
+    base.paste(m, (x, y), m)
+    return base.convert("RGB")
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(prog="azusa-mascot", description="吉祥物萌系壁纸")
+    ap.add_argument("--size", default="2880x1800")
+    ap.add_argument("--mascot", default=str(MASCOT))
+    ap.add_argument("--out", default=str(OUT))
+    ap.add_argument("--avatar", action="store_true", help="顺便导出 512x512 头像")
+    ap.add_argument("--height", type=float, default=0.72,
+                    help="角色占画面高度的比例，默认 0.72")
+    ap.add_argument("--seed", type=int, default=20261122)
+    args = ap.parse_args(argv)
+
+    try:
+        w, h = (int(v) for v in args.size.lower().split("x"))
+    except ValueError:
+        sys.exit("azusa-mascot: --size 格式应为 2880x1800")
+
+    palette = json.loads(PALETTE.read_text())
+    mascot = cutout(Path(args.mascot))
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+
+    for dark in (False, True):
+        img = build(palette, dark, (w, h), mascot, random.Random(args.seed),
+                    args.height)
+        suffix = "dark" if dark else "light"
+        dest = out / f"mascot-{suffix}-{w}x{h}.jpg"
+        img.save(dest, quality=94, optimize=True)
+        print(f"  {dest.name}  ({dest.stat().st_size / 1024:.0f} KB)")
+
+    if args.avatar:
+        # 头像：取上半部分，居中裁正方形再缩放，避免四周留空
+        head = mascot.crop((0, 0, mascot.width, int(mascot.height * 0.42)))
+        side = min(head.size)
+        left = (head.width - side) // 2
+        square = head.crop((left, 0, left + side, side)).resize((512, 512), Image.LANCZOS)
+        dest = out / "mascot-avatar-512.png"
+        square.save(dest)
+        print(f"  {dest.name}  ({dest.stat().st_size / 1024:.0f} KB)")
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

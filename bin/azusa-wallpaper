@@ -1,0 +1,227 @@
+#!/usr/bin/env python3
+"""azusa-wallpaper — 把立绘合成为 16:9 壁纸
+
+思路：竖图直接当壁纸会两边留白，所以
+    背景 = 同一张图放大、重模糊、压暗，再叠一层色板渐变
+    前景 = 原图按高度缩放，偏右放置
+这样任意一张立绘都能出一张风格统一的横版壁纸。
+
+需要 Pillow。用法：
+    ./bin/azusa-wallpaper --src a.jpg b.png --out dist/wallpapers
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+from PIL import Image, ImageDraw, ImageFilter
+
+def _find_root() -> Path:
+    """仓库布局用 script/..，安装后用 /usr/local/share/azusalinux。"""
+    import os
+    candidates = []
+    if os.environ.get("AZUSA_ROOT"):
+        candidates.append(Path(os.environ["AZUSA_ROOT"]))
+    candidates.append(Path(__file__).resolve().parent.parent)
+    candidates.append(Path("/usr/local/share/azusalinux"))
+    for c in candidates:
+        if (c / "branding" / "palette.json").exists():
+            return c
+    return Path(__file__).resolve().parent.parent
+
+
+ROOT = _find_root()
+PALETTE = ROOT / "branding" / "palette.json"
+
+
+def hex_to_rgb(value: str) -> tuple[int, int, int]:
+    v = value.lstrip("#")
+    return tuple(int(v[i:i + 2], 16) for i in (0, 2, 4))  # type: ignore[return-value]
+
+
+def cover(img: Image.Image, size: tuple[int, int]) -> Image.Image:
+    """等比缩放到刚好铺满，再居中裁切。"""
+    tw, th = size
+    scale = max(tw / img.width, th / img.height)
+    resized = img.resize((round(img.width * scale) + 1, round(img.height * scale) + 1),
+                         Image.LANCZOS)
+    left = (resized.width - tw) // 2
+    top = (resized.height - th) // 2
+    return resized.crop((left, top, left + tw, top + th))
+
+
+def gradient(size: tuple[int, int], top: tuple[int, int, int], bottom: tuple[int, int, int],
+             top_alpha: int, bottom_alpha: int) -> Image.Image:
+    """竖直渐变，用来压暗背景、统一色调。"""
+    w, h = size
+    strip = Image.new("RGB", (1, h))
+    px = strip.load()
+    for y in range(h):
+        t = y / max(1, h - 1)
+        px[0, y] = tuple(round(top[i] + (bottom[i] - top[i]) * t) for i in range(3))
+    alpha = Image.new("L", (1, h))
+    ap = alpha.load()
+    for y in range(h):
+        t = y / max(1, h - 1)
+        ap[0, y] = round(top_alpha + (bottom_alpha - top_alpha) * t)
+    strip = strip.resize((w, h))
+    alpha = alpha.resize((w, h))
+    out = Image.new("RGBA", (w, h))
+    out.paste(strip, (0, 0))
+    out.putalpha(alpha)
+    return out
+
+
+def vignette(size: tuple[int, int], strength: int = 90) -> Image.Image:
+    """四周压暗，让视线落在角色身上。"""
+    w, h = size
+    mask = Image.new("L", (w, h), 0)
+    d = ImageDraw.Draw(mask)
+    d.ellipse((-w * 0.15, -h * 0.25, w * 1.15, h * 1.25), fill=255)
+    mask = mask.filter(ImageFilter.GaussianBlur(max(w, h) // 8))
+    mask = Image.eval(mask, lambda v: strength - int(v * strength / 255))
+    layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    layer.putalpha(mask)
+    return layer
+
+
+def border_deviation(img: Image.Image) -> float:
+    """边界像素偏离平均色的程度，用来判断「是不是纯色背景」。"""
+    w, h = img.size
+    px = img.load()
+    samples = []
+    for x in range(0, w, max(1, w // 60)):
+        samples.append(px[x, 0]); samples.append(px[x, h - 1])
+    for y in range(0, h, max(1, h // 60)):
+        samples.append(px[0, y]); samples.append(px[w - 1, y])
+    means = [sum(s[i] for s in samples) / len(samples) for i in range(3)]
+    return max(abs(s[i] - means[i]) for s in samples for i in range(3))
+
+
+def cutout(img: Image.Image, tol: int = 30) -> Image.Image | None:
+    """从四角泛洪填充，把纯色背景变成透明。失败返回 None。"""
+    rgba = img.convert("RGBA")
+    w, h = rgba.size
+    for corner in ((0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1)):
+        try:
+            ImageDraw.floodfill(rgba, corner, (0, 0, 0, 0), thresh=tol)
+        except Exception:
+            return None
+    bbox = rgba.getbbox()
+    if not bbox:
+        return None
+    # 抠掉的面积要够大，否则说明这图本来就有内容铺满
+    removed = rgba.getchannel("A").histogram()[0]
+    if removed / (w * h) < 0.25:
+        return None
+    return rgba.crop(bbox)
+
+
+def round_mask(size: tuple[int, int], radius: int) -> Image.Image:
+    mask = Image.new("L", size, 0)
+    ImageDraw.Draw(mask).rounded_rectangle([0, 0, size[0] - 1, size[1] - 1], radius, fill=255)
+    return mask
+
+
+def compose(src: Path, dark: dict[str, str], size: tuple[int, int],
+            anchor: float = 0.64, mode: str = "auto") -> Image.Image:
+    img = Image.open(src).convert("RGB")
+    W, H = size
+    landscape = img.width / img.height >= 1.5
+
+    # 背景：色板渐变 + 一团柔光（把立绘压到 48px 再放大，几乎没有细节）
+    base = gradient(size, hex_to_rgb(dark["bg"]), hex_to_rgb(dark["overlay"]), 255, 255).convert("RGB")
+    # 光晕：用色板主色在角色位置打一团柔光，而不是把原图糊上去
+    glow = Image.new("RGBA", size, (0, 0, 0, 0))
+    gx, gy = int(W * anchor), int(H * 0.48)
+    radius = int(min(W, H) * 0.62)
+    ImageDraw.Draw(glow).ellipse(
+        [gx - radius, gy - radius, gx + radius, gy + radius],
+        fill=hex_to_rgb(dark["primary"]) + (70,))
+    base = Image.alpha_composite(base.convert("RGBA"),
+                                 glow.filter(ImageFilter.GaussianBlur(radius / 2)))
+
+    if mode == "auto":
+        # 横图铺满；竖图一律做卡片。
+        # 自动抠图在头发内部会残留白色区域（泛洪填充不连通），
+        # 效果不稳定，所以只保留 --mode cutout 作为手动选项。
+        mode = "full" if landscape else "card"
+
+    canvas = base.convert("RGBA")
+
+    if mode == "full":
+        # 横图：直接铺满，最干净
+        full = cover(img, size).convert("RGBA")
+        tint = gradient(size, hex_to_rgb(dark["bg"]), hex_to_rgb(dark["bg"]), 60, 130)
+        canvas = Image.alpha_composite(full, tint)
+
+    elif mode == "cutout":
+        cut = cutout(img)
+        if cut is None:
+            return compose(src, dark, size, anchor, mode="card")
+        scale = (H * 0.96) / cut.height
+        cut = cut.resize((round(cut.width * scale), round(cut.height * scale)), Image.LANCZOS)
+        x = round(W * anchor - cut.width / 2)
+        y = round((H - cut.height) / 2)
+        # 柔和投影，把角色从背景里「托」起来
+        shadow = Image.new("RGBA", size, (0, 0, 0, 0))
+        sh = Image.new("RGBA", cut.size, (0, 0, 0, 0))
+        sh.putalpha(cut.getchannel("A").point(lambda v: int(v * 0.55)))
+        shadow.paste(sh, (x + 12, y + 18), sh)
+        canvas = Image.alpha_composite(canvas, shadow.filter(ImageFilter.GaussianBlur(22)))
+        canvas.alpha_composite(cut, (x, y))
+
+    else:  # card
+        ch = int(H * 0.9)
+        cw = round(img.width * ch / img.height)
+        card = img.resize((cw, ch), Image.LANCZOS)
+        # 原图白底太扎眼，往色板的浅紫方向染一成，和整体色调贴合
+        tint = Image.new("RGB", card.size, hex_to_rgb(dark["overlay"]))
+        card = Image.blend(card, tint, 0.12)
+        mask = round_mask((cw, ch), 24)
+        card_rgba = card.convert("RGBA")
+        card_rgba.putalpha(mask)
+        x = round(W * anchor - cw / 2)
+        y = (H - ch) // 2
+        shadow = Image.new("RGBA", size, (0, 0, 0, 0))
+        sh = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
+        sh.putalpha(mask.point(lambda v: int(v * 0.6)))
+        shadow.paste(sh, (x + 10, y + 16), sh)
+        canvas = Image.alpha_composite(canvas, shadow.filter(ImageFilter.GaussianBlur(26)))
+        canvas.paste(card_rgba, (x, y), card_rgba)
+
+    return Image.alpha_composite(canvas, vignette(size, 95)).convert("RGB")
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(prog="azusa-wallpaper", description="立绘合成 16:9 壁纸")
+    ap.add_argument("--src", nargs="+", required=True, help="源图片")
+    ap.add_argument("--out", default=str(ROOT / "dist" / "wallpapers"), help="输出目录")
+    ap.add_argument("--width", type=int, default=2560)
+    ap.add_argument("--height", type=int, default=1440)
+    ap.add_argument("--anchor", type=float, default=0.64,
+                    help="角色水平位置，0 最左 1 最右")
+    ap.add_argument("--mode", choices=("auto", "full", "cutout", "card"), default="auto",
+                    help="auto=横图铺满、纯色底抠图、其余做卡片")
+    args = ap.parse_args(argv)
+
+    dark = json.loads(PALETTE.read_text())["dark"]
+    out_dir = Path(args.out)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    for src in args.src:
+        path = Path(src)
+        if not path.exists():
+            print(f"  跳过 {path}（不存在）")
+            continue
+        result = compose(path, dark, (args.width, args.height), args.anchor, args.mode)
+        dest = out_dir / f"azusa-{path.stem.split('_')[0]}-{args.width}x{args.height}.jpg"
+        result.save(dest, quality=92, optimize=True)
+        print(f"  {dest}  ({dest.stat().st_size / 1024:.0f} KB)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

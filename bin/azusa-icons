@@ -1,0 +1,193 @@
+#!/usr/bin/env python3
+"""azusa-icons — 【v1 未采用】程序化生成图标主题
+
+⚠️ 这个方案被否决了：几何简笔图标和周围精修图标放在一起风格断层，
+   实际效果比预期差很多。v1 改用 Papirus-Dark + papirus-folders violet。
+   文件保留是因为「为什么不该自己做图标」这个结论值得留档。
+
+下面是原始说明：
+
+
+思路不是"画整套图标"（那要几百个 SVG，是美术工程），而是：
+继承 Adwaita，只覆盖 4 个最显眼的图标。其余全部照旧，
+所以永远不会出现"某个图标没画所以空白"的情况。
+
+图标全部用几何形状程序化生成，颜色来自 palette.json。
+
+用法：
+    ./bin/azusa-icons                 # 生成到 dist/icons/Azusa
+    ./bin/azusa-icons --install       # 装到 ~/.local/share/icons 并启用
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+PALETTE = ROOT / "branding" / "palette.json"
+DIST = ROOT / "dist" / "icons"
+
+
+def load_colors() -> dict:
+    pal = json.loads(PALETTE.read_text())
+    return {
+        "deep": pal["dark"]["bg"],
+        "surface": pal["dark"]["surface"],
+        "primary": pal["dark"]["primary"],
+        "accent": pal["dark"]["accent"],
+        "pink": pal["dark"]["pink"],
+        "light_primary": pal["light"]["primary"],
+        "light_bg": pal["light"]["bg"],
+    }
+
+
+def header(title: str) -> str:
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" '
+            f'width="128" height="128">\n  <title>{title}</title>\n')
+
+
+def star(cx: float, cy: float, r: float, fill: str, points: int = 5) -> str:
+    """五角星，用来呼应吉祥物的发饰。"""
+    inner = r * 0.382
+    pts = []
+    for i in range(points * 2):
+        rad = r if i % 2 == 0 else inner
+        a = -math.pi / 2 + i * math.pi / points
+        pts.append(f"{cx + rad * math.cos(a):.2f},{cy + rad * math.sin(a):.2f}")
+    return f'  <polygon points="{" ".join(pts)}" fill="{fill}"/>\n'
+
+
+def icon_terminal(c: dict) -> str:
+    s = header("Terminal")
+    s += f'  <rect x="10" y="18" width="108" height="92" rx="18" fill="{c["surface"]}"/>\n'
+    s += f'  <rect x="10" y="18" width="108" height="92" rx="18" fill="none" stroke="{c["primary"]}" stroke-width="3" stroke-opacity="0.55"/>\n'
+    s += f'  <path d="M34 48 L54 64 L34 80" fill="none" stroke="{c["accent"]}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>\n'
+    s += f'  <rect x="62" y="74" width="30" height="7" rx="3.5" fill="{c["pink"]}"/>\n'
+    s += star(96, 34, 11, c["primary"])
+    return s + "</svg>\n"
+
+
+def icon_folder(c: dict) -> str:
+    s = header("Folder")
+    s += (f'  <path d="M12 38 q0-8 8-8 h28 l10 10 h50 q8 0 8 8 v50 q0 8-8 8 '
+          f'H20 q-8 0-8-8 z" fill="{c["light_primary"]}"/>\n')
+    s += (f'  <path d="M12 56 h104 v42 q0 8-8 8 H20 q-8 0-8-8 z" '
+          f'fill="{c["light_primary"]}" fill-opacity="0.75"/>\n')
+    s += star(96, 84, 13, c["light_bg"])
+    return s + "</svg>\n"
+
+
+def icon_settings(c: dict) -> str:
+    s = header("Settings")
+    cx = cy = 64.0
+    r_out, r_in, teeth = 46.0, 36.0, 8
+    pts = []
+    for i in range(teeth * 2):
+        rad = r_out if i % 2 == 0 else r_in
+        a = -math.pi / 2 + i * math.pi / teeth
+        pts.append(f"{cx + rad * math.cos(a):.2f},{cy + rad * math.sin(a):.2f}")
+    s += f'  <polygon points="{" ".join(pts)}" fill="{c["primary"]}"/>\n'
+    s += f'  <circle cx="{cx}" cy="{cy}" r="16" fill="{c["deep"]}"/>\n'
+    s += star(cx, cy, 9, c["pink"])
+    return s + "</svg>\n"
+
+
+def icon_star(c: dict) -> str:
+    """品牌图标：单独的五角星，用于「关于系统」之类。"""
+    s = header("AzusaLinux")
+    s += f'  <circle cx="64" cy="64" r="52" fill="{c["deep"]}"/>\n'
+    s += f'  <circle cx="64" cy="64" r="52" fill="none" stroke="{c["primary"]}" stroke-width="3"/>\n'
+    s += star(64, 66, 34, c["primary"])
+    s += star(64, 66, 14, c["pink"])
+    return s + "</svg>\n"
+
+
+INDEX = """[Icon Theme]
+Name=Azusa
+Comment=Azusa icons on top of Adwaita
+Inherits=Adwaita,hicolor
+
+Directories=scalable/apps,scalable/places
+
+[scalable/apps]
+Context=Applications
+Size=128
+Type=Scalable
+MinSize=8
+MaxSize=512
+
+[scalable/places]
+Context=Places
+Size=128
+Type=Scalable
+MinSize=8
+MaxSize=512
+"""
+
+
+ICONS = {
+    "apps": {
+        "utilities-terminal": icon_terminal,
+        "org.gnome.Ptyxis": icon_terminal,
+        "org.gnome.Terminal": icon_terminal,
+        "preferences-system": icon_settings,
+        "org.gnome.Settings": icon_settings,
+        "azusalinux": icon_star,
+    },
+    "places": {
+        "folder": icon_folder,
+        "folder-home": icon_folder,
+        "user-home": icon_folder,
+    },
+}
+
+
+def build(colors: dict, out: Path) -> int:
+    count = 0
+    for ctx, items in ICONS.items():
+        d = out / "scalable" / ctx
+        d.mkdir(parents=True, exist_ok=True)
+        for name, fn in items.items():
+            (d / f"{name}.svg").write_text(fn(colors))
+            count += 1
+    (out / "index.theme").write_text(INDEX)
+    return count
+
+
+def install(src: Path) -> None:
+    dest = Path.home() / ".local/share/icons/Azusa"
+    if dest.exists():
+        shutil.rmtree(dest)
+    shutil.copytree(src, dest)
+    subprocess.run(["gtk-update-icon-cache", "-f", "-t", str(dest)],
+                   capture_output=True)
+    subprocess.run(["gsettings", "set", "org.gnome.desktop.interface",
+                    "icon-theme", "Azusa"], capture_output=True)
+    print(f"  已装到 {dest}，图标主题切到 Azusa")
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(prog="azusa-icons", description="生成/安装图标主题")
+    ap.add_argument("--install", action="store_true")
+    ap.add_argument("--out", default=str(DIST))
+    args = ap.parse_args(argv)
+
+    colors = load_colors()
+    out = Path(args.out) / "Azusa"
+    if out.exists():
+        shutil.rmtree(out)
+    count = build(colors, out)
+    print(f"  生成 {count} 个图标 → {out}")
+
+    if args.install:
+        install(out)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
