@@ -1,0 +1,22 @@
+#!/bin/sh
+# 在 chroot 里把系统身份和品牌资产固化进镜像
+set -e
+
+echo "=== AzusaLinux: 写入系统身份 ==="
+/share/azusalinux/azusa-setup --apply --hostname azusalinux 2>&1 | sed 's/^/  /'
+
+echo "=== AzusaLinux: 安装壁纸 ==="
+install -d /usr/share/backgrounds/azusa
+for f in /share/azusalinux/wallpapers/*.jpg; do
+    [ -f "$f" ] && install -m 0644 "$f" /usr/share/backgrounds/azusa/
+done || true
+
+echo "=== AzusaLinux: Papirus 文件夹染色 ==="
+if [ -x /share/azusalinux/vendor/papirus-folders ]; then
+    /share/azusalinux/vendor/papirus-folders -C violet --theme Papirus-Dark || true
+fi
+
+echo "=== AzusaLinux: /etc/skel 基础配置 ==="
+install -d /etc/skel/.config/fastfetch
+[ -f /share/azusalinux/branding/fastfetch/azusa.jsonc ] && \
+    install -m 0644 /share/azusalinux/branding/fastfetch/azusa.jsonc /etc/skel/.config/fastfetch/config.jsonc

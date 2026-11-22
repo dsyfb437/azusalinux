@@ -1,0 +1,7 @@
+# AzusaLinux 基础预装（第一阶段先做能启动的 live 系统，桌面后面再加）
+fonts-inter
+fonts-jetbrains-mono
+papirus-icon-theme
+fastfetch
+python3
+curl

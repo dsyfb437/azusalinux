@@ -1,3 +1,7 @@
 dist/
 __pycache__/
 *.pyc
+iso/work/
+iso/work.cache.keep/
+iso/build.out
+iso/build.log

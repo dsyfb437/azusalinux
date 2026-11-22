@@ -210,7 +210,12 @@ if [ "$cur_host" = "$NEW_HOST" ]; then
 else
     printf '  %s %-24s %s → %s（%s）\n' "$(todo)" "hostname" "$cur_host" "$NEW_HOST" "$HOST_REASON"
     if [ "$APPLY" -eq 1 ]; then
-        hostnamectl set-hostname "$NEW_HOST"
+        # 构建 ISO 时是在 chroot 里跑，没有 systemd，也没有 hostnamectl
+        if command -v hostnamectl >/dev/null 2>&1; then
+            hostnamectl set-hostname "$NEW_HOST" 2>/dev/null || true
+        else
+            printf '       %s\n' "（chroot 环境，跳过 hostname 变更）"
+        fi
     fi
 fi
 
