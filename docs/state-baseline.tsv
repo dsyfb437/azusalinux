@@ -2150,23 +2150,21 @@ file	/etc/os-release	ab0f3d2f6d181f68
 file	/etc/lsb-release	00973a5ea5d2be86
 file	/etc/issue	ce87936abae430f2
 file	/etc/issue.net	ce87936abae430f2
-file	/etc/default/grub	d08a49ce48cdd70b
 grubcolor	GRUB_COLOR_NORMAL="light-gray/#181430"
 grubcolor	GRUB_COLOR_HIGHLIGHT="#ece8f6/#b296cc"
-bin	azusa-abstract
-bin	azusa-apply
-bin	azusa-fetch
-bin	azusa-logo
-bin	azusa-mascot
-bin	azusa-palette
-bin	azusa-wallpaper
-bin	azusafetch
-wallpaper	abstract-dusk-2880x1800.jpg
-wallpaper	abstract-veil-2880x1800.jpg
-wallpaper	mascot-dark-2880x1800.jpg
-wallpaper	mascot-light-2880x1800.jpg
-user-wallpaper	mascot-dark-2880x1800.jpg
-user-wallpaper	mascot-light-2880x1800.jpg
+bin	azusa-abstract	present
+bin	azusa-apply	present
+bin	azusa-fetch	present
+bin	azusa-logo	present
+bin	azusa-mascot	present
+bin	azusa-palette	present
+bin	azusa-wallpaper	present
+wallpaper	abstract-dusk-2880x1800.jpg	present
+wallpaper	abstract-veil-2880x1800.jpg	present
+wallpaper	mascot-dark-2880x1800.jpg	present
+wallpaper	mascot-light-2880x1800.jpg	present
+user-wallpaper	mascot-dark-2880x1800.jpg	present
+user-wallpaper	mascot-light-2880x1800.jpg	present
 file	ptyxis-palette	5f90990c7e164b5f
 file	kitty-config	485412b0dac29c55
 font	Inter	Inter

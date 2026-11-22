@@ -32,8 +32,7 @@ dump_gsettings() {
 }
 
 dump_files() {
-    for f in /etc/os-release /etc/lsb-release /etc/issue /etc/issue.net \
-             /etc/default/grub; do
+    for f in /etc/os-release /etc/lsb-release /etc/issue /etc/issue.net; do
         [ -f "$f" ] && printf 'file\t%s\t%s\n' "$f" "$(sha256sum "$f" | cut -c1-16)"
     done
     # 只关心和 Azusa 有关的行，避免整文件比对被系统更新干扰
@@ -42,10 +41,16 @@ dump_files() {
 }
 
 dump_paths() {
-    ls /usr/local/bin 2>/dev/null | grep '^azusa' | sed 's/^/bin\t/'
-    ls /usr/share/backgrounds/azusa 2>/dev/null | sed 's/^/wallpaper\t/'
-    [ -f "$HOME/.local/share/backgrounds/azusa/"*.jpg ] 2>/dev/null
-    ls "$HOME/.local/share/backgrounds/azusa" 2>/dev/null | sed 's/^/user-wallpaper\t/'
+    # 必须是三字段：两字段会被 compare 当成「空 key」全部塌缩成一条
+    for f in /usr/local/bin/azusa-*; do
+        [ -e "$f" ] && printf 'bin\t%s\tpresent\n' "$(basename "$f")"
+    done
+    for f in /usr/share/backgrounds/azusa/*; do
+        [ -e "$f" ] && printf 'wallpaper\t%s\tpresent\n' "$(basename "$f")"
+    done
+    for f in "$HOME/.local/share/backgrounds/azusa/"*; do
+        [ -e "$f" ] && printf 'user-wallpaper\t%s\tpresent\n' "$(basename "$f")"
+    done
     [ -f "$HOME/.local/share/org.gnome.Ptyxis/palettes/azusa.palette" ] \
         && echo -e "file\tptyxis-palette\t$(sha256sum "$HOME/.local/share/org.gnome.Ptyxis/palettes/azusa.palette" | cut -c1-16)"
     [ -f "$HOME/.config/kitty/azusa.conf" ] \
