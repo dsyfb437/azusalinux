@@ -11,9 +11,15 @@ set -uo pipefail
 
 ACTION="${1:-dump}"
 
+# 所有条目必须是三个字段：section <TAB> key <TAB> value
+# 两字段会被 compare 当成空 key，同一 section 的所有条目会塌缩成一条。
+emit() { printf '%s\t%s\t%s\n' "$1" "$2" "$3"; }
+
 dump_packages() {
     # 只比包名，不比版本（版本差异是噪音）
-    dpkg-query -W -f='${Package}\n' 2>/dev/null | sort -u | sed 's/^/pkg\t/'
+    dpkg-query -W -f='${Package}\n' 2>/dev/null | sort -u | while read -r p; do
+        emit pkg "$p" installed
+    done
 }
 
 dump_gsettings() {
@@ -22,55 +28,59 @@ dump_gsettings() {
                   org.gnome.desktop.wm.preferences \
                   org.gnome.Ptyxis; do
         gsettings list-recursively "$schema" 2>/dev/null \
-            | sed "s/^/gset\t/"
+            | while read -r _sc key rest; do
+                emit gset "$_sc $key" "$rest"
+              done
     done
-    # ptyxis profile（uuid 每台机器不同，只取内容）
+    # ptyxis profile（uuid 每台机器不同，key 里不含 uuid）
+    local uuid
     uuid=$(gsettings get org.gnome.Ptyxis default-profile-uuid 2>/dev/null | tr -d "'")
     [ -n "$uuid" ] && gsettings list-recursively \
         "org.gnome.Ptyxis.Profile:/org/gnome/Ptyxis/Profiles/$uuid/" 2>/dev/null \
-        | sed 's/^/gset\t/'
+        | while read -r _sc key rest; do
+            emit gset "ptyxis-profile $key" "$rest"
+          done
 }
 
 dump_files() {
     for f in /etc/os-release /etc/lsb-release /etc/issue /etc/issue.net; do
-        [ -f "$f" ] && printf 'file\t%s\t%s\n' "$f" "$(sha256sum "$f" | cut -c1-16)"
+        [ -f "$f" ] && emit file "$f" "$(sha256sum "$f" | cut -c1-16)"
     done
-    # 只关心和 Azusa 有关的行，避免整文件比对被系统更新干扰
+    # 只比对和 Azusa 有关的行，避免整文件被系统更新干扰
     [ -f /etc/default/grub ] && grep '^GRUB_COLOR' /etc/default/grub 2>/dev/null \
-        | sed 's/^/grubcolor\t/'
+        | while IFS='=' read -r k v; do emit grubcolor "$k" "$v"; done
 }
 
 dump_paths() {
-    # 必须是三字段：两字段会被 compare 当成「空 key」全部塌缩成一条
     for f in /usr/local/bin/azusa-*; do
-        [ -e "$f" ] && printf 'bin\t%s\tpresent\n' "$(basename "$f")"
+        [ -e "$f" ] && emit bin "$(basename "$f")" present
     done
     for f in /usr/share/backgrounds/azusa/*; do
-        [ -e "$f" ] && printf 'wallpaper\t%s\tpresent\n' "$(basename "$f")"
+        [ -e "$f" ] && emit wallpaper-system "$(basename "$f")" present
     done
     for f in "$HOME/.local/share/backgrounds/azusa/"*; do
-        [ -e "$f" ] && printf 'user-wallpaper\t%s\tpresent\n' "$(basename "$f")"
+        [ -e "$f" ] && emit wallpaper-user "$(basename "$f")" present
     done
-    [ -f "$HOME/.local/share/org.gnome.Ptyxis/palettes/azusa.palette" ] \
-        && echo -e "file\tptyxis-palette\t$(sha256sum "$HOME/.local/share/org.gnome.Ptyxis/palettes/azusa.palette" | cut -c1-16)"
-    [ -f "$HOME/.config/kitty/azusa.conf" ] \
-        && echo -e "file\tkitty-config\t$(sha256sum "$HOME/.config/kitty/azusa.conf" | cut -c1-16)"
+    local pal="$HOME/.local/share/org.gnome.Ptyxis/palettes/azusa.palette"
+    [ -f "$pal" ] && emit file ptyxis-palette "$(sha256sum "$pal" | cut -c1-16)"
+    local kitty="$HOME/.config/kitty/azusa.conf"
+    [ -f "$kitty" ] && emit file kitty-config "$(sha256sum "$kitty" | cut -c1-16)"
 }
 
 dump_fonts() {
     for fam in "Inter" "JetBrains Mono" "Noto Sans CJK SC"; do
+        local got
         got=$(fc-match -f '%{family}' "$fam" 2>/dev/null | head -1)
-        printf 'font\t%s\t%s\n' "$fam" "${got:-缺失}"
+        emit font "$fam" "${got:-缺失}"
     done
 }
 
 dump_icons() {
     local svg=/usr/share/icons/Papirus-Dark/48x48/places/folder.svg
     if [ -f "$svg" ]; then
-        col=$(grep -oE '#7e57c2|#5294e2|#[0-9a-f]{6}' "$svg" | head -1)
-        printf 'icon\tfolder-color\t%s\n' "$col"
+        emit icon folder-color "$(grep -oE '#7e57c2|#5294e2' "$svg" | head -1)"
     else
-        printf 'icon\tfolder-color\t(papirus 未安装)\n'
+        emit icon folder-color "papirus 未安装"
     fi
 }
 

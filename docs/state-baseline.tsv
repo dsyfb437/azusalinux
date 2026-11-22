@@ -1,2173 +1,2172 @@
-pkg	3cpio
-pkg	accountsservice
-pkg	acl
-pkg	adduser
-pkg	adwaita-icon-theme
-pkg	alsa-base
-pkg	alsa-topology-conf
-pkg	alsa-ucm-conf
-pkg	alsa-utils
-pkg	amd64-microcode
-pkg	anacron
-pkg	apparmor
-pkg	apport
-pkg	apport-core-dump-handler
-pkg	apport-gtk
-pkg	apport-symptoms
-pkg	appstream
-pkg	apt
-pkg	apt-config-icons
-pkg	apt-config-icons-hidpi
-pkg	aptdaemon
-pkg	aptdaemon-data
-pkg	aspell
-pkg	aspell-en
-pkg	at-spi2-common
-pkg	at-spi2-core
-pkg	avahi-daemon
-pkg	baobab
-pkg	base-files
-pkg	base-passwd
-pkg	bash
-pkg	bash-completion
-pkg	bc
-pkg	bind9-dnsutils
-pkg	bind9-host
-pkg	bind9-libs
-pkg	binutils
-pkg	binutils-common
-pkg	binutils-x86-64-linux-gnu
-pkg	bluez
-pkg	bluez-cups
-pkg	bluez-obexd
-pkg	bolt
-pkg	bpfcc-tools
-pkg	bpftool
-pkg	bpftrace
-pkg	brltty
-pkg	bsdextrautils
-pkg	bsdutils
-pkg	bubblewrap
-pkg	build-essential
-pkg	busybox-initramfs
-pkg	busybox-static
-pkg	bzip2
-pkg	ca-certificates
-pkg	chrony
-pkg	clang-format
-pkg	clang-format-21
-pkg	cloud-guest-utils
-pkg	cloud-init
-pkg	cloud-init-base
-pkg	cmake
-pkg	cmake-data
-pkg	code
-pkg	colord
-pkg	colord-data
-pkg	command-not-found
-pkg	console-setup
-pkg	console-setup-linux
-pkg	coreutils
-pkg	coreutils-from-uutils
-pkg	cpio
-pkg	cpp
-pkg	cpp-15
-pkg	cpp-15-x86-64-linux-gnu
-pkg	cpp-x86-64-linux-gnu
-pkg	cracklib-runtime
-pkg	crash
-pkg	cron
-pkg	cron-daemon-common
-pkg	cups
-pkg	cups-browsed
-pkg	cups-bsd
-pkg	cups-client
-pkg	cups-common
-pkg	cups-core-drivers
-pkg	cups-daemon
-pkg	cups-filters
-pkg	cups-filters-core-drivers
-pkg	cups-ipp-utils
-pkg	cups-pk-helper
-pkg	cups-ppdc
-pkg	cups-server-common
-pkg	curl
-pkg	dash
-pkg	dbus
-pkg	dbus-bin
-pkg	dbus-daemon
-pkg	dbus-session-bus-common
-pkg	dbus-system-bus-common
-pkg	dbus-user-session
-pkg	dc
-pkg	dconf-cli
-pkg	dconf-gsettings-backend
-pkg	dconf-service
-pkg	debconf
-pkg	debconf-i18n
-pkg	debianutils
-pkg	debootstrap
-pkg	desktop-file-utils
-pkg	dhcpcd-base
-pkg	dictionaries-common
-pkg	diffutils
-pkg	dirmngr
-pkg	distro-info
-pkg	distro-info-data
-pkg	dmidecode
-pkg	dmsetup
-pkg	dmz-cursor-theme
-pkg	dnsmasq-base
-pkg	dns-root-data
-pkg	docbook-xml
-pkg	dosfstools
-pkg	dpkg
-pkg	dpkg-dev
-pkg	dracut
-pkg	dracut-core
-pkg	dracut-install
-pkg	e2fsprogs
-pkg	eatmydata
-pkg	ed
-pkg	efibootmgr
-pkg	eject
-pkg	emacsen-common
-pkg	enchant-2
-pkg	eslint
-pkg	espeak-ng-data
-pkg	ethtool
-pkg	evolution-data-server
-pkg	evolution-data-server-common
-pkg	exfatprogs
-pkg	fakeroot
-pkg	fastfetch
-pkg	fdisk
-pkg	file
-pkg	findutils
-pkg	firefox
-pkg	firmware-sof-signed
-pkg	fontconfig
-pkg	fontconfig-config
-pkg	fonts-dejavu-core
-pkg	fonts-dejavu-mono
-pkg	fonts-droid-fallback
-pkg	fonts-inter
-pkg	fonts-jetbrains-mono
-pkg	fonts-liberation
-pkg	fonts-liberation-sans-narrow
-pkg	fonts-noto-cjk
-pkg	fonts-noto-color-emoji
-pkg	fonts-noto-core
-pkg	fonts-noto-mono
-pkg	fonts-ubuntu
-pkg	fonts-urw-base35
-pkg	foomatic-db-compressed-ppds
-pkg	fprintd
-pkg	friendly-recovery
-pkg	ftp
-pkg	fuse3
-pkg	fwupd
-pkg	fwupd-signed
-pkg	g++
-pkg	g++-15
-pkg	g++-15-x86-64-linux-gnu
-pkg	g++-x86-64-linux-gnu
-pkg	gamemode
-pkg	gamemode-daemon
-pkg	gcc
-pkg	gcc-15
-pkg	gcc-15-base
-pkg	gcc-15-x86-64-linux-gnu
-pkg	gcc-16-base
-pkg	gcc-x86-64-linux-gnu
-pkg	gcr
-pkg	gcr4
-pkg	gdb
-pkg	gdisk
-pkg	gdm3
-pkg	geoclue-2.0
-pkg	geocode-glib-common
-pkg	gettext-base
-pkg	gh
-pkg	ghostscript
-pkg	gir1.2-accountsservice-1.0
-pkg	gir1.2-adw-1
-pkg	gir1.2-atk-1.0
-pkg	gir1.2-atspi-2.0
-pkg	gir1.2-dbusmenu-glib-0.4
-pkg	gir1.2-freedesktop
-pkg	gir1.2-gck-2
-pkg	gir1.2-gcr-4
-pkg	gir1.2-gdesktopenums-3.0
-pkg	gir1.2-gdkpixbuf-2.0
-pkg	gir1.2-gdm-1.0
-pkg	gir1.2-geoclue-2.0
-pkg	gir1.2-girepository-3.0
-pkg	gir1.2-glib-2.0
-pkg	gir1.2-gmenu-3.0
-pkg	gir1.2-gnomeautoar-0.1
-pkg	gir1.2-gnomebg-4.0
-pkg	gir1.2-gnomebluetooth-3.0
-pkg	gir1.2-gnomedesktop-3.0
-pkg	gir1.2-gnomedesktop-4.0
-pkg	gir1.2-gnomeqr-4.0
-pkg	gir1.2-graphene-1.0
-pkg	gir1.2-gstreamer-1.0
-pkg	gir1.2-gtk-3.0
-pkg	gir1.2-gtk-4.0
-pkg	gir1.2-gweather-4.0
-pkg	gir1.2-handy-1
-pkg	gir1.2-harfbuzz-0.0
-pkg	gir1.2-ibus-1.0
-pkg	gir1.2-javascriptcoregtk-4.1
-pkg	gir1.2-mutter-18
-pkg	gir1.2-nm-1.0
-pkg	gir1.2-nma4-1.0
-pkg	gir1.2-notify-0.7
-pkg	gir1.2-packagekitglib-1.0
-pkg	gir1.2-pango-1.0
-pkg	gir1.2-polkit-1.0
-pkg	gir1.2-rsvg-2.0
-pkg	gir1.2-secret-1
-pkg	gir1.2-snapd-2
-pkg	gir1.2-soup-3.0
-pkg	gir1.2-upowerglib-1.0
-pkg	gir1.2-vte-2.91
-pkg	gir1.2-webkit2-4.1
-pkg	gir1.2-wnck-3.0
-pkg	git
-pkg	git-man
-pkg	gjs
-pkg	glib-networking
-pkg	glib-networking-common
-pkg	glib-networking-services
-pkg	glycin-loaders
-pkg	glycin-thumbnailers
-pkg	gnome-accessibility-themes
-pkg	gnome-bluetooth-3-common
-pkg	gnome-bluetooth-sendto
-pkg	gnome-calculator
-pkg	gnome-characters
-pkg	gnome-clocks
-pkg	gnome-control-center
-pkg	gnome-control-center-data
-pkg	gnome-control-center-faces
-pkg	gnome-desktop3-data
-pkg	gnome-disk-utility
-pkg	gnome-font-viewer
-pkg	gnome-initial-setup
-pkg	gnome-keyring
-pkg	gnome-keyring-pkcs11
-pkg	gnome-logs
-pkg	gnome-menus
-pkg	gnome-online-accounts
-pkg	gnome-remote-desktop
-pkg	gnome-session-bin
-pkg	gnome-session-canberra
-pkg	gnome-session-common
-pkg	gnome-settings-daemon
-pkg	gnome-settings-daemon-common
-pkg	gnome-shell
-pkg	gnome-shell-common
-pkg	gnome-shell-extension-manager
-pkg	gnome-shell-ubuntu-extensions
-pkg	gnome-text-editor
-pkg	gnome-themes-extra
-pkg	gnome-themes-extra-data
-pkg	gnome-user-docs
-pkg	gnu-coreutils
-pkg	gnupg
-pkg	gnupg-l10n
-pkg	gnupg-utils
-pkg	google-chrome-stable
-pkg	gpg
-pkg	gpg-agent
-pkg	gpgconf
-pkg	gpgsm
-pkg	gpgv
-pkg	gpg-wks-client
-pkg	grep
-pkg	groff-base
-pkg	grub2-common
-pkg	grub-common
-pkg	grub-efi-amd64
-pkg	grub-efi-amd64-bin
-pkg	grub-efi-amd64-signed
-pkg	grub-efi-amd64-unsigned
-pkg	grub-pc
-pkg	grub-pc-bin
-pkg	gsettings-desktop-schemas
-pkg	gsettings-ubuntu-schemas
-pkg	gst-audio-thumbnailer
-pkg	gstreamer1.0-alsa
-pkg	gstreamer1.0-gl
-pkg	gstreamer1.0-packagekit
-pkg	gstreamer1.0-pipewire
-pkg	gstreamer1.0-plugins-base
-pkg	gstreamer1.0-plugins-base-apps
-pkg	gstreamer1.0-plugins-good
-pkg	gstreamer1.0-tools
-pkg	gstreamer1.0-x
-pkg	gst-video-thumbnailer
-pkg	gtk2-engines-murrine
-pkg	gtk2-engines-pixbuf
-pkg	gtk-update-icon-cache
-pkg	gvfs
-pkg	gvfs-backends
-pkg	gvfs-common
-pkg	gvfs-daemons
-pkg	gvfs-fuse
-pkg	gvfs-libs
-pkg	gyp
-pkg	gzip
-pkg	handlebars
-pkg	hdparm
-pkg	heif-gdk-pixbuf
-pkg	heif-thumbnailer
-pkg	hicolor-icon-theme
-pkg	hostname
-pkg	hplip
-pkg	hplip-data
-pkg	hunspell-en-us
-pkg	hwctl
-pkg	hwdata
-pkg	ibus
-pkg	ibus-data
-pkg	ibus-gtk
-pkg	ibus-gtk3
-pkg	ibus-gtk4
-pkg	ibus-rime
-pkg	ibus-table
-pkg	ibus-table-cangjie3
-pkg	ibus-table-cangjie5
-pkg	ibus-table-cangjie-big
-pkg	ibverbs-providers
-pkg	ieee-data
-pkg	iio-sensor-proxy
-pkg	im-config
-pkg	inetutils-telnet
-pkg	info
-pkg	init
-pkg	initramfs-tools
-pkg	initramfs-tools-bin
-pkg	initramfs-tools-core
-pkg	init-system-helpers
-pkg	inputattach
-pkg	install-info
-pkg	intel-microcode
-pkg	ipp-usb
-pkg	iproute2
-pkg	iptables
-pkg	iputils-ping
-pkg	iputils-tracepath
-pkg	iso-codes
-pkg	isolinux
-pkg	iucode-tool
-pkg	iw
-pkg	javascript-common
-pkg	jq
-pkg	kbd
-pkg	kdump-tools
-pkg	kexec-tools
-pkg	keyboard-configuration
-pkg	klibc-utils
-pkg	kmod
-pkg	krb5-locales
-pkg	language-pack-en
-pkg	language-pack-en-base
-pkg	language-pack-gnome-en
-pkg	language-pack-gnome-en-base
-pkg	language-pack-gnome-zh-hans
-pkg	language-pack-gnome-zh-hans-base
-pkg	language-pack-zh-hans
-pkg	language-pack-zh-hans-base
-pkg	language-selector-common
-pkg	language-selector-gnome
-pkg	laptop-detect
-pkg	ldap-utils
-pkg	less
-pkg	libaa1
-pkg	libabsl20260107
-pkg	libaccountsservice0
-pkg	libacl1
-pkg	libada-url0-3
-pkg	libadwaita-1-0
-pkg	libalgorithm-diff-perl
-pkg	libalgorithm-diff-xs-perl
-pkg	libalgorithm-merge-perl
-pkg	libao4
-pkg	libao-common
-pkg	libaom3
-pkg	libapparmor1
-pkg	libappstream5
-pkg	libapt-pkg7.0
-pkg	libarchive13t64
-pkg	libasan8
-pkg	libasound2-data
-pkg	libasound2t64
-pkg	libaspell15
-pkg	libassuan9
-pkg	libasyncns0
-pkg	libatasmart4
-pkg	libatk1.0-0t64
-pkg	libatk-adaptor
-pkg	libatk-bridge2.0-0t64
-pkg	libatkmm-1.6-1v5
-pkg	libatomic1
-pkg	libatopology2t64
-pkg	libatspi2.0-0t64
-pkg	libattr1
-pkg	libaudit1
-pkg	libaudit-common
-pkg	libauthen-sasl-perl
-pkg	libavahi-client3
-pkg	libavahi-common3
-pkg	libavahi-common-data
-pkg	libavahi-core7
-pkg	libavahi-glib1
-pkg	libavc1394-0
-pkg	libayatana-appindicator3-1
-pkg	libayatana-ido3-0.4-0
-pkg	libayatana-indicator3-7
-pkg	libbabeltrace1
-pkg	libbasicobjects0t64
-pkg	libbinutils
-pkg	libblkid1
-pkg	libblockdev3
-pkg	libblockdev-crypto3
-pkg	libblockdev-fs3
-pkg	libblockdev-loop3
-pkg	libblockdev-mdraid3
-pkg	libblockdev-nvme3
-pkg	libblockdev-part3
-pkg	libblockdev-smart3
-pkg	libblockdev-swap3
-pkg	libblockdev-utils3
-pkg	libbluetooth3
-pkg	libboost-locale1.90.0
-pkg	libboost-thread1.90.0
-pkg	libbpf1
-pkg	libbpfcc
-pkg	libbrlapi0.8
-pkg	libbrotli1
-pkg	libbsd0
-pkg	libburn4t64
-pkg	libbytesize1
-pkg	libbytesize-common
-pkg	libbz2-1.0
-pkg	libc6
-pkg	libc6-dbg
-pkg	libc6-dev
-pkg	libcaca0
-pkg	libcairo2
-pkg	libcairo-gobject2
-pkg	libcairo-gobject-perl
-pkg	libcairomm-1.0-1v5
-pkg	libcairo-perl
-pkg	libcairo-script-interpreter2
-pkg	libcamel-1.2-64t64
-pkg	libcanberra0
-pkg	libcanberra-gtk3-0
-pkg	libcanberra-gtk3-module
-pkg	libcanberra-pulse
-pkg	libcap2
-pkg	libcap2-bin
-pkg	libcap-ng0
-pkg	libcares2
-pkg	libc-bin
-pkg	libcbor0.10
-pkg	libcc1-0
-pkg	libc-dev-bin
-pkg	libcdio19t64
-pkg	libcdio-cdda2t64
-pkg	libcdio-paranoia2t64
-pkg	libcdparanoia0
-pkg	libc-gconv-modules-extra
-pkg	libchewing3
-pkg	libchewing3-data
-pkg	libclang1-21
-pkg	libclang-cpp21
-pkg	libclone-perl
-pkg	libcollection4t64
-pkg	libcolord2
-pkg	libcolord-gtk4-1t64
-pkg	libcolorhug2
-pkg	libcom-err2
-pkg	libcrack2
-pkg	libcrypt1
-pkg	libcrypt-dev
-pkg	libcryptsetup12
-pkg	libcrypt-urandom-perl
-pkg	libctf0
-pkg	libctf-nobfd0
-pkg	libcue2
-pkg	libcups2t64
-pkg	libcupsfilters2-common
-pkg	libcupsfilters2t64
-pkg	libcupsimage2t64
-pkg	libcurl3t64-gnutls
-pkg	libcurl4t64
-pkg	libdaemon0
-pkg	libdata-dump-perl
-pkg	libdatrie1
-pkg	libdb5.3t64
-pkg	libdbus-1-3
-pkg	libdbusmenu-glib4
-pkg	libdbusmenu-gtk3-4
-pkg	libdconf1
-pkg	libdebconfclient0
-pkg	libdebuginfod1t64
-pkg	libdebuginfod-common
-pkg	libdecor-0-0
-pkg	libdecor-0-plugin-1-gtk
-pkg	libdee-1.0-4
-pkg	libdeflate0
-pkg	libdevmapper1.02.1
-pkg	libdex-1-1
-pkg	libdhash1t64
-pkg	libdisplay-info3
-pkg	libdjvulibre21
-pkg	libdjvulibre-text
-pkg	libdotconf0
-pkg	libdpkg-perl
-pkg	libdrm2
-pkg	libdrm-amdgpu1
-pkg	libdrm-common
-pkg	libdrm-intel1
-pkg	libduktape207
-pkg	libdv4t64
-pkg	libdw1t64
-pkg	libeatmydata1
-pkg	libebackend-1.2-11t64
-pkg	libebook-1.2-21t64
-pkg	libebook-contacts-1.2-4t64
-pkg	libecal-2.0-3
-pkg	libedata-book-1.2-27t64
-pkg	libedata-cal-2.0-2t64
-pkg	libedataserver-1.2-27t64
-pkg	libedataserverui-1.2-4t64
-pkg	libedit2
-pkg	libeditorconfig0
-pkg	libefiboot1t64
-pkg	libefivar1t64
-pkg	libegl1
-pkg	libegl-mesa0
-pkg	libei1
-pkg	libeis1
-pkg	libelf1t64
-pkg	libenchant-2-2
-pkg	libencode-locale-perl
-pkg	libepoxy0
-pkg	liberror-perl
-pkg	libespeak-ng1
-pkg	libestr0
-pkg	libevdev2
-pkg	libexempi8
-pkg	libexif12
-pkg	libexiv2-28
-pkg	libexiv2-data
-pkg	libexpat1
-pkg	libexpat1-dev
-pkg	libext2fs2t64
-pkg	libextutils-depends-perl
-pkg	libfakeroot
-pkg	libfastjson4
-pkg	libfdisk1
-pkg	libffi8
-pkg	libfftw3-single3
-pkg	libfido2-1
-pkg	libfile-basedir-perl
-pkg	libfile-desktopentry-perl
-pkg	libfile-fcntllock-perl
-pkg	libfile-listing-perl
-pkg	libfile-mimeinfo-perl
-pkg	libflac14
-pkg	libflashrom1
-pkg	libfont-afm-perl
-pkg	libfontconfig1
-pkg	libfontenc1
-pkg	libfprint-2-2
-pkg	libfprint-2-tod1
-pkg	libfreeaptx0
-pkg	libfreerdp3-3
-pkg	libfreerdp-server3-3
-pkg	libfreetype6
-pkg	libfribidi0
-pkg	libftdi1-2
-pkg	libfuse3-4
-pkg	libfwupd3
-pkg	libfyaml0
-pkg	libgamemode0
-pkg	libgamemodeauto0
-pkg	libgbm1
-pkg	libgcc-15-dev
-pkg	libgcc-s1
-pkg	libgck-1-0
-pkg	libgck-2-2
-pkg	libgcr-4-4
-pkg	libgcr-base-3-1
-pkg	libgcr-ui-3-1
-pkg	libgcrypt20
-pkg	libgd3
-pkg	libgdbm6t64
-pkg	libgdbm-compat4t64
-pkg	libgdk-pixbuf-2.0-0
-pkg	libgdk-pixbuf2.0-bin
-pkg	libgdk-pixbuf2.0-common
-pkg	libgdm1
-pkg	libgee-0.8-2
-pkg	libgeoclue-2-0
-pkg	libgeocode-glib-2-0
-pkg	libgexiv2-2
-pkg	libgflags2.2
-pkg	libgif7
-pkg	libgirepository-1.0-1
-pkg	libgirepository-2.0-0
-pkg	libgjs0
-pkg	libgl1
-pkg	libgl1-mesa-dri
-pkg	libgles2
-pkg	libglib2.0-0t64
-pkg	libglib2.0-bin
-pkg	libglib2.0-data
-pkg	libglibmm-2.4-1t64
-pkg	libglib-object-introspection-perl
-pkg	libglib-perl
-pkg	libglvnd0
-pkg	libglx0
-pkg	libglx-mesa0
-pkg	libglycin-2-0
-pkg	libglycin-gtk4-2-0
-pkg	libgmp10
-pkg	libgnome-autoar-0-0
-pkg	libgnome-bg-4-2t64
-pkg	libgnome-bluetooth-3.0-13
-pkg	libgnome-bluetooth-ui-3.0-13
-pkg	libgnome-desktop-3-20t64
-pkg	libgnome-desktop-4-2t64
-pkg	libgnome-menu-3-0
-pkg	libgnome-qr-4-0
-pkg	libgnome-qr-gtk-4-0
-pkg	libgnutls30t64
-pkg	libgoa-1.0-0b
-pkg	libgoa-1.0-common
-pkg	libgoa-backend-1.0-2
-pkg	libgomp1
-pkg	libgoogle-glog0v6t64
-pkg	libgpg-error0
-pkg	libgpg-error-l10n
-pkg	libgpgme45
-pkg	libgpgmepp7
-pkg	libgphoto2-6t64
-pkg	libgphoto2-l10n
-pkg	libgphoto2-port12t64
-pkg	libgpm2
-pkg	libgprofng0
-pkg	libgraphene-1.0-0
-pkg	libgraphite2-3
-pkg	libgs10
-pkg	libgs10-common
-pkg	libgs-common
-pkg	libgsf-1-114
-pkg	libgsf-1-common
-pkg	libgsound0t64
-pkg	libgssapi-krb5-2
-pkg	libgssdp-1.6-0
-pkg	libgstreamer1.0-0
-pkg	libgstreamer-gl1.0-0
-pkg	libgstreamer-plugins-base1.0-0
-pkg	libgstreamer-plugins-extra1.0-0
-pkg	libgtk-3-0t64
-pkg	libgtk-3-bin
-pkg	libgtk-3-common
-pkg	libgtk3-perl
-pkg	libgtk-4-1
-pkg	libgtk-4-bin
-pkg	libgtk-4-common
-pkg	libgtkmm-3.0-1t64
-pkg	libgtksourceview-5-0
-pkg	libgtksourceview-5-common
-pkg	libgtop-2.0-11
-pkg	libgtop2-common
-pkg	libgudev-1.0-0
-pkg	libgupnp-1.6-0
-pkg	libgupnp-av-1.0-3
-pkg	libgupnp-dlna-2.0-4
-pkg	libgusb2a
-pkg	libgweather-4-0t64
-pkg	libgweather-4-common
-pkg	libgxps2t64
-pkg	libhandy-1-0
-pkg	libharfbuzz0b
-pkg	libharfbuzz-gobject0
-pkg	libharfbuzz-icu0
-pkg	libharfbuzz-subset0
-pkg	libheif1
-pkg	libheif-plugin-aomdec
-pkg	libheif-plugin-aomenc
-pkg	libhogweed6t64
-pkg	libhpmud0
-pkg	libhtml-format-perl
-pkg	libhtml-form-perl
-pkg	libhtml-parser-perl
-pkg	libhtml-tagset-perl
-pkg	libhtml-tree-perl
-pkg	libhttp-cookies-perl
-pkg	libhttp-daemon-perl
-pkg	libhttp-date-perl
-pkg	libhttp-message-perl
-pkg	libhttp-negotiate-perl
-pkg	libhunspell-1.7-0
-pkg	libhwasan0
-pkg	libhwy1t64
-pkg	libhyphen0
-pkg	libibus-1.0-5
-pkg	libibverbs1
-pkg	libical3t64
-pkg	libice6
-pkg	libicu78
-pkg	libidn12
-pkg	libidn2-0
-pkg	libiec61883-0
-pkg	libieee1284-3t64
-pkg	libijs-0.35
-pkg	libimagequant0
-pkg	libimobiledevice-1.0-6
-pkg	libimobiledevice-glue-1.0-0
-pkg	libini-config5t64
-pkg	libinih1
-pkg	libinireader0
-pkg	libinput10
-pkg	libinput-bin
-pkg	libinsights0
-pkg	libio-html-perl
-pkg	libio-socket-ssl-perl
-pkg	libio-stringy-perl
-pkg	libip4tc2
-pkg	libip6tc2
-pkg	libipa-hbac0t64
-pkg	libipc-system-simple-perl
-pkg	libipt2
-pkg	libisl23
-pkg	libisoburn1t64
-pkg	libisofs6t64
-pkg	libitm1
-pkg	libjansson4
-pkg	libjavascriptcoregtk-4.1-0
-pkg	libjavascriptcoregtk-6.0-1
-pkg	libjbig0
-pkg	libjbig2dec0
-pkg	libjcat1
-pkg	libjemalloc2
-pkg	libjpeg8
-pkg	libjpeg-turbo8
-pkg	libjq1
-pkg	libjs-events
-pkg	libjs-inherits
-pkg	libjson-c5
-pkg	libjsoncpp26
-pkg	libjson-glib-1.0-0
-pkg	libjson-glib-1.0-common
-pkg	libjs-prettify
-pkg	libjs-regenerate
-pkg	libjs-source-map
-pkg	libjs-sphinxdoc
-pkg	libjs-sprintf-js
-pkg	libjs-util
-pkg	libjxl0.11
-pkg	libjxl-gdk-pixbuf
-pkg	libk5crypto3
-pkg	libkeyutils1
-pkg	libklibc
-pkg	libkmod2
-pkg	libkrb5-3
-pkg	libkrb5support0
-pkg	libksba8
-pkg	liblc3-1
-pkg	liblcms2-2
-pkg	liblcms2-utils
-pkg	libldacbt-abr2
-pkg	libldacbt-enc2
-pkg	libldap2
-pkg	libldap-common
-pkg	libldb2
-pkg	liblerc4
-pkg	libleveldb1d
-pkg	libllhttp9.3
-pkg	libllvm21
-pkg	liblmdb0
-pkg	liblocale-gettext-perl
-pkg	liblouis20
-pkg	liblouis-data
-pkg	liblouisutdml9t64
-pkg	liblouisutdml-bin
-pkg	liblouisutdml-data
-pkg	liblsan0
-pkg	liblsof0
-pkg	libltdl7
-pkg	liblua5.4-0
-pkg	liblwp-mediatypes-perl
-pkg	liblwp-protocol-https-perl
-pkg	liblz4-1
-pkg	liblzma5
-pkg	liblzo2-2
-pkg	libm17n-0
-pkg	libmagic1t64
-pkg	libmagic-mgc
-pkg	libmailtools-perl
-pkg	libmalcontent-0-0
-pkg	libmalcontent-common
-pkg	libmarisa1
-pkg	libmaxminddb0
-pkg	libmbim-glib4
-pkg	libmbim-proxy
-pkg	libmbim-utils
-pkg	libmd0
-pkg	libmediaart-2.0-0
-pkg	libmm-glib0
-pkg	libmnl0
-pkg	libmount1
-pkg	libmozjs-140-0
-pkg	libmp3lame0
-pkg	libmpc3
-pkg	libmpfr6
-pkg	libmpg123-0t64
-pkg	libmsgraph-1-1
-pkg	libmspack0t64
-pkg	libmtdev1t64
-pkg	libmtp9t64
-pkg	libmtp-common
-pkg	libmtp-runtime
-pkg	libmutter-18-0
-pkg	libnautilus-extension4
-pkg	libncurses6
-pkg	libncursesw6
-pkg	libndp0
-pkg	libnet-dbus-perl
-pkg	libnetfilter-conntrack3
-pkg	libnet-http-perl
-pkg	libnetplan1
-pkg	libnet-smtp-ssl-perl
-pkg	libnet-ssleay-perl
-pkg	libnettle8t64
-pkg	libnewt0.52
-pkg	libnfnetlink0
-pkg	libnfs14
-pkg	libnfsidmap1
-pkg	libnftables1
-pkg	libnftnl11
-pkg	libnghttp2-14
-pkg	libnl-3-200
-pkg	libnl-genl-3-200
-pkg	libnl-route-3-200
-pkg	libnm0
-pkg	libnma0
-pkg	libnma-common
-pkg	libnma-gtk4-0
-pkg	libnode127
-pkg	libnode-dev
-pkg	libnotify4
-pkg	libnotify-bin
-pkg	libnpth0t64
-pkg	libnspr4
-pkg	libnss3
-pkg	libnss-mdns
-pkg	libnss-sss
-pkg	libnss-systemd
-pkg	libntfs-3g89t64
-pkg	libnuma1
-pkg	libnvme1t64
-pkg	liboeffis1
-pkg	libogg0
-pkg	libonig5
-pkg	libopencc1.1
-pkg	libopencc-data
-pkg	libopenjp2-7
-pkg	libopus0
-pkg	liborc-0.4-0t64
-pkg	libotf1
-pkg	libp11-kit0
-pkg	libpackagekit-glib2-18
-pkg	libpam0g
-pkg	libpam-cap
-pkg	libpam-fprintd
-pkg	libpam-gnome-keyring
-pkg	libpam-modules
-pkg	libpam-modules-bin
-pkg	libpam-pwquality
-pkg	libpam-runtime
-pkg	libpam-sss
-pkg	libpam-systemd
-pkg	libpanel-1-1
-pkg	libpanel-common
-pkg	libpango-1.0-0
-pkg	libpangocairo-1.0-0
-pkg	libpangoft2-1.0-0
-pkg	libpangomm-1.4-1v5
-pkg	libpangoxft-1.0-0
-pkg	libpaper2
-pkg	libpaper-utils
-pkg	libparted2t64
-pkg	libpath-utils1t64
-pkg	libpcap0.8t64
-pkg	libpcaudio0
-pkg	libpci3
-pkg	libpciaccess0
-pkg	libpcre2-32-0
-pkg	libpcre2-8-0
-pkg	libpcsclite1
-pkg	libperl5.40
-pkg	libphonenumber8
-pkg	libpinyin15
-pkg	libpinyin-data
-pkg	libpipeline1
-pkg	libpipewire-0.3-0t64
-pkg	libpipewire-0.3-common
-pkg	libpipewire-0.3-modules
-pkg	libpixman-1-0
-pkg	libpkcs11-helper1t64
-pkg	libpkgconf7
-pkg	libplist-2.0-4
-pkg	libplymouth5
-pkg	libpng16-16t64
-pkg	libpolkit-agent-1-0
-pkg	libpolkit-gobject-1-0
-pkg	libpoppler156
-pkg	libpoppler-cpp3
-pkg	libpoppler-glib8t64
-pkg	libpopt0
-pkg	libportal1
-pkg	libportal-gtk4-1
-pkg	libppd2
-pkg	libppd2-common
-pkg	libppsdocument-4.0-6
-pkg	libppsview-4.0-5
-pkg	libproc2-0
-pkg	libprotobuf32t64
-pkg	libproxy1v5
-pkg	libpsl5t64
-pkg	libpulse0
-pkg	libpulse-mainloop-glib0
-pkg	libpwquality1
-pkg	libpwquality-common
-pkg	libpython3.14
-pkg	libpython3.14-dev
-pkg	libpython3.14-minimal
-pkg	libpython3.14-stdlib
-pkg	libpython3-dev
-pkg	libpython3-stdlib
-pkg	libqmi-glib5
-pkg	libqmi-proxy
-pkg	libqmi-utils
-pkg	libqpdf30
-pkg	libqrtr-glib0
-pkg	libquadmath0
-pkg	libraqm0
-pkg	libraw1394-11
-pkg	libre2-11
-pkg	libreadline8t64
-pkg	libref-array1t64
-pkg	librest-1.0-0
-pkg	librhash1
-pkg	librime1t64
-pkg	librime-bin
-pkg	librime-data
-pkg	librime-plugin-charcode
-pkg	librime-plugin-lua
-pkg	librime-plugin-octagram
-pkg	libroc0.4
-pkg	librsvg2-2
-pkg	librsvg2-bin
-pkg	librsvg2-common
-pkg	librtmp1
-pkg	librygel-core-2.8-0
-pkg	librygel-db-2.8-0
-pkg	librygel-renderer-2.8-0
-pkg	librygel-server-2.8-0
-pkg	libsamplerate0
-pkg	libsane1
-pkg	libsane-common
-pkg	libsane-hpaio
-pkg	libsasl2-2
-pkg	libsasl2-modules
-pkg	libsasl2-modules-db
-pkg	libsasl2-modules-gssapi-mit
-pkg	libsbc1
-pkg	libseccomp2
-pkg	libsecret-1-0
-pkg	libsecret-common
-pkg	libselinux1
-pkg	libsemanage2
-pkg	libsemanage-common
-pkg	libsensors5
-pkg	libsensors-config
-pkg	libsepol2
-pkg	libsframe3
-pkg	libsharpyuv0
-pkg	libshout3
-pkg	libsigc++-2.0-0v5
-pkg	libsimdjson29
-pkg	libsimdutf31
-pkg	libslang2
-pkg	libsm6
-pkg	libsmartcols1
-pkg	libsmbclient0
-pkg	libsnapd-glib-2-1
-pkg	libsnappy1v5
-pkg	libsndfile1
-pkg	libsnmp40t64
-pkg	libsnmp-base
-pkg	libsodium23
-pkg	libsonic0
-pkg	libsoup-3.0-0
-pkg	libsoup-3.0-common
-pkg	libsource-highlight4t64
-pkg	libsource-highlight-common
-pkg	libspa-0.2-bluetooth
-pkg	libspa-0.2-modules
-pkg	libspeechd2
-pkg	libspeechd-module0
-pkg	libspeex1
-pkg	libspeexdsp1
-pkg	libspelling-1-2
-pkg	libspelling-common
-pkg	libsqlite3-0
-pkg	libss2
-pkg	libssh2-1t64
-pkg	libssl3t64
-pkg	libssl-dev
-pkg	libsss-certmap0
-pkg	libsss-idmap0
-pkg	libsss-nss-idmap0
-pkg	libstartup-notification0
-pkg	libstdc++-15-dev
-pkg	libstdc++6
-pkg	libstemmer0d
-pkg	libsysprof-6-6
-pkg	libsysprof-6-modules
-pkg	libsystemd0
-pkg	libsystemd-shared
-pkg	libtag2
-pkg	libtalloc2
-pkg	libtasn1-6
-pkg	libtcl8.6
-pkg	libtdb1
-pkg	libteamdctl0
-pkg	libtevent0t64
-pkg	libtext-charwidth-perl
-pkg	libtext-iconv-perl
-pkg	libtext-wrapi18n-perl
-pkg	libthai0
-pkg	libthai-data
-pkg	libtheora1
-pkg	libtheoradec2
-pkg	libtheoraenc2
-pkg	libtie-ixhash-perl
-pkg	libtiff6
-pkg	libtimedate-perl
-pkg	libtinfo6
-pkg	libtinysparql-3.0-0
-pkg	libtirpc3t64
-pkg	libtirpc-common
-pkg	libtotem-plparser18
-pkg	libtotem-plparser-common
-pkg	libtraceevent1
-pkg	libtraceevent1-plugin
-pkg	libtracefs1
-pkg	libtry-tiny-perl
-pkg	libtsan2
-pkg	libtss2-esys-3.0.2-0t64
-pkg	libtss2-mu-4.0.1-0t64
-pkg	libtss2-rc0t64
-pkg	libtss2-sys1t64
-pkg	libtss2-tcti-cmd0t64
-pkg	libtss2-tcti-device0t64
-pkg	libtss2-tctildr0t64
-pkg	libtss2-tcti-libtpms0t64
-pkg	libtss2-tcti-mssim0t64
-pkg	libtss2-tcti-spi-helper0t64
-pkg	libtss2-tcti-swtpm0t64
-pkg	libtwolame0
-pkg	libubsan1
-pkg	libuchardet0
-pkg	libudev1
-pkg	libudisks2-0
-pkg	libunistring5
-pkg	libunity9
-pkg	libunity-protocol-private0
-pkg	libunity-scopes-json-def-desktop
-pkg	libunwind8
-pkg	libupower-glib3
-pkg	liburcu8t64
-pkg	liburing2
-pkg	liburi-perl
-pkg	libusb-1.0-0
-pkg	libusbmuxd-2.0-7
-pkg	libuuid1
-pkg	libuv1-dev
-pkg	libuv1t64
-pkg	libv4l-0t64
-pkg	libv4lconvert0t64
-pkg	libva2
-pkg	libva-drm2
-pkg	libvisual-0.4-0
-pkg	libvolume-key1
-pkg	libvorbis0a
-pkg	libvorbisenc2
-pkg	libvorbisfile3
-pkg	libvpx12
-pkg	libvte-2.91-0
-pkg	libvte-2.91-common
-pkg	libvte-2.91-gtk4-0
-pkg	libvulkan1
-pkg	libwacom9
-pkg	libwacom-common
-pkg	libwavpack1
-pkg	libwayland-client0
-pkg	libwayland-cursor0
-pkg	libwayland-egl1
-pkg	libwayland-server0
-pkg	libwbclient0
-pkg	libwebkit2gtk-4.1-0
-pkg	libwebkitgtk-6.0-4
-pkg	libwebp7
-pkg	libwebpdemux2
-pkg	libwebpmux3
-pkg	libwebrtc-audio-processing-1-3
-pkg	libwhoopsie0
-pkg	libwhoopsie-preferences0
-pkg	libwinpr3-3
-pkg	libwireplumber-0.5-0
-pkg	libwmf-0.2-7
-pkg	libwmf-0.2-7-gtk
-pkg	libwmflite-0.2-7
-pkg	libwnck-3-0
-pkg	libwnck-3-common
-pkg	libwrap0
-pkg	libwww-perl
-pkg	libwww-robotrules-perl
-pkg	libx11-6
-pkg	libx11-data
-pkg	libx11-protocol-perl
-pkg	libx11-xcb1
-pkg	libxau6
-pkg	libxaw7
-pkg	libxcb1
-pkg	libxcb-dri3-0
-pkg	libxcb-glx0
-pkg	libxcb-present0
-pkg	libxcb-randr0
-pkg	libxcb-render0
-pkg	libxcb-res0
-pkg	libxcb-shape0
-pkg	libxcb-shm0
-pkg	libxcb-sync1
-pkg	libxcb-util1
-pkg	libxcb-xfixes0
-pkg	libxcomposite1
-pkg	libxcursor1
-pkg	libxcvt0
-pkg	libxdamage1
-pkg	libxdmcp6
-pkg	libxext6
-pkg	libxfixes3
-pkg	libxfont2
-pkg	libxft2
-pkg	libxi6
-pkg	libxinerama1
-pkg	libxkbcommon0
-pkg	libxkbfile1
-pkg	libxkbregistry0
-pkg	libxml2-16
-pkg	libxmlb2
-pkg	libxml-parser-perl
-pkg	libxmlsec1-1
-pkg	libxmlsec1-openssl1
-pkg	libxml-twig-perl
-pkg	libxml-xpathengine-perl
-pkg	libxmu6
-pkg	libxmuu1
-pkg	libxpm4
-pkg	libxrandr2
-pkg	libxrender1
-pkg	libxres1
-pkg	libxshmfence1
-pkg	libxslt1.1
-pkg	libxss1
-pkg	libxt6t64
-pkg	libxtables12
-pkg	libxtst6
-pkg	libxv1
-pkg	libxxf86dga1
-pkg	libxxf86vm1
-pkg	libxxhash0
-pkg	libyaml-0-2
-pkg	libyaml-cpp0.8
-pkg	libyelp-1-0
-pkg	libyyjson0
-pkg	libzstd1
-pkg	linux-base
-pkg	linux-firmware
-pkg	linux-firmware-amd-graphics
-pkg	linux-firmware-amd-misc
-pkg	linux-firmware-broadcom-wireless
-pkg	linux-firmware-intel-graphics
-pkg	linux-firmware-intel-misc
-pkg	linux-firmware-intel-wireless
-pkg	linux-firmware-marvell-prestera
-pkg	linux-firmware-marvell-wireless
-pkg	linux-firmware-mediatek
-pkg	linux-firmware-mellanox-spectrum
-pkg	linux-firmware-misc
-pkg	linux-firmware-netronome
-pkg	linux-firmware-nvidia-graphics
-pkg	linux-firmware-qlogic
-pkg	linux-firmware-qualcomm-graphics
-pkg	linux-firmware-qualcomm-misc
-pkg	linux-firmware-qualcomm-wireless
-pkg	linux-firmware-realtek
-pkg	linux-generic-hwe-24.04
-pkg	linux-generic-hwe-26.04
-pkg	linux-headers-7.0.0-44
-pkg	linux-headers-7.0.0-44-generic
-pkg	linux-headers-generic-hwe-26.04
-pkg	linux-image-7.0.0-44-generic
-pkg	linux-image-generic-hwe-26.04
-pkg	linux-image-unsigned-7.0.0-30-generic
-pkg	linux-libc-dev
-pkg	linux-main-modules-v4l2loopback-7.0.0-44-generic
-pkg	linux-main-modules-zfs-7.0.0-30-generic
-pkg	linux-main-modules-zfs-7.0.0-44-generic
-pkg	linux-modules-7.0.0-30-generic
-pkg	linux-modules-7.0.0-44-generic
-pkg	linux-perf
-pkg	linux-sound-base
-pkg	linux-sysctl-defaults
-pkg	linux-tools-7.0.0-44
-pkg	linux-tools-7.0.0-44-generic
-pkg	linux-tools-common
-pkg	live-build
-pkg	locales
-pkg	localsearch
-pkg	login
-pkg	login.defs
-pkg	logrotate
-pkg	logsave
-pkg	loupe
-pkg	lsb-release
-pkg	lshw
-pkg	lsof
-pkg	lto-disabled-list
-pkg	luit
-pkg	m17n-db
-pkg	make
-pkg	makedumpfile
-pkg	man-db
-pkg	manpages
-pkg	manpages-dev
-pkg	mawk
-pkg	media-types
-pkg	memtest86+
-pkg	mesa-libgallium
-pkg	mesa-vulkan-drivers
-pkg	mobile-broadband-provider-info
-pkg	modemmanager
-pkg	mokutil
-pkg	mount
-pkg	mscompress
-pkg	mtools
-pkg	mtr-tiny
-pkg	mutter-common
-pkg	mutter-common-bin
-pkg	nano
-pkg	nautilus
-pkg	nautilus-data
-pkg	nautilus-sendto
-pkg	ncurses-base
-pkg	ncurses-bin
-pkg	netbase
-pkg	netcat-openbsd
-pkg	netplan-generator
-pkg	netplan.io
-pkg	networkd-dispatcher
-pkg	network-manager
-pkg	network-manager-config-connectivity-ubuntu
-pkg	network-manager-l10n
-pkg	network-manager-openvpn
-pkg	network-manager-openvpn-gnome
-pkg	network-manager-pptp
-pkg	network-manager-pptp-gnome
-pkg	nftables
-pkg	ninja-build
-pkg	nm-connection-editor
-pkg	node-abbrev
-pkg	node-acorn
-pkg	node-agent-base
-pkg	node-ajv
-pkg	node-ajv-keywords
-pkg	node-ampproject-remapping
-pkg	node-ansi-escapes
-pkg	node-ansi-regex
-pkg	node-ansi-styles
-pkg	node-anymatch
-pkg	node-aproba
-pkg	node-archy
-pkg	node-are-we-there-yet
-pkg	node-argparse
-pkg	node-arrify
-pkg	node-assert
-pkg	node-async
-pkg	node-async-each
-pkg	node-auto-bind
-pkg	node-babel7
-pkg	node-babel7-runtime
-pkg	node-babel-helper-define-polyfill-provider
-pkg	node-babel-plugin-add-module-exports
-pkg	node-babel-plugin-lodash
-pkg	node-babel-plugin-polyfill-corejs2
-pkg	node-babel-plugin-polyfill-corejs3
-pkg	node-babel-plugin-polyfill-regenerator
-pkg	node-balanced-match
-pkg	node-base
-pkg	node-base64-js
-pkg	node-binary-extensions
-pkg	node-brace-expansion
-pkg	node-braces
-pkg	node-browserslist
-pkg	node-builtins
-pkg	node-cacache
-pkg	node-cache-base
-pkg	node-camelcase
-pkg	node-caniuse-lite
-pkg	node-chalk
-pkg	node-chokidar
-pkg	node-chownr
-pkg	node-chrome-trace-event
-pkg	node-ci-info
-pkg	node-cjs-module-lexer
-pkg	node-cli-boxes
-pkg	node-cli-cursor
-pkg	node-cli-table
-pkg	node-cli-truncate
-pkg	node-cliui
-pkg	node-clone
-pkg	node-clone-deep
-pkg	node-collection-visit
-pkg	node-color-convert
-pkg	node-color-name
-pkg	node-colors
-pkg	node-columnify
-pkg	node-commander
-pkg	node-commondir
-pkg	node-component-emitter
-pkg	node-concat-stream
-pkg	node-console-control-strings
-pkg	node-convert-source-map
-pkg	node-copy-concurrently
-pkg	node-core-js
-pkg	node-core-js-compat
-pkg	node-core-js-pure
-pkg	node-corepack
-pkg	node-core-util-is
-pkg	node-coveralls
-pkg	node-css-loader
-pkg	node-css-selector-tokenizer
-pkg	node-data-uri-to-buffer
-pkg	node-debbundle-es-to-primitive
-pkg	node-debug
-pkg	node-decamelize
-pkg	node-decompress-response
-pkg	node-deep-equal
-pkg	node-deep-is
-pkg	node-defaults
-pkg	node-defined
-pkg	node-define-properties
-pkg	node-define-property
-pkg	node-del
-pkg	node-delegates
-pkg	node-depd
-pkg	node-diff
-pkg	node-doctrine
-pkg	node-electron-to-chromium
-pkg	node-encoding
-pkg	node-enhanced-resolve
-pkg	node-envinfo
-pkg	node-err-code
-pkg	node-errno
-pkg	node-error-ex
-pkg	node-es6-error
-pkg	node-es-abstract
-pkg	node-escape-string-regexp
-pkg	node-escodegen
-pkg	node-eslint-scope
-pkg	node-eslint-utils
-pkg	node-eslint-visitor-keys
-pkg	node-es-module-lexer
-pkg	node-espree
-pkg	node-esprima
-pkg	node-esquery
-pkg	node-esrecurse
-pkg	node-estraverse
-pkg	node-esutils
-pkg	node-events
-pkg	node-execa
-pkg	node-fancy-log
-pkg	node-fast-deep-equal
-pkg	node-fast-levenshtein
-pkg	node-fetch
-pkg	node-file-entry-cache
-pkg	node-fill-range
-pkg	node-find-cache-dir
-pkg	node-find-up
-pkg	node-flat-cache
-pkg	node-flatted
-pkg	node-foreground-child
-pkg	node-for-in
-pkg	node-for-own
-pkg	node-fs-readdir-recursive
-pkg	node-fs-write-stream-atomic
-pkg	node-functional-red-black-tree
-pkg	node-function-bind
-pkg	node-gauge
-pkg	node-get-caller-file
-pkg	node-get-stream
-pkg	node-get-value
-pkg	node-glob
-pkg	node-globals
-pkg	node-globby
-pkg	node-glob-parent
-pkg	node-got
-pkg	node-graceful-fs
-pkg	node-growl
-pkg	node-gyp
-pkg	node-has-flag
-pkg	node-has-unicode
-pkg	node-has-value
-pkg	node-has-values
-pkg	node-hosted-git-info
-pkg	node-http-proxy-agent
-pkg	node-https-proxy-agent
-pkg	node-iconv-lite
-pkg	node-icss-utils
-pkg	node-ieee754
-pkg	node-iferr
-pkg	node-ignore
-pkg	node-imurmurhash
-pkg	node-indent-string
-pkg	node-inherits
-pkg	node-ini
-pkg	node-interpret
-pkg	node-ip
-pkg	node-ip-regex
-pkg	node-isarray
-pkg	node-is-arrayish
-pkg	node-is-binary-path
-pkg	node-is-buffer
-pkg	node-is-descriptor
-pkg	node-isexe
-pkg	node-is-extendable
-pkg	node-is-extglob
-pkg	node-is-glob
-pkg	node-is-number
-pkg	node-isobject
-pkg	node-is-path-cwd
-pkg	node-is-path-inside
-pkg	node-is-plain-obj
-pkg	node-is-plain-object
-pkg	node-is-primitive
-pkg	node-is-stream
-pkg	node-istanbul
-pkg	node-is-windows
-pkg	node-jest-debbundle
-pkg	node-jest-worker
-pkg	nodejs
-pkg	nodejs-doc
-pkg	node-jsesc
-pkg	node-json5
-pkg	node-json-buffer
-pkg	node-jsonify
-pkg	node-jsonparse
-pkg	node-json-parse-better-errors
-pkg	node-json-schema
-pkg	node-json-schema-traverse
-pkg	node-json-stable-stringify
-pkg	node-js-tokens
-pkg	node-js-yaml
-pkg	node-kind-of
-pkg	node-lcov-parse
-pkg	node-levn
-pkg	node-llhttp
-pkg	node-loader-runner
-pkg	node-locate-path
-pkg	node-lodash
-pkg	node-lodash-packages
-pkg	node-log-driver
-pkg	node-long
-pkg	node-lowercase-keys
-pkg	node-lru-cache
-pkg	node-make-dir
-pkg	node-map-visit
-pkg	node-memfs
-pkg	node-memory-fs
-pkg	node-merge-stream
-pkg	node-micromatch
-pkg	node-mime
-pkg	node-mime-types
-pkg	node-mimic-fn
-pkg	node-mimic-response
-pkg	node-minimatch
-pkg	node-minimist
-pkg	node-minipass
-pkg	node-mixin-deep
-pkg	node-mkdirp
-pkg	node-move-concurrently
-pkg	node-ms
-pkg	node-mute-stream
-pkg	node-n3
-pkg	node-negotiator
-pkg	node-neo-async
-pkg	node-nopt
-pkg	node-normalize-package-data
-pkg	node-normalize-path
-pkg	node-npm-bundled
-pkg	node-npmlog
-pkg	node-npm-package-arg
-pkg	node-npm-run-path
-pkg	node-object-assign
-pkg	node-object-inspect
-pkg	node-object-visit
-pkg	node-once
-pkg	node-opener
-pkg	node-optimist
-pkg	node-optionator
-pkg	node-osenv
-pkg	node-parse-json
-pkg	node-pascalcase
-pkg	node-path-dirname
-pkg	node-path-exists
-pkg	node-path-is-absolute
-pkg	node-path-is-inside
-pkg	node-path-scurry
-pkg	node-path-type
-pkg	node-p-cancelable
-pkg	node-picocolors
-pkg	node-pify
-pkg	node-pkg-dir
-pkg	node-p-limit
-pkg	node-p-locate
-pkg	node-p-map
-pkg	node-postcss
-pkg	node-postcss-modules-extract-imports
-pkg	node-postcss-modules-values
-pkg	node-postcss-value-parser
-pkg	node-prelude-ls
-pkg	node-process-nextick-args
-pkg	node-progress
-pkg	node-promise-inflight
-pkg	node-promise-retry
-pkg	node-promzard
-pkg	node-prr
-pkg	node-punycode
-pkg	node-quick-lru
-pkg	node-randombytes
-pkg	node-re2
-pkg	node-read
-pkg	node-readable-stream
-pkg	node-readdirp
-pkg	node-read-package-json
-pkg	node-read-pkg
-pkg	node-rechoir
-pkg	node-regenerate
-pkg	node-regenerate-unicode-properties
-pkg	node-regenerator-runtime
-pkg	node-regenerator-transform
-pkg	node-regexpp
-pkg	node-regexpu-core
-pkg	node-regjsgen
-pkg	node-regjsparser
-pkg	node-repeat-string
-pkg	node-require-directory
-pkg	node-require-from-string
-pkg	node-resolve
-pkg	node-resolve-cwd
-pkg	node-resolve-from
-pkg	node-restore-cursor
-pkg	node-resumer
-pkg	node-retry
-pkg	node-rimraf
-pkg	node-run-queue
-pkg	node-safe-buffer
-pkg	node-schema-utils
-pkg	node-semver
-pkg	node-serialize-javascript
-pkg	node-set-blocking
-pkg	node-set-immediate-shim
-pkg	node-set-value
-pkg	node-shebang-command
-pkg	node-shebang-regex
-pkg	node-shell-quote
-pkg	node-signal-exit
-pkg	node-slash
-pkg	node-slice-ansi
-pkg	node-source-list-map
-pkg	node-source-map
-pkg	node-source-map-support
-pkg	node-spdx-correct
-pkg	node-spdx-exceptions
-pkg	node-spdx-expression-parse
-pkg	node-spdx-license-ids
-pkg	node-sprintf-js
-pkg	node-ssri
-pkg	node-stack-utils
-pkg	node-string-decoder
-pkg	node-string-width
-pkg	node-strip-ansi
-pkg	node-strip-bom
-pkg	node-strip-eof
-pkg	node-strip-json-comments
-pkg	node-supports-color
-pkg	node-tap
-pkg	node-tapable
-pkg	node-tape
-pkg	node-tap-mocha-reporter
-pkg	node-tap-parser
-pkg	node-tar
-pkg	node-terser
-pkg	node-text-table
-pkg	node-through
-pkg	node-time-stamp
-pkg	node-to-fast-properties
-pkg	node-to-regex-range
-pkg	node-tslib
-pkg	node-type-check
-pkg	node-typedarray
-pkg	node-undici
-pkg	node-unicode-canonical-property-names-ecmascript
-pkg	node-unicode-match-property-ecmascript
-pkg	node-unicode-match-property-value-ecmascript
-pkg	node-unicode-property-aliases-ecmascript
-pkg	node-union-value
-pkg	node-unique-filename
-pkg	node-unset-value
-pkg	node-util
-pkg	node-util-deprecate
-pkg	node-uuid
-pkg	node-v8-compile-cache
-pkg	node-v8flags
-pkg	node-validate-npm-package-license
-pkg	node-validate-npm-package-name
-pkg	node-watchpack
-pkg	node-wcwidth.js
-pkg	node-webassemblyjs
-pkg	node-webpack-sources
-pkg	node-which
-pkg	node-wide-align
-pkg	node-widest-line
-pkg	node-wordwrap
-pkg	node-wrap-ansi
-pkg	node-wrappy
-pkg	node-write
-pkg	node-write-file-atomic
-pkg	node-ws
-pkg	node-xtend
-pkg	node-y18n
-pkg	node-yallist
-pkg	node-yaml
-pkg	node-yargs
-pkg	node-yargs-parser
-pkg	npm
-pkg	ntfs-3g
-pkg	numactl
-pkg	obsidian
-pkg	openprinting-ppds
-pkg	openssh-client
-pkg	openssl
-pkg	openssl-provider-legacy
-pkg	open-vm-tools
-pkg	open-vm-tools-desktop
-pkg	openvpn
-pkg	orca
-pkg	os-prober
-pkg	p11-kit
-pkg	p11-kit-modules
-pkg	packagekit
-pkg	papers
-pkg	papers-common
-pkg	papirus-colors
-pkg	papirus-icon-theme
-pkg	parted
-pkg	passwd
-pkg	patch
-pkg	pci.ids
-pkg	pciutils
-pkg	pcmciautils
-pkg	perl
-pkg	perl-base
-pkg	perl-modules-5.40
-pkg	perl-openssl-defaults
-pkg	pinentry-curses
-pkg	pinentry-gnome3
-pkg	pipewire
-pkg	pipewire-alsa
-pkg	pipewire-audio
-pkg	pipewire-bin
-pkg	pipewire-pulse
-pkg	pkexec
-pkg	pkgconf
-pkg	pkgconf-bin
-pkg	pkg-config
-pkg	plymouth
-pkg	plymouth-label
-pkg	plymouth-theme-spinner
-pkg	plymouth-theme-ubuntu-text
-pkg	pnp.ids
-pkg	policykit-desktop-privileges
-pkg	polkitd
-pkg	poppler-data
-pkg	poppler-utils
-pkg	powermgmt-base
-pkg	power-profiles-daemon
-pkg	ppp
-pkg	pptp-linux
-pkg	printer-driver-brlaser
-pkg	printer-driver-c2esp
-pkg	printer-driver-foo2zjs
-pkg	printer-driver-foo2zjs-common
-pkg	printer-driver-hpcups
-pkg	printer-driver-m2300w
-pkg	printer-driver-min12xxw
-pkg	printer-driver-pnm2ppa
-pkg	printer-driver-postscript-hp
-pkg	printer-driver-ptouch
-pkg	printer-driver-pxljr
-pkg	printer-driver-sag-gdi
-pkg	printer-driver-splix
-pkg	procps
-pkg	psmisc
-pkg	ptyxis
-pkg	publicsuffix
-pkg	python3
-pkg	python3.14
-pkg	python3.14-dev
-pkg	python3.14-gdbm
-pkg	python3.14-minimal
-pkg	python3.14-venv
-pkg	python3-apport
-pkg	python3-apt
-pkg	python3-aptdaemon
-pkg	python3-aptdaemon.gtk3widgets
-pkg	python3-attr
-pkg	python3-autocommand
-pkg	python3-babel
-pkg	python3-bcrypt
-pkg	python3-blinker
-pkg	python3-bpfcc
-pkg	python3-brlapi
-pkg	python3-cairo
-pkg	python3-certifi
-pkg	python3-cffi-backend
-pkg	python3-chardet
-pkg	python3-click
-pkg	python3-commandnotfound
-pkg	python3-configobj
-pkg	python3-cryptography
-pkg	python3-cups
-pkg	python3-cupshelpers
-pkg	python3-dasbus
-pkg	python3-dbus
-pkg	python3-debconf
-pkg	python3-debian
-pkg	python3-defer
-pkg	python3-dev
-pkg	python3-distro
-pkg	python3-distro-info
-pkg	python3-distupgrade
-pkg	python3-gdbm
-pkg	python3-gi
-pkg	python3-httplib2
-pkg	python3-ibus-1.0
-pkg	python3-idna
-pkg	python3-inflect
-pkg	python3-jaraco.context
-pkg	python3-jaraco.functools
-pkg	python3-jaraco.text
-pkg	python3-jinja2
-pkg	python3-jsonpatch
-pkg	python3-json-pointer
-pkg	python3-jsonschema
-pkg	python3-jsonschema-specifications
-pkg	python3-jwt
-pkg	python3-launchpadlib
-pkg	python3-lazr.restfulclient
-pkg	python3-lazr.uri
-pkg	python3-linkify-it
-pkg	python3-louis
-pkg	python3-markdown-it
-pkg	python3-markupsafe
-pkg	python3-mdurl
-pkg	python3-minimal
-pkg	python3-more-itertools
-pkg	python3-netaddr
-pkg	python3-netplan
-pkg	python3-oauthlib
-pkg	python3-olefile
-pkg	python3-packaging
-pkg	python3-passlib
-pkg	python3-pexpect
-pkg	python3-pil
-pkg	python3-pip
-pkg	python3-pip-whl
-pkg	python3-pkg-resources
-pkg	python3-problem-report
-pkg	python3-psutil
-pkg	python3-ptyprocess
-pkg	python3-pygments
-pkg	python3-pyparsing
-pkg	python3-referencing
-pkg	python3-requests
-pkg	python3-rich
-pkg	python3-rpds-py
-pkg	python3-serial
-pkg	python3-setproctitle
-pkg	python3-setuptools
-pkg	python3-setuptools-whl
-pkg	python3-software-properties
-pkg	python3-speechd
-pkg	python3-sss
-pkg	python3-systemd
-pkg	python3-typeguard
-pkg	python3-typing-extensions
-pkg	python3-uc-micro
-pkg	python3-update-manager
-pkg	python3-urllib3
-pkg	python3-venv
-pkg	python3-wadllib
-pkg	python3-wheel
-pkg	python3-xdg
-pkg	python3-xkit
-pkg	python3-yaml
-pkg	python3-zipp
-pkg	python-apt-common
-pkg	python-babel-localedata
-pkg	readline-common
-pkg	resources
-pkg	rfkill
-pkg	rime-data-bopomofo
-pkg	rime-data-cangjie5
-pkg	rime-data-luna-pinyin
-pkg	rime-data-stroke
-pkg	rime-data-terra-pinyin
-pkg	rime-essay
-pkg	rime-prelude
-pkg	ripgrep
-pkg	rpcsvc-proto
-pkg	rsync
-pkg	rsyslog
-pkg	rtkit
-pkg	rust-coreutils
-pkg	rygel
-pkg	samba-libs
-pkg	sane-airscan
-pkg	sane-utils
-pkg	sbsigntool
-pkg	screen
-pkg	seahorse
-pkg	secureboot-db
-pkg	sed
-pkg	sensible-utils
-pkg	sgml-base
-pkg	sgml-data
-pkg	shared-mime-info
-pkg	shim-signed
-pkg	snapd
-pkg	socat
-pkg	software-properties-common
-pkg	sound-icons
-pkg	sound-theme-freedesktop
-pkg	speech-dispatcher
-pkg	speech-dispatcher-audio-plugins
-pkg	speech-dispatcher-espeak-ng
-pkg	spice-vdagent
-pkg	squashfs-tools
-pkg	ssl-cert
-pkg	sssd
-pkg	sssd-ad
-pkg	sssd-ad-common
-pkg	sssd-common
-pkg	sssd-ipa
-pkg	sssd-krb5
-pkg	sssd-krb5-common
-pkg	sssd-ldap
-pkg	sssd-proxy
-pkg	strace
-pkg	sudo
-pkg	sudo-common
-pkg	sudo-rs
-pkg	switcheroo-control
-pkg	syslinux-common
-pkg	syslinux-efi
-pkg	sysprof
-pkg	sysstat
-pkg	system-config-printer-common
-pkg	system-config-printer-udev
-pkg	systemd
-pkg	systemd-cryptsetup
-pkg	systemd-hwe-hwdb
-pkg	systemd-oomd
-pkg	systemd-resolved
-pkg	systemd-sysv
-pkg	sysvinit-utils
-pkg	tar
-pkg	tcl
-pkg	tcl8.6
-pkg	tcpdump
-pkg	tecla
-pkg	telnet
-pkg	terser
-pkg	thermald
-pkg	time
-pkg	tinysparql
-pkg	tnftp
-pkg	tpm-udev
-pkg	trace-cmd
-pkg	tzdata
-pkg	ubuntu-advantage-desktop-daemon
-pkg	ubuntu-desktop-minimal
-pkg	ubuntu-docs
-pkg	ubuntu-drivers-common
-pkg	ubuntu-insights
-pkg	ubuntu-kernel-accessories
-pkg	ubuntu-keyring
-pkg	ubuntu-minimal
-pkg	ubuntu-pro-client
-pkg	ubuntu-pro-client-l10n
-pkg	ubuntu-release-upgrader-core
-pkg	ubuntu-release-upgrader-gtk
-pkg	ubuntu-report
-pkg	ubuntu-session
-pkg	ubuntu-settings
-pkg	ubuntu-standard
-pkg	ubuntu-wallpapers
-pkg	ubuntu-wallpapers-resolute
-pkg	ucf
-pkg	udev
-pkg	udisks2
-pkg	ufw
-pkg	unattended-upgrades
-pkg	unzip
-pkg	update-inetd
-pkg	update-manager
-pkg	update-manager-core
-pkg	update-notifier
-pkg	update-notifier-common
-pkg	upower
-pkg	usb.ids
-pkg	usb-modeswitch
-pkg	usb-modeswitch-data
-pkg	usbmuxd
-pkg	usbutils
-pkg	user-session-migration
-pkg	util-linux
-pkg	uuid-runtime
-pkg	vim
-pkg	vim-common
-pkg	vim-runtime
-pkg	vim-tiny
-pkg	wabt
-pkg	wamerican
-pkg	wbritish
-pkg	webpack
-pkg	webp-pixbuf-loader
-pkg	wget
-pkg	whiptail
-pkg	whoopsie
-pkg	whoopsie-preferences
-pkg	wireless-regdb
-pkg	wireplumber
-pkg	wpasupplicant
-pkg	wsdd
-pkg	x11-common
-pkg	x11-utils
-pkg	x11-xkb-utils
-pkg	x11-xserver-utils
-pkg	xauth
-pkg	xbrlapi
-pkg	xcursor-themes
-pkg	xdg-dbus-proxy
-pkg	xdg-desktop-portal
-pkg	xdg-desktop-portal-gnome
-pkg	xdg-desktop-portal-gtk
-pkg	xdg-terminal-exec
-pkg	xdg-user-dirs
-pkg	xdg-user-dirs-gtk
-pkg	xdg-utils
-pkg	xfonts-base
-pkg	xfonts-encodings
-pkg	xfonts-utils
-pkg	xkb-data
-pkg	xml-core
-pkg	xorriso
-pkg	xserver-common
-pkg	xwayland
-pkg	xxd
-pkg	xz-utils
-pkg	yaru-theme-gnome-shell
-pkg	yaru-theme-gtk
-pkg	yaru-theme-icon
-pkg	yaru-theme-sound
-pkg	yelp
-pkg	yelp-xsl
-pkg	zenity
-pkg	zenity-common
-pkg	zerofree
-pkg	zip
-pkg	zlib1g
-pkg	zlib1g-dev
-pkg	zstd
-gset	org.gnome.desktop.interface accent-color 'purple'
-gset	org.gnome.desktop.interface avatar-directories @as []
-gset	org.gnome.desktop.interface can-change-accels false
-gset	org.gnome.desktop.interface clock-format '24h'
-gset	org.gnome.desktop.interface clock-show-date true
-gset	org.gnome.desktop.interface clock-show-seconds false
-gset	org.gnome.desktop.interface clock-show-weekday false
-gset	org.gnome.desktop.interface color-scheme 'prefer-dark'
-gset	org.gnome.desktop.interface cursor-blink true
-gset	org.gnome.desktop.interface cursor-blink-time 1200
-gset	org.gnome.desktop.interface cursor-blink-timeout 10
-gset	org.gnome.desktop.interface cursor-size 24
-gset	org.gnome.desktop.interface cursor-theme 'Yaru'
-gset	org.gnome.desktop.interface document-font-name 'Inter 11'
-gset	org.gnome.desktop.interface enable-animations true
-gset	org.gnome.desktop.interface enable-hot-corners false
-gset	org.gnome.desktop.interface font-antialiasing 'rgba'
-gset	org.gnome.desktop.interface font-hinting 'slight'
-gset	org.gnome.desktop.interface font-name 'Inter 11'
-gset	org.gnome.desktop.interface font-rendering 'automatic'
-gset	org.gnome.desktop.interface font-rgba-order 'rgb'
-gset	org.gnome.desktop.interface gtk-color-palette 'black:white:gray50:red:purple:blue:light blue:green:yellow:orange:lavender:brown:goldenrod4:dodger blue:pink:light green:gray10:gray30:gray75:gray90'
-gset	org.gnome.desktop.interface gtk-color-scheme ''
-gset	org.gnome.desktop.interface gtk-enable-primary-paste false
-gset	org.gnome.desktop.interface gtk-im-module ''
-gset	org.gnome.desktop.interface gtk-im-preedit-style 'callback'
-gset	org.gnome.desktop.interface gtk-im-status-style 'callback'
-gset	org.gnome.desktop.interface gtk-key-theme 'Default'
-gset	org.gnome.desktop.interface gtk-theme 'Yaru'
-gset	org.gnome.desktop.interface gtk-timeout-initial 200
-gset	org.gnome.desktop.interface gtk-timeout-repeat 20
-gset	org.gnome.desktop.interface icon-theme 'Papirus-Dark'
-gset	org.gnome.desktop.interface locate-pointer false
-gset	org.gnome.desktop.interface menubar-accel 'F10'
-gset	org.gnome.desktop.interface menubar-detachable false
-gset	org.gnome.desktop.interface menus-have-tearoff false
-gset	org.gnome.desktop.interface monospace-font-name 'JetBrains Mono 11'
-gset	org.gnome.desktop.interface overlay-scrolling true
-gset	org.gnome.desktop.interface scaling-factor uint32 0
-gset	org.gnome.desktop.interface show-battery-percentage false
-gset	org.gnome.desktop.interface text-scaling-factor 1.0
-gset	org.gnome.desktop.interface toolbar-detachable false
-gset	org.gnome.desktop.interface toolbar-icons-size 'large'
-gset	org.gnome.desktop.interface toolbar-style 'both-horiz'
-gset	org.gnome.desktop.interface toolkit-accessibility false
-gset	org.gnome.desktop.background color-shading-type 'solid'
-gset	org.gnome.desktop.background picture-opacity 100
-gset	org.gnome.desktop.background picture-options 'zoom'
-gset	org.gnome.desktop.background picture-uri 'file:///home/dsyfb437/.local/share/backgrounds/azusa/mascot-light-2880x1800.jpg'
-gset	org.gnome.desktop.background picture-uri-dark 'file:///home/dsyfb437/.local/share/backgrounds/azusa/mascot-dark-2880x1800.jpg'
-gset	org.gnome.desktop.background primary-color '#023c88'
-gset	org.gnome.desktop.background secondary-color '#5789ca'
-gset	org.gnome.desktop.background show-desktop-icons true
-gset	org.gnome.desktop.wm.preferences action-double-click-titlebar 'toggle-maximize'
-gset	org.gnome.desktop.wm.preferences action-middle-click-titlebar 'lower'
-gset	org.gnome.desktop.wm.preferences action-right-click-titlebar 'menu'
-gset	org.gnome.desktop.wm.preferences audible-bell true
-gset	org.gnome.desktop.wm.preferences auto-raise false
-gset	org.gnome.desktop.wm.preferences auto-raise-delay 500
-gset	org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
-gset	org.gnome.desktop.wm.preferences disable-workarounds false
-gset	org.gnome.desktop.wm.preferences focus-mode 'click'
-gset	org.gnome.desktop.wm.preferences focus-new-windows 'smart'
-gset	org.gnome.desktop.wm.preferences mouse-button-modifier '<Super>'
-gset	org.gnome.desktop.wm.preferences num-workspaces 4
-gset	org.gnome.desktop.wm.preferences raise-on-click true
-gset	org.gnome.desktop.wm.preferences resize-with-right-button false
-gset	org.gnome.desktop.wm.preferences theme 'Adwaita'
-gset	org.gnome.desktop.wm.preferences titlebar-font 'Inter Bold 11'
-gset	org.gnome.desktop.wm.preferences titlebar-uses-system-font false
-gset	org.gnome.desktop.wm.preferences visual-bell false
-gset	org.gnome.desktop.wm.preferences visual-bell-type 'fullscreen-flash'
-gset	org.gnome.desktop.wm.preferences workspace-names @as []
-gset	org.gnome.Ptyxis audible-bell true
-gset	org.gnome.Ptyxis cursor-blink-mode 'system'
-gset	org.gnome.Ptyxis cursor-shape 'block'
-gset	org.gnome.Ptyxis default-columns uint32 80
-gset	org.gnome.Ptyxis default-profile-uuid '7152f2a583f538da55fa90516b00811c'
-gset	org.gnome.Ptyxis default-rows uint32 24
-gset	org.gnome.Ptyxis disable-padding false
-gset	org.gnome.Ptyxis enable-a11y true
-gset	org.gnome.Ptyxis enable-zoom-scroll-ctrl true
-gset	org.gnome.Ptyxis font-name 'JetBrains Mono 11'
-gset	org.gnome.Ptyxis ignore-osc-title false
-gset	org.gnome.Ptyxis inhibit-logout true
-gset	org.gnome.Ptyxis interface-style 'dark'
-gset	org.gnome.Ptyxis new-tab-position 'last'
-gset	org.gnome.Ptyxis profile-uuids ['7152f2a583f538da55fa90516b00811c']
-gset	org.gnome.Ptyxis prompt-on-close true
-gset	org.gnome.Ptyxis restore-session true
-gset	org.gnome.Ptyxis restore-window-size true
-gset	org.gnome.Ptyxis scrollbar-policy 'system'
-gset	org.gnome.Ptyxis tab-middle-click 'close'
-gset	org.gnome.Ptyxis text-blink-mode 'always'
-gset	org.gnome.Ptyxis toast-on-copy-clipboard true
-gset	org.gnome.Ptyxis use-system-font false
-gset	org.gnome.Ptyxis visual-bell true
-gset	org.gnome.Ptyxis visual-process-leader true
-gset	org.gnome.Ptyxis window-size (uint32 141, uint32 30)
-gset	org.gnome.Ptyxis word-char-exceptions @ms nothing
-gset	org.gnome.Ptyxis.Profile backspace-binding 'ascii-delete'
-gset	org.gnome.Ptyxis.Profile bold-is-bright false
-gset	org.gnome.Ptyxis.Profile cell-height-scale 1.0
-gset	org.gnome.Ptyxis.Profile cell-width-scale 1.0
-gset	org.gnome.Ptyxis.Profile cjk-ambiguous-width 'narrow'
-gset	org.gnome.Ptyxis.Profile custom-command ''
-gset	org.gnome.Ptyxis.Profile custom-links [('(?i)(Closes|Helps|Mitigates|RFP|ITP): ?#?(\\d+)', 'https://bugs.debian.org/$2'), ('(?i)LP:? ?#?(\\d+)', 'https://launchpad.net/bugs/$1')]
-gset	org.gnome.Ptyxis.Profile default-container 'session'
-gset	org.gnome.Ptyxis.Profile delete-binding 'delete-sequence'
-gset	org.gnome.Ptyxis.Profile exit-action 'close'
-gset	org.gnome.Ptyxis.Profile label ''
-gset	org.gnome.Ptyxis.Profile limit-scrollback true
-gset	org.gnome.Ptyxis.Profile login-shell false
-gset	org.gnome.Ptyxis.Profile opacity 1.0
-gset	org.gnome.Ptyxis.Profile palette 'azusa'
-gset	org.gnome.Ptyxis.Profile preserve-container 'always'
-gset	org.gnome.Ptyxis.Profile preserve-directory 'safe'
-gset	org.gnome.Ptyxis.Profile scroll-on-keystroke true
-gset	org.gnome.Ptyxis.Profile scroll-on-output false
-gset	org.gnome.Ptyxis.Profile scrollback-lines 10000
-gset	org.gnome.Ptyxis.Profile use-custom-command false
-gset	org.gnome.Ptyxis.Profile use-proxy true
+pkg	3cpio	installed
+pkg	accountsservice	installed
+pkg	acl	installed
+pkg	adduser	installed
+pkg	adwaita-icon-theme	installed
+pkg	alsa-base	installed
+pkg	alsa-topology-conf	installed
+pkg	alsa-ucm-conf	installed
+pkg	alsa-utils	installed
+pkg	amd64-microcode	installed
+pkg	anacron	installed
+pkg	apparmor	installed
+pkg	apport	installed
+pkg	apport-core-dump-handler	installed
+pkg	apport-gtk	installed
+pkg	apport-symptoms	installed
+pkg	appstream	installed
+pkg	apt	installed
+pkg	apt-config-icons	installed
+pkg	apt-config-icons-hidpi	installed
+pkg	aptdaemon	installed
+pkg	aptdaemon-data	installed
+pkg	aspell	installed
+pkg	aspell-en	installed
+pkg	at-spi2-common	installed
+pkg	at-spi2-core	installed
+pkg	avahi-daemon	installed
+pkg	baobab	installed
+pkg	base-files	installed
+pkg	base-passwd	installed
+pkg	bash	installed
+pkg	bash-completion	installed
+pkg	bc	installed
+pkg	bind9-dnsutils	installed
+pkg	bind9-host	installed
+pkg	bind9-libs	installed
+pkg	binutils	installed
+pkg	binutils-common	installed
+pkg	binutils-x86-64-linux-gnu	installed
+pkg	bluez	installed
+pkg	bluez-cups	installed
+pkg	bluez-obexd	installed
+pkg	bolt	installed
+pkg	bpfcc-tools	installed
+pkg	bpftool	installed
+pkg	bpftrace	installed
+pkg	brltty	installed
+pkg	bsdextrautils	installed
+pkg	bsdutils	installed
+pkg	bubblewrap	installed
+pkg	build-essential	installed
+pkg	busybox-initramfs	installed
+pkg	busybox-static	installed
+pkg	bzip2	installed
+pkg	ca-certificates	installed
+pkg	chrony	installed
+pkg	clang-format	installed
+pkg	clang-format-21	installed
+pkg	cloud-guest-utils	installed
+pkg	cloud-init	installed
+pkg	cloud-init-base	installed
+pkg	cmake	installed
+pkg	cmake-data	installed
+pkg	code	installed
+pkg	colord	installed
+pkg	colord-data	installed
+pkg	command-not-found	installed
+pkg	console-setup	installed
+pkg	console-setup-linux	installed
+pkg	coreutils	installed
+pkg	coreutils-from-uutils	installed
+pkg	cpio	installed
+pkg	cpp	installed
+pkg	cpp-15	installed
+pkg	cpp-15-x86-64-linux-gnu	installed
+pkg	cpp-x86-64-linux-gnu	installed
+pkg	cracklib-runtime	installed
+pkg	crash	installed
+pkg	cron	installed
+pkg	cron-daemon-common	installed
+pkg	cups	installed
+pkg	cups-browsed	installed
+pkg	cups-bsd	installed
+pkg	cups-client	installed
+pkg	cups-common	installed
+pkg	cups-core-drivers	installed
+pkg	cups-daemon	installed
+pkg	cups-filters	installed
+pkg	cups-filters-core-drivers	installed
+pkg	cups-ipp-utils	installed
+pkg	cups-pk-helper	installed
+pkg	cups-ppdc	installed
+pkg	cups-server-common	installed
+pkg	curl	installed
+pkg	dash	installed
+pkg	dbus	installed
+pkg	dbus-bin	installed
+pkg	dbus-daemon	installed
+pkg	dbus-session-bus-common	installed
+pkg	dbus-system-bus-common	installed
+pkg	dbus-user-session	installed
+pkg	dc	installed
+pkg	dconf-cli	installed
+pkg	dconf-gsettings-backend	installed
+pkg	dconf-service	installed
+pkg	debconf	installed
+pkg	debconf-i18n	installed
+pkg	debianutils	installed
+pkg	debootstrap	installed
+pkg	desktop-file-utils	installed
+pkg	dhcpcd-base	installed
+pkg	dictionaries-common	installed
+pkg	diffutils	installed
+pkg	dirmngr	installed
+pkg	distro-info	installed
+pkg	distro-info-data	installed
+pkg	dmidecode	installed
+pkg	dmsetup	installed
+pkg	dmz-cursor-theme	installed
+pkg	dnsmasq-base	installed
+pkg	dns-root-data	installed
+pkg	docbook-xml	installed
+pkg	dosfstools	installed
+pkg	dpkg	installed
+pkg	dpkg-dev	installed
+pkg	dracut	installed
+pkg	dracut-core	installed
+pkg	dracut-install	installed
+pkg	e2fsprogs	installed
+pkg	eatmydata	installed
+pkg	ed	installed
+pkg	efibootmgr	installed
+pkg	eject	installed
+pkg	emacsen-common	installed
+pkg	enchant-2	installed
+pkg	eslint	installed
+pkg	espeak-ng-data	installed
+pkg	ethtool	installed
+pkg	evolution-data-server	installed
+pkg	evolution-data-server-common	installed
+pkg	exfatprogs	installed
+pkg	fakeroot	installed
+pkg	fastfetch	installed
+pkg	fdisk	installed
+pkg	file	installed
+pkg	findutils	installed
+pkg	firefox	installed
+pkg	firmware-sof-signed	installed
+pkg	fontconfig	installed
+pkg	fontconfig-config	installed
+pkg	fonts-dejavu-core	installed
+pkg	fonts-dejavu-mono	installed
+pkg	fonts-droid-fallback	installed
+pkg	fonts-inter	installed
+pkg	fonts-jetbrains-mono	installed
+pkg	fonts-liberation	installed
+pkg	fonts-liberation-sans-narrow	installed
+pkg	fonts-noto-cjk	installed
+pkg	fonts-noto-color-emoji	installed
+pkg	fonts-noto-core	installed
+pkg	fonts-noto-mono	installed
+pkg	fonts-ubuntu	installed
+pkg	fonts-urw-base35	installed
+pkg	foomatic-db-compressed-ppds	installed
+pkg	fprintd	installed
+pkg	friendly-recovery	installed
+pkg	ftp	installed
+pkg	fuse3	installed
+pkg	fwupd	installed
+pkg	fwupd-signed	installed
+pkg	g++	installed
+pkg	g++-15	installed
+pkg	g++-15-x86-64-linux-gnu	installed
+pkg	g++-x86-64-linux-gnu	installed
+pkg	gamemode	installed
+pkg	gamemode-daemon	installed
+pkg	gcc	installed
+pkg	gcc-15	installed
+pkg	gcc-15-base	installed
+pkg	gcc-15-x86-64-linux-gnu	installed
+pkg	gcc-16-base	installed
+pkg	gcc-x86-64-linux-gnu	installed
+pkg	gcr	installed
+pkg	gcr4	installed
+pkg	gdb	installed
+pkg	gdisk	installed
+pkg	gdm3	installed
+pkg	geoclue-2.0	installed
+pkg	geocode-glib-common	installed
+pkg	gettext-base	installed
+pkg	gh	installed
+pkg	ghostscript	installed
+pkg	gir1.2-accountsservice-1.0	installed
+pkg	gir1.2-adw-1	installed
+pkg	gir1.2-atk-1.0	installed
+pkg	gir1.2-atspi-2.0	installed
+pkg	gir1.2-dbusmenu-glib-0.4	installed
+pkg	gir1.2-freedesktop	installed
+pkg	gir1.2-gck-2	installed
+pkg	gir1.2-gcr-4	installed
+pkg	gir1.2-gdesktopenums-3.0	installed
+pkg	gir1.2-gdkpixbuf-2.0	installed
+pkg	gir1.2-gdm-1.0	installed
+pkg	gir1.2-geoclue-2.0	installed
+pkg	gir1.2-girepository-3.0	installed
+pkg	gir1.2-glib-2.0	installed
+pkg	gir1.2-gmenu-3.0	installed
+pkg	gir1.2-gnomeautoar-0.1	installed
+pkg	gir1.2-gnomebg-4.0	installed
+pkg	gir1.2-gnomebluetooth-3.0	installed
+pkg	gir1.2-gnomedesktop-3.0	installed
+pkg	gir1.2-gnomedesktop-4.0	installed
+pkg	gir1.2-gnomeqr-4.0	installed
+pkg	gir1.2-graphene-1.0	installed
+pkg	gir1.2-gstreamer-1.0	installed
+pkg	gir1.2-gtk-3.0	installed
+pkg	gir1.2-gtk-4.0	installed
+pkg	gir1.2-gweather-4.0	installed
+pkg	gir1.2-handy-1	installed
+pkg	gir1.2-harfbuzz-0.0	installed
+pkg	gir1.2-ibus-1.0	installed
+pkg	gir1.2-javascriptcoregtk-4.1	installed
+pkg	gir1.2-mutter-18	installed
+pkg	gir1.2-nm-1.0	installed
+pkg	gir1.2-nma4-1.0	installed
+pkg	gir1.2-notify-0.7	installed
+pkg	gir1.2-packagekitglib-1.0	installed
+pkg	gir1.2-pango-1.0	installed
+pkg	gir1.2-polkit-1.0	installed
+pkg	gir1.2-rsvg-2.0	installed
+pkg	gir1.2-secret-1	installed
+pkg	gir1.2-snapd-2	installed
+pkg	gir1.2-soup-3.0	installed
+pkg	gir1.2-upowerglib-1.0	installed
+pkg	gir1.2-vte-2.91	installed
+pkg	gir1.2-webkit2-4.1	installed
+pkg	gir1.2-wnck-3.0	installed
+pkg	git	installed
+pkg	git-man	installed
+pkg	gjs	installed
+pkg	glib-networking	installed
+pkg	glib-networking-common	installed
+pkg	glib-networking-services	installed
+pkg	glycin-loaders	installed
+pkg	glycin-thumbnailers	installed
+pkg	gnome-accessibility-themes	installed
+pkg	gnome-bluetooth-3-common	installed
+pkg	gnome-bluetooth-sendto	installed
+pkg	gnome-calculator	installed
+pkg	gnome-characters	installed
+pkg	gnome-clocks	installed
+pkg	gnome-control-center	installed
+pkg	gnome-control-center-data	installed
+pkg	gnome-control-center-faces	installed
+pkg	gnome-desktop3-data	installed
+pkg	gnome-disk-utility	installed
+pkg	gnome-font-viewer	installed
+pkg	gnome-initial-setup	installed
+pkg	gnome-keyring	installed
+pkg	gnome-keyring-pkcs11	installed
+pkg	gnome-logs	installed
+pkg	gnome-menus	installed
+pkg	gnome-online-accounts	installed
+pkg	gnome-remote-desktop	installed
+pkg	gnome-session-bin	installed
+pkg	gnome-session-canberra	installed
+pkg	gnome-session-common	installed
+pkg	gnome-settings-daemon	installed
+pkg	gnome-settings-daemon-common	installed
+pkg	gnome-shell	installed
+pkg	gnome-shell-common	installed
+pkg	gnome-shell-extension-manager	installed
+pkg	gnome-shell-ubuntu-extensions	installed
+pkg	gnome-text-editor	installed
+pkg	gnome-themes-extra	installed
+pkg	gnome-themes-extra-data	installed
+pkg	gnome-user-docs	installed
+pkg	gnu-coreutils	installed
+pkg	gnupg	installed
+pkg	gnupg-l10n	installed
+pkg	gnupg-utils	installed
+pkg	google-chrome-stable	installed
+pkg	gpg	installed
+pkg	gpg-agent	installed
+pkg	gpgconf	installed
+pkg	gpgsm	installed
+pkg	gpgv	installed
+pkg	gpg-wks-client	installed
+pkg	grep	installed
+pkg	groff-base	installed
+pkg	grub2-common	installed
+pkg	grub-common	installed
+pkg	grub-efi-amd64	installed
+pkg	grub-efi-amd64-bin	installed
+pkg	grub-efi-amd64-signed	installed
+pkg	grub-efi-amd64-unsigned	installed
+pkg	grub-pc	installed
+pkg	grub-pc-bin	installed
+pkg	gsettings-desktop-schemas	installed
+pkg	gsettings-ubuntu-schemas	installed
+pkg	gst-audio-thumbnailer	installed
+pkg	gstreamer1.0-alsa	installed
+pkg	gstreamer1.0-gl	installed
+pkg	gstreamer1.0-packagekit	installed
+pkg	gstreamer1.0-pipewire	installed
+pkg	gstreamer1.0-plugins-base	installed
+pkg	gstreamer1.0-plugins-base-apps	installed
+pkg	gstreamer1.0-plugins-good	installed
+pkg	gstreamer1.0-tools	installed
+pkg	gstreamer1.0-x	installed
+pkg	gst-video-thumbnailer	installed
+pkg	gtk2-engines-murrine	installed
+pkg	gtk2-engines-pixbuf	installed
+pkg	gtk-update-icon-cache	installed
+pkg	gvfs	installed
+pkg	gvfs-backends	installed
+pkg	gvfs-common	installed
+pkg	gvfs-daemons	installed
+pkg	gvfs-fuse	installed
+pkg	gvfs-libs	installed
+pkg	gyp	installed
+pkg	gzip	installed
+pkg	handlebars	installed
+pkg	hdparm	installed
+pkg	heif-gdk-pixbuf	installed
+pkg	heif-thumbnailer	installed
+pkg	hicolor-icon-theme	installed
+pkg	hostname	installed
+pkg	hplip	installed
+pkg	hplip-data	installed
+pkg	hunspell-en-us	installed
+pkg	hwctl	installed
+pkg	hwdata	installed
+pkg	ibus	installed
+pkg	ibus-data	installed
+pkg	ibus-gtk	installed
+pkg	ibus-gtk3	installed
+pkg	ibus-gtk4	installed
+pkg	ibus-rime	installed
+pkg	ibus-table	installed
+pkg	ibus-table-cangjie3	installed
+pkg	ibus-table-cangjie5	installed
+pkg	ibus-table-cangjie-big	installed
+pkg	ibverbs-providers	installed
+pkg	ieee-data	installed
+pkg	iio-sensor-proxy	installed
+pkg	im-config	installed
+pkg	inetutils-telnet	installed
+pkg	info	installed
+pkg	init	installed
+pkg	initramfs-tools	installed
+pkg	initramfs-tools-bin	installed
+pkg	initramfs-tools-core	installed
+pkg	init-system-helpers	installed
+pkg	inputattach	installed
+pkg	install-info	installed
+pkg	intel-microcode	installed
+pkg	ipp-usb	installed
+pkg	iproute2	installed
+pkg	iptables	installed
+pkg	iputils-ping	installed
+pkg	iputils-tracepath	installed
+pkg	iso-codes	installed
+pkg	isolinux	installed
+pkg	iucode-tool	installed
+pkg	iw	installed
+pkg	javascript-common	installed
+pkg	jq	installed
+pkg	kbd	installed
+pkg	kdump-tools	installed
+pkg	kexec-tools	installed
+pkg	keyboard-configuration	installed
+pkg	klibc-utils	installed
+pkg	kmod	installed
+pkg	krb5-locales	installed
+pkg	language-pack-en	installed
+pkg	language-pack-en-base	installed
+pkg	language-pack-gnome-en	installed
+pkg	language-pack-gnome-en-base	installed
+pkg	language-pack-gnome-zh-hans	installed
+pkg	language-pack-gnome-zh-hans-base	installed
+pkg	language-pack-zh-hans	installed
+pkg	language-pack-zh-hans-base	installed
+pkg	language-selector-common	installed
+pkg	language-selector-gnome	installed
+pkg	laptop-detect	installed
+pkg	ldap-utils	installed
+pkg	less	installed
+pkg	libaa1	installed
+pkg	libabsl20260107	installed
+pkg	libaccountsservice0	installed
+pkg	libacl1	installed
+pkg	libada-url0-3	installed
+pkg	libadwaita-1-0	installed
+pkg	libalgorithm-diff-perl	installed
+pkg	libalgorithm-diff-xs-perl	installed
+pkg	libalgorithm-merge-perl	installed
+pkg	libao4	installed
+pkg	libao-common	installed
+pkg	libaom3	installed
+pkg	libapparmor1	installed
+pkg	libappstream5	installed
+pkg	libapt-pkg7.0	installed
+pkg	libarchive13t64	installed
+pkg	libasan8	installed
+pkg	libasound2-data	installed
+pkg	libasound2t64	installed
+pkg	libaspell15	installed
+pkg	libassuan9	installed
+pkg	libasyncns0	installed
+pkg	libatasmart4	installed
+pkg	libatk1.0-0t64	installed
+pkg	libatk-adaptor	installed
+pkg	libatk-bridge2.0-0t64	installed
+pkg	libatkmm-1.6-1v5	installed
+pkg	libatomic1	installed
+pkg	libatopology2t64	installed
+pkg	libatspi2.0-0t64	installed
+pkg	libattr1	installed
+pkg	libaudit1	installed
+pkg	libaudit-common	installed
+pkg	libauthen-sasl-perl	installed
+pkg	libavahi-client3	installed
+pkg	libavahi-common3	installed
+pkg	libavahi-common-data	installed
+pkg	libavahi-core7	installed
+pkg	libavahi-glib1	installed
+pkg	libavc1394-0	installed
+pkg	libayatana-appindicator3-1	installed
+pkg	libayatana-ido3-0.4-0	installed
+pkg	libayatana-indicator3-7	installed
+pkg	libbabeltrace1	installed
+pkg	libbasicobjects0t64	installed
+pkg	libbinutils	installed
+pkg	libblkid1	installed
+pkg	libblockdev3	installed
+pkg	libblockdev-crypto3	installed
+pkg	libblockdev-fs3	installed
+pkg	libblockdev-loop3	installed
+pkg	libblockdev-mdraid3	installed
+pkg	libblockdev-nvme3	installed
+pkg	libblockdev-part3	installed
+pkg	libblockdev-smart3	installed
+pkg	libblockdev-swap3	installed
+pkg	libblockdev-utils3	installed
+pkg	libbluetooth3	installed
+pkg	libboost-locale1.90.0	installed
+pkg	libboost-thread1.90.0	installed
+pkg	libbpf1	installed
+pkg	libbpfcc	installed
+pkg	libbrlapi0.8	installed
+pkg	libbrotli1	installed
+pkg	libbsd0	installed
+pkg	libburn4t64	installed
+pkg	libbytesize1	installed
+pkg	libbytesize-common	installed
+pkg	libbz2-1.0	installed
+pkg	libc6	installed
+pkg	libc6-dbg	installed
+pkg	libc6-dev	installed
+pkg	libcaca0	installed
+pkg	libcairo2	installed
+pkg	libcairo-gobject2	installed
+pkg	libcairo-gobject-perl	installed
+pkg	libcairomm-1.0-1v5	installed
+pkg	libcairo-perl	installed
+pkg	libcairo-script-interpreter2	installed
+pkg	libcamel-1.2-64t64	installed
+pkg	libcanberra0	installed
+pkg	libcanberra-gtk3-0	installed
+pkg	libcanberra-gtk3-module	installed
+pkg	libcanberra-pulse	installed
+pkg	libcap2	installed
+pkg	libcap2-bin	installed
+pkg	libcap-ng0	installed
+pkg	libcares2	installed
+pkg	libc-bin	installed
+pkg	libcbor0.10	installed
+pkg	libcc1-0	installed
+pkg	libc-dev-bin	installed
+pkg	libcdio19t64	installed
+pkg	libcdio-cdda2t64	installed
+pkg	libcdio-paranoia2t64	installed
+pkg	libcdparanoia0	installed
+pkg	libc-gconv-modules-extra	installed
+pkg	libchewing3	installed
+pkg	libchewing3-data	installed
+pkg	libclang1-21	installed
+pkg	libclang-cpp21	installed
+pkg	libclone-perl	installed
+pkg	libcollection4t64	installed
+pkg	libcolord2	installed
+pkg	libcolord-gtk4-1t64	installed
+pkg	libcolorhug2	installed
+pkg	libcom-err2	installed
+pkg	libcrack2	installed
+pkg	libcrypt1	installed
+pkg	libcrypt-dev	installed
+pkg	libcryptsetup12	installed
+pkg	libcrypt-urandom-perl	installed
+pkg	libctf0	installed
+pkg	libctf-nobfd0	installed
+pkg	libcue2	installed
+pkg	libcups2t64	installed
+pkg	libcupsfilters2-common	installed
+pkg	libcupsfilters2t64	installed
+pkg	libcupsimage2t64	installed
+pkg	libcurl3t64-gnutls	installed
+pkg	libcurl4t64	installed
+pkg	libdaemon0	installed
+pkg	libdata-dump-perl	installed
+pkg	libdatrie1	installed
+pkg	libdb5.3t64	installed
+pkg	libdbus-1-3	installed
+pkg	libdbusmenu-glib4	installed
+pkg	libdbusmenu-gtk3-4	installed
+pkg	libdconf1	installed
+pkg	libdebconfclient0	installed
+pkg	libdebuginfod1t64	installed
+pkg	libdebuginfod-common	installed
+pkg	libdecor-0-0	installed
+pkg	libdecor-0-plugin-1-gtk	installed
+pkg	libdee-1.0-4	installed
+pkg	libdeflate0	installed
+pkg	libdevmapper1.02.1	installed
+pkg	libdex-1-1	installed
+pkg	libdhash1t64	installed
+pkg	libdisplay-info3	installed
+pkg	libdjvulibre21	installed
+pkg	libdjvulibre-text	installed
+pkg	libdotconf0	installed
+pkg	libdpkg-perl	installed
+pkg	libdrm2	installed
+pkg	libdrm-amdgpu1	installed
+pkg	libdrm-common	installed
+pkg	libdrm-intel1	installed
+pkg	libduktape207	installed
+pkg	libdv4t64	installed
+pkg	libdw1t64	installed
+pkg	libeatmydata1	installed
+pkg	libebackend-1.2-11t64	installed
+pkg	libebook-1.2-21t64	installed
+pkg	libebook-contacts-1.2-4t64	installed
+pkg	libecal-2.0-3	installed
+pkg	libedata-book-1.2-27t64	installed
+pkg	libedata-cal-2.0-2t64	installed
+pkg	libedataserver-1.2-27t64	installed
+pkg	libedataserverui-1.2-4t64	installed
+pkg	libedit2	installed
+pkg	libeditorconfig0	installed
+pkg	libefiboot1t64	installed
+pkg	libefivar1t64	installed
+pkg	libegl1	installed
+pkg	libegl-mesa0	installed
+pkg	libei1	installed
+pkg	libeis1	installed
+pkg	libelf1t64	installed
+pkg	libenchant-2-2	installed
+pkg	libencode-locale-perl	installed
+pkg	libepoxy0	installed
+pkg	liberror-perl	installed
+pkg	libespeak-ng1	installed
+pkg	libestr0	installed
+pkg	libevdev2	installed
+pkg	libexempi8	installed
+pkg	libexif12	installed
+pkg	libexiv2-28	installed
+pkg	libexiv2-data	installed
+pkg	libexpat1	installed
+pkg	libexpat1-dev	installed
+pkg	libext2fs2t64	installed
+pkg	libextutils-depends-perl	installed
+pkg	libfakeroot	installed
+pkg	libfastjson4	installed
+pkg	libfdisk1	installed
+pkg	libffi8	installed
+pkg	libfftw3-single3	installed
+pkg	libfido2-1	installed
+pkg	libfile-basedir-perl	installed
+pkg	libfile-desktopentry-perl	installed
+pkg	libfile-fcntllock-perl	installed
+pkg	libfile-listing-perl	installed
+pkg	libfile-mimeinfo-perl	installed
+pkg	libflac14	installed
+pkg	libflashrom1	installed
+pkg	libfont-afm-perl	installed
+pkg	libfontconfig1	installed
+pkg	libfontenc1	installed
+pkg	libfprint-2-2	installed
+pkg	libfprint-2-tod1	installed
+pkg	libfreeaptx0	installed
+pkg	libfreerdp3-3	installed
+pkg	libfreerdp-server3-3	installed
+pkg	libfreetype6	installed
+pkg	libfribidi0	installed
+pkg	libftdi1-2	installed
+pkg	libfuse3-4	installed
+pkg	libfwupd3	installed
+pkg	libfyaml0	installed
+pkg	libgamemode0	installed
+pkg	libgamemodeauto0	installed
+pkg	libgbm1	installed
+pkg	libgcc-15-dev	installed
+pkg	libgcc-s1	installed
+pkg	libgck-1-0	installed
+pkg	libgck-2-2	installed
+pkg	libgcr-4-4	installed
+pkg	libgcr-base-3-1	installed
+pkg	libgcr-ui-3-1	installed
+pkg	libgcrypt20	installed
+pkg	libgd3	installed
+pkg	libgdbm6t64	installed
+pkg	libgdbm-compat4t64	installed
+pkg	libgdk-pixbuf-2.0-0	installed
+pkg	libgdk-pixbuf2.0-bin	installed
+pkg	libgdk-pixbuf2.0-common	installed
+pkg	libgdm1	installed
+pkg	libgee-0.8-2	installed
+pkg	libgeoclue-2-0	installed
+pkg	libgeocode-glib-2-0	installed
+pkg	libgexiv2-2	installed
+pkg	libgflags2.2	installed
+pkg	libgif7	installed
+pkg	libgirepository-1.0-1	installed
+pkg	libgirepository-2.0-0	installed
+pkg	libgjs0	installed
+pkg	libgl1	installed
+pkg	libgl1-mesa-dri	installed
+pkg	libgles2	installed
+pkg	libglib2.0-0t64	installed
+pkg	libglib2.0-bin	installed
+pkg	libglib2.0-data	installed
+pkg	libglibmm-2.4-1t64	installed
+pkg	libglib-object-introspection-perl	installed
+pkg	libglib-perl	installed
+pkg	libglvnd0	installed
+pkg	libglx0	installed
+pkg	libglx-mesa0	installed
+pkg	libglycin-2-0	installed
+pkg	libglycin-gtk4-2-0	installed
+pkg	libgmp10	installed
+pkg	libgnome-autoar-0-0	installed
+pkg	libgnome-bg-4-2t64	installed
+pkg	libgnome-bluetooth-3.0-13	installed
+pkg	libgnome-bluetooth-ui-3.0-13	installed
+pkg	libgnome-desktop-3-20t64	installed
+pkg	libgnome-desktop-4-2t64	installed
+pkg	libgnome-menu-3-0	installed
+pkg	libgnome-qr-4-0	installed
+pkg	libgnome-qr-gtk-4-0	installed
+pkg	libgnutls30t64	installed
+pkg	libgoa-1.0-0b	installed
+pkg	libgoa-1.0-common	installed
+pkg	libgoa-backend-1.0-2	installed
+pkg	libgomp1	installed
+pkg	libgoogle-glog0v6t64	installed
+pkg	libgpg-error0	installed
+pkg	libgpg-error-l10n	installed
+pkg	libgpgme45	installed
+pkg	libgpgmepp7	installed
+pkg	libgphoto2-6t64	installed
+pkg	libgphoto2-l10n	installed
+pkg	libgphoto2-port12t64	installed
+pkg	libgpm2	installed
+pkg	libgprofng0	installed
+pkg	libgraphene-1.0-0	installed
+pkg	libgraphite2-3	installed
+pkg	libgs10	installed
+pkg	libgs10-common	installed
+pkg	libgs-common	installed
+pkg	libgsf-1-114	installed
+pkg	libgsf-1-common	installed
+pkg	libgsound0t64	installed
+pkg	libgssapi-krb5-2	installed
+pkg	libgssdp-1.6-0	installed
+pkg	libgstreamer1.0-0	installed
+pkg	libgstreamer-gl1.0-0	installed
+pkg	libgstreamer-plugins-base1.0-0	installed
+pkg	libgstreamer-plugins-extra1.0-0	installed
+pkg	libgtk-3-0t64	installed
+pkg	libgtk-3-bin	installed
+pkg	libgtk-3-common	installed
+pkg	libgtk3-perl	installed
+pkg	libgtk-4-1	installed
+pkg	libgtk-4-bin	installed
+pkg	libgtk-4-common	installed
+pkg	libgtkmm-3.0-1t64	installed
+pkg	libgtksourceview-5-0	installed
+pkg	libgtksourceview-5-common	installed
+pkg	libgtop-2.0-11	installed
+pkg	libgtop2-common	installed
+pkg	libgudev-1.0-0	installed
+pkg	libgupnp-1.6-0	installed
+pkg	libgupnp-av-1.0-3	installed
+pkg	libgupnp-dlna-2.0-4	installed
+pkg	libgusb2a	installed
+pkg	libgweather-4-0t64	installed
+pkg	libgweather-4-common	installed
+pkg	libgxps2t64	installed
+pkg	libhandy-1-0	installed
+pkg	libharfbuzz0b	installed
+pkg	libharfbuzz-gobject0	installed
+pkg	libharfbuzz-icu0	installed
+pkg	libharfbuzz-subset0	installed
+pkg	libheif1	installed
+pkg	libheif-plugin-aomdec	installed
+pkg	libheif-plugin-aomenc	installed
+pkg	libhogweed6t64	installed
+pkg	libhpmud0	installed
+pkg	libhtml-format-perl	installed
+pkg	libhtml-form-perl	installed
+pkg	libhtml-parser-perl	installed
+pkg	libhtml-tagset-perl	installed
+pkg	libhtml-tree-perl	installed
+pkg	libhttp-cookies-perl	installed
+pkg	libhttp-daemon-perl	installed
+pkg	libhttp-date-perl	installed
+pkg	libhttp-message-perl	installed
+pkg	libhttp-negotiate-perl	installed
+pkg	libhunspell-1.7-0	installed
+pkg	libhwasan0	installed
+pkg	libhwy1t64	installed
+pkg	libhyphen0	installed
+pkg	libibus-1.0-5	installed
+pkg	libibverbs1	installed
+pkg	libical3t64	installed
+pkg	libice6	installed
+pkg	libicu78	installed
+pkg	libidn12	installed
+pkg	libidn2-0	installed
+pkg	libiec61883-0	installed
+pkg	libieee1284-3t64	installed
+pkg	libijs-0.35	installed
+pkg	libimagequant0	installed
+pkg	libimobiledevice-1.0-6	installed
+pkg	libimobiledevice-glue-1.0-0	installed
+pkg	libini-config5t64	installed
+pkg	libinih1	installed
+pkg	libinireader0	installed
+pkg	libinput10	installed
+pkg	libinput-bin	installed
+pkg	libinsights0	installed
+pkg	libio-html-perl	installed
+pkg	libio-socket-ssl-perl	installed
+pkg	libio-stringy-perl	installed
+pkg	libip4tc2	installed
+pkg	libip6tc2	installed
+pkg	libipa-hbac0t64	installed
+pkg	libipc-system-simple-perl	installed
+pkg	libipt2	installed
+pkg	libisl23	installed
+pkg	libisoburn1t64	installed
+pkg	libisofs6t64	installed
+pkg	libitm1	installed
+pkg	libjansson4	installed
+pkg	libjavascriptcoregtk-4.1-0	installed
+pkg	libjavascriptcoregtk-6.0-1	installed
+pkg	libjbig0	installed
+pkg	libjbig2dec0	installed
+pkg	libjcat1	installed
+pkg	libjemalloc2	installed
+pkg	libjpeg8	installed
+pkg	libjpeg-turbo8	installed
+pkg	libjq1	installed
+pkg	libjs-events	installed
+pkg	libjs-inherits	installed
+pkg	libjson-c5	installed
+pkg	libjsoncpp26	installed
+pkg	libjson-glib-1.0-0	installed
+pkg	libjson-glib-1.0-common	installed
+pkg	libjs-prettify	installed
+pkg	libjs-regenerate	installed
+pkg	libjs-source-map	installed
+pkg	libjs-sphinxdoc	installed
+pkg	libjs-sprintf-js	installed
+pkg	libjs-util	installed
+pkg	libjxl0.11	installed
+pkg	libjxl-gdk-pixbuf	installed
+pkg	libk5crypto3	installed
+pkg	libkeyutils1	installed
+pkg	libklibc	installed
+pkg	libkmod2	installed
+pkg	libkrb5-3	installed
+pkg	libkrb5support0	installed
+pkg	libksba8	installed
+pkg	liblc3-1	installed
+pkg	liblcms2-2	installed
+pkg	liblcms2-utils	installed
+pkg	libldacbt-abr2	installed
+pkg	libldacbt-enc2	installed
+pkg	libldap2	installed
+pkg	libldap-common	installed
+pkg	libldb2	installed
+pkg	liblerc4	installed
+pkg	libleveldb1d	installed
+pkg	libllhttp9.3	installed
+pkg	libllvm21	installed
+pkg	liblmdb0	installed
+pkg	liblocale-gettext-perl	installed
+pkg	liblouis20	installed
+pkg	liblouis-data	installed
+pkg	liblouisutdml9t64	installed
+pkg	liblouisutdml-bin	installed
+pkg	liblouisutdml-data	installed
+pkg	liblsan0	installed
+pkg	liblsof0	installed
+pkg	libltdl7	installed
+pkg	liblua5.4-0	installed
+pkg	liblwp-mediatypes-perl	installed
+pkg	liblwp-protocol-https-perl	installed
+pkg	liblz4-1	installed
+pkg	liblzma5	installed
+pkg	liblzo2-2	installed
+pkg	libm17n-0	installed
+pkg	libmagic1t64	installed
+pkg	libmagic-mgc	installed
+pkg	libmailtools-perl	installed
+pkg	libmalcontent-0-0	installed
+pkg	libmalcontent-common	installed
+pkg	libmarisa1	installed
+pkg	libmaxminddb0	installed
+pkg	libmbim-glib4	installed
+pkg	libmbim-proxy	installed
+pkg	libmbim-utils	installed
+pkg	libmd0	installed
+pkg	libmediaart-2.0-0	installed
+pkg	libmm-glib0	installed
+pkg	libmnl0	installed
+pkg	libmount1	installed
+pkg	libmozjs-140-0	installed
+pkg	libmp3lame0	installed
+pkg	libmpc3	installed
+pkg	libmpfr6	installed
+pkg	libmpg123-0t64	installed
+pkg	libmsgraph-1-1	installed
+pkg	libmspack0t64	installed
+pkg	libmtdev1t64	installed
+pkg	libmtp9t64	installed
+pkg	libmtp-common	installed
+pkg	libmtp-runtime	installed
+pkg	libmutter-18-0	installed
+pkg	libnautilus-extension4	installed
+pkg	libncurses6	installed
+pkg	libncursesw6	installed
+pkg	libndp0	installed
+pkg	libnet-dbus-perl	installed
+pkg	libnetfilter-conntrack3	installed
+pkg	libnet-http-perl	installed
+pkg	libnetplan1	installed
+pkg	libnet-smtp-ssl-perl	installed
+pkg	libnet-ssleay-perl	installed
+pkg	libnettle8t64	installed
+pkg	libnewt0.52	installed
+pkg	libnfnetlink0	installed
+pkg	libnfs14	installed
+pkg	libnfsidmap1	installed
+pkg	libnftables1	installed
+pkg	libnftnl11	installed
+pkg	libnghttp2-14	installed
+pkg	libnl-3-200	installed
+pkg	libnl-genl-3-200	installed
+pkg	libnl-route-3-200	installed
+pkg	libnm0	installed
+pkg	libnma0	installed
+pkg	libnma-common	installed
+pkg	libnma-gtk4-0	installed
+pkg	libnode127	installed
+pkg	libnode-dev	installed
+pkg	libnotify4	installed
+pkg	libnotify-bin	installed
+pkg	libnpth0t64	installed
+pkg	libnspr4	installed
+pkg	libnss3	installed
+pkg	libnss-mdns	installed
+pkg	libnss-sss	installed
+pkg	libnss-systemd	installed
+pkg	libntfs-3g89t64	installed
+pkg	libnuma1	installed
+pkg	libnvme1t64	installed
+pkg	liboeffis1	installed
+pkg	libogg0	installed
+pkg	libonig5	installed
+pkg	libopencc1.1	installed
+pkg	libopencc-data	installed
+pkg	libopenjp2-7	installed
+pkg	libopus0	installed
+pkg	liborc-0.4-0t64	installed
+pkg	libotf1	installed
+pkg	libp11-kit0	installed
+pkg	libpackagekit-glib2-18	installed
+pkg	libpam0g	installed
+pkg	libpam-cap	installed
+pkg	libpam-fprintd	installed
+pkg	libpam-gnome-keyring	installed
+pkg	libpam-modules	installed
+pkg	libpam-modules-bin	installed
+pkg	libpam-pwquality	installed
+pkg	libpam-runtime	installed
+pkg	libpam-sss	installed
+pkg	libpam-systemd	installed
+pkg	libpanel-1-1	installed
+pkg	libpanel-common	installed
+pkg	libpango-1.0-0	installed
+pkg	libpangocairo-1.0-0	installed
+pkg	libpangoft2-1.0-0	installed
+pkg	libpangomm-1.4-1v5	installed
+pkg	libpangoxft-1.0-0	installed
+pkg	libpaper2	installed
+pkg	libpaper-utils	installed
+pkg	libparted2t64	installed
+pkg	libpath-utils1t64	installed
+pkg	libpcap0.8t64	installed
+pkg	libpcaudio0	installed
+pkg	libpci3	installed
+pkg	libpciaccess0	installed
+pkg	libpcre2-32-0	installed
+pkg	libpcre2-8-0	installed
+pkg	libpcsclite1	installed
+pkg	libperl5.40	installed
+pkg	libphonenumber8	installed
+pkg	libpinyin15	installed
+pkg	libpinyin-data	installed
+pkg	libpipeline1	installed
+pkg	libpipewire-0.3-0t64	installed
+pkg	libpipewire-0.3-common	installed
+pkg	libpipewire-0.3-modules	installed
+pkg	libpixman-1-0	installed
+pkg	libpkcs11-helper1t64	installed
+pkg	libpkgconf7	installed
+pkg	libplist-2.0-4	installed
+pkg	libplymouth5	installed
+pkg	libpng16-16t64	installed
+pkg	libpolkit-agent-1-0	installed
+pkg	libpolkit-gobject-1-0	installed
+pkg	libpoppler156	installed
+pkg	libpoppler-cpp3	installed
+pkg	libpoppler-glib8t64	installed
+pkg	libpopt0	installed
+pkg	libportal1	installed
+pkg	libportal-gtk4-1	installed
+pkg	libppd2	installed
+pkg	libppd2-common	installed
+pkg	libppsdocument-4.0-6	installed
+pkg	libppsview-4.0-5	installed
+pkg	libproc2-0	installed
+pkg	libprotobuf32t64	installed
+pkg	libproxy1v5	installed
+pkg	libpsl5t64	installed
+pkg	libpulse0	installed
+pkg	libpulse-mainloop-glib0	installed
+pkg	libpwquality1	installed
+pkg	libpwquality-common	installed
+pkg	libpython3.14	installed
+pkg	libpython3.14-dev	installed
+pkg	libpython3.14-minimal	installed
+pkg	libpython3.14-stdlib	installed
+pkg	libpython3-dev	installed
+pkg	libpython3-stdlib	installed
+pkg	libqmi-glib5	installed
+pkg	libqmi-proxy	installed
+pkg	libqmi-utils	installed
+pkg	libqpdf30	installed
+pkg	libqrtr-glib0	installed
+pkg	libquadmath0	installed
+pkg	libraqm0	installed
+pkg	libraw1394-11	installed
+pkg	libre2-11	installed
+pkg	libreadline8t64	installed
+pkg	libref-array1t64	installed
+pkg	librest-1.0-0	installed
+pkg	librhash1	installed
+pkg	librime1t64	installed
+pkg	librime-bin	installed
+pkg	librime-data	installed
+pkg	librime-plugin-charcode	installed
+pkg	librime-plugin-lua	installed
+pkg	librime-plugin-octagram	installed
+pkg	libroc0.4	installed
+pkg	librsvg2-2	installed
+pkg	librsvg2-bin	installed
+pkg	librsvg2-common	installed
+pkg	librtmp1	installed
+pkg	librygel-core-2.8-0	installed
+pkg	librygel-db-2.8-0	installed
+pkg	librygel-renderer-2.8-0	installed
+pkg	librygel-server-2.8-0	installed
+pkg	libsamplerate0	installed
+pkg	libsane1	installed
+pkg	libsane-common	installed
+pkg	libsane-hpaio	installed
+pkg	libsasl2-2	installed
+pkg	libsasl2-modules	installed
+pkg	libsasl2-modules-db	installed
+pkg	libsasl2-modules-gssapi-mit	installed
+pkg	libsbc1	installed
+pkg	libseccomp2	installed
+pkg	libsecret-1-0	installed
+pkg	libsecret-common	installed
+pkg	libselinux1	installed
+pkg	libsemanage2	installed
+pkg	libsemanage-common	installed
+pkg	libsensors5	installed
+pkg	libsensors-config	installed
+pkg	libsepol2	installed
+pkg	libsframe3	installed
+pkg	libsharpyuv0	installed
+pkg	libshout3	installed
+pkg	libsigc++-2.0-0v5	installed
+pkg	libsimdjson29	installed
+pkg	libsimdutf31	installed
+pkg	libslang2	installed
+pkg	libsm6	installed
+pkg	libsmartcols1	installed
+pkg	libsmbclient0	installed
+pkg	libsnapd-glib-2-1	installed
+pkg	libsnappy1v5	installed
+pkg	libsndfile1	installed
+pkg	libsnmp40t64	installed
+pkg	libsnmp-base	installed
+pkg	libsodium23	installed
+pkg	libsonic0	installed
+pkg	libsoup-3.0-0	installed
+pkg	libsoup-3.0-common	installed
+pkg	libsource-highlight4t64	installed
+pkg	libsource-highlight-common	installed
+pkg	libspa-0.2-bluetooth	installed
+pkg	libspa-0.2-modules	installed
+pkg	libspeechd2	installed
+pkg	libspeechd-module0	installed
+pkg	libspeex1	installed
+pkg	libspeexdsp1	installed
+pkg	libspelling-1-2	installed
+pkg	libspelling-common	installed
+pkg	libsqlite3-0	installed
+pkg	libss2	installed
+pkg	libssh2-1t64	installed
+pkg	libssl3t64	installed
+pkg	libssl-dev	installed
+pkg	libsss-certmap0	installed
+pkg	libsss-idmap0	installed
+pkg	libsss-nss-idmap0	installed
+pkg	libstartup-notification0	installed
+pkg	libstdc++-15-dev	installed
+pkg	libstdc++6	installed
+pkg	libstemmer0d	installed
+pkg	libsysprof-6-6	installed
+pkg	libsysprof-6-modules	installed
+pkg	libsystemd0	installed
+pkg	libsystemd-shared	installed
+pkg	libtag2	installed
+pkg	libtalloc2	installed
+pkg	libtasn1-6	installed
+pkg	libtcl8.6	installed
+pkg	libtdb1	installed
+pkg	libteamdctl0	installed
+pkg	libtevent0t64	installed
+pkg	libtext-charwidth-perl	installed
+pkg	libtext-iconv-perl	installed
+pkg	libtext-wrapi18n-perl	installed
+pkg	libthai0	installed
+pkg	libthai-data	installed
+pkg	libtheora1	installed
+pkg	libtheoradec2	installed
+pkg	libtheoraenc2	installed
+pkg	libtie-ixhash-perl	installed
+pkg	libtiff6	installed
+pkg	libtimedate-perl	installed
+pkg	libtinfo6	installed
+pkg	libtinysparql-3.0-0	installed
+pkg	libtirpc3t64	installed
+pkg	libtirpc-common	installed
+pkg	libtotem-plparser18	installed
+pkg	libtotem-plparser-common	installed
+pkg	libtraceevent1	installed
+pkg	libtraceevent1-plugin	installed
+pkg	libtracefs1	installed
+pkg	libtry-tiny-perl	installed
+pkg	libtsan2	installed
+pkg	libtss2-esys-3.0.2-0t64	installed
+pkg	libtss2-mu-4.0.1-0t64	installed
+pkg	libtss2-rc0t64	installed
+pkg	libtss2-sys1t64	installed
+pkg	libtss2-tcti-cmd0t64	installed
+pkg	libtss2-tcti-device0t64	installed
+pkg	libtss2-tctildr0t64	installed
+pkg	libtss2-tcti-libtpms0t64	installed
+pkg	libtss2-tcti-mssim0t64	installed
+pkg	libtss2-tcti-spi-helper0t64	installed
+pkg	libtss2-tcti-swtpm0t64	installed
+pkg	libtwolame0	installed
+pkg	libubsan1	installed
+pkg	libuchardet0	installed
+pkg	libudev1	installed
+pkg	libudisks2-0	installed
+pkg	libunistring5	installed
+pkg	libunity9	installed
+pkg	libunity-protocol-private0	installed
+pkg	libunity-scopes-json-def-desktop	installed
+pkg	libunwind8	installed
+pkg	libupower-glib3	installed
+pkg	liburcu8t64	installed
+pkg	liburing2	installed
+pkg	liburi-perl	installed
+pkg	libusb-1.0-0	installed
+pkg	libusbmuxd-2.0-7	installed
+pkg	libuuid1	installed
+pkg	libuv1-dev	installed
+pkg	libuv1t64	installed
+pkg	libv4l-0t64	installed
+pkg	libv4lconvert0t64	installed
+pkg	libva2	installed
+pkg	libva-drm2	installed
+pkg	libvisual-0.4-0	installed
+pkg	libvolume-key1	installed
+pkg	libvorbis0a	installed
+pkg	libvorbisenc2	installed
+pkg	libvorbisfile3	installed
+pkg	libvpx12	installed
+pkg	libvte-2.91-0	installed
+pkg	libvte-2.91-common	installed
+pkg	libvte-2.91-gtk4-0	installed
+pkg	libvulkan1	installed
+pkg	libwacom9	installed
+pkg	libwacom-common	installed
+pkg	libwavpack1	installed
+pkg	libwayland-client0	installed
+pkg	libwayland-cursor0	installed
+pkg	libwayland-egl1	installed
+pkg	libwayland-server0	installed
+pkg	libwbclient0	installed
+pkg	libwebkit2gtk-4.1-0	installed
+pkg	libwebkitgtk-6.0-4	installed
+pkg	libwebp7	installed
+pkg	libwebpdemux2	installed
+pkg	libwebpmux3	installed
+pkg	libwebrtc-audio-processing-1-3	installed
+pkg	libwhoopsie0	installed
+pkg	libwhoopsie-preferences0	installed
+pkg	libwinpr3-3	installed
+pkg	libwireplumber-0.5-0	installed
+pkg	libwmf-0.2-7	installed
+pkg	libwmf-0.2-7-gtk	installed
+pkg	libwmflite-0.2-7	installed
+pkg	libwnck-3-0	installed
+pkg	libwnck-3-common	installed
+pkg	libwrap0	installed
+pkg	libwww-perl	installed
+pkg	libwww-robotrules-perl	installed
+pkg	libx11-6	installed
+pkg	libx11-data	installed
+pkg	libx11-protocol-perl	installed
+pkg	libx11-xcb1	installed
+pkg	libxau6	installed
+pkg	libxaw7	installed
+pkg	libxcb1	installed
+pkg	libxcb-dri3-0	installed
+pkg	libxcb-glx0	installed
+pkg	libxcb-present0	installed
+pkg	libxcb-randr0	installed
+pkg	libxcb-render0	installed
+pkg	libxcb-res0	installed
+pkg	libxcb-shape0	installed
+pkg	libxcb-shm0	installed
+pkg	libxcb-sync1	installed
+pkg	libxcb-util1	installed
+pkg	libxcb-xfixes0	installed
+pkg	libxcomposite1	installed
+pkg	libxcursor1	installed
+pkg	libxcvt0	installed
+pkg	libxdamage1	installed
+pkg	libxdmcp6	installed
+pkg	libxext6	installed
+pkg	libxfixes3	installed
+pkg	libxfont2	installed
+pkg	libxft2	installed
+pkg	libxi6	installed
+pkg	libxinerama1	installed
+pkg	libxkbcommon0	installed
+pkg	libxkbfile1	installed
+pkg	libxkbregistry0	installed
+pkg	libxml2-16	installed
+pkg	libxmlb2	installed
+pkg	libxml-parser-perl	installed
+pkg	libxmlsec1-1	installed
+pkg	libxmlsec1-openssl1	installed
+pkg	libxml-twig-perl	installed
+pkg	libxml-xpathengine-perl	installed
+pkg	libxmu6	installed
+pkg	libxmuu1	installed
+pkg	libxpm4	installed
+pkg	libxrandr2	installed
+pkg	libxrender1	installed
+pkg	libxres1	installed
+pkg	libxshmfence1	installed
+pkg	libxslt1.1	installed
+pkg	libxss1	installed
+pkg	libxt6t64	installed
+pkg	libxtables12	installed
+pkg	libxtst6	installed
+pkg	libxv1	installed
+pkg	libxxf86dga1	installed
+pkg	libxxf86vm1	installed
+pkg	libxxhash0	installed
+pkg	libyaml-0-2	installed
+pkg	libyaml-cpp0.8	installed
+pkg	libyelp-1-0	installed
+pkg	libyyjson0	installed
+pkg	libzstd1	installed
+pkg	linux-base	installed
+pkg	linux-firmware	installed
+pkg	linux-firmware-amd-graphics	installed
+pkg	linux-firmware-amd-misc	installed
+pkg	linux-firmware-broadcom-wireless	installed
+pkg	linux-firmware-intel-graphics	installed
+pkg	linux-firmware-intel-misc	installed
+pkg	linux-firmware-intel-wireless	installed
+pkg	linux-firmware-marvell-prestera	installed
+pkg	linux-firmware-marvell-wireless	installed
+pkg	linux-firmware-mediatek	installed
+pkg	linux-firmware-mellanox-spectrum	installed
+pkg	linux-firmware-misc	installed
+pkg	linux-firmware-netronome	installed
+pkg	linux-firmware-nvidia-graphics	installed
+pkg	linux-firmware-qlogic	installed
+pkg	linux-firmware-qualcomm-graphics	installed
+pkg	linux-firmware-qualcomm-misc	installed
+pkg	linux-firmware-qualcomm-wireless	installed
+pkg	linux-firmware-realtek	installed
+pkg	linux-generic-hwe-24.04	installed
+pkg	linux-generic-hwe-26.04	installed
+pkg	linux-headers-7.0.0-44	installed
+pkg	linux-headers-7.0.0-44-generic	installed
+pkg	linux-headers-generic-hwe-26.04	installed
+pkg	linux-image-7.0.0-44-generic	installed
+pkg	linux-image-generic-hwe-26.04	installed
+pkg	linux-image-unsigned-7.0.0-30-generic	installed
+pkg	linux-libc-dev	installed
+pkg	linux-main-modules-v4l2loopback-7.0.0-44-generic	installed
+pkg	linux-main-modules-zfs-7.0.0-30-generic	installed
+pkg	linux-main-modules-zfs-7.0.0-44-generic	installed
+pkg	linux-modules-7.0.0-30-generic	installed
+pkg	linux-modules-7.0.0-44-generic	installed
+pkg	linux-perf	installed
+pkg	linux-sound-base	installed
+pkg	linux-sysctl-defaults	installed
+pkg	linux-tools-7.0.0-44	installed
+pkg	linux-tools-7.0.0-44-generic	installed
+pkg	linux-tools-common	installed
+pkg	live-build	installed
+pkg	locales	installed
+pkg	localsearch	installed
+pkg	login	installed
+pkg	login.defs	installed
+pkg	logrotate	installed
+pkg	logsave	installed
+pkg	loupe	installed
+pkg	lsb-release	installed
+pkg	lshw	installed
+pkg	lsof	installed
+pkg	lto-disabled-list	installed
+pkg	luit	installed
+pkg	m17n-db	installed
+pkg	make	installed
+pkg	makedumpfile	installed
+pkg	man-db	installed
+pkg	manpages	installed
+pkg	manpages-dev	installed
+pkg	mawk	installed
+pkg	media-types	installed
+pkg	memtest86+	installed
+pkg	mesa-libgallium	installed
+pkg	mesa-vulkan-drivers	installed
+pkg	mobile-broadband-provider-info	installed
+pkg	modemmanager	installed
+pkg	mokutil	installed
+pkg	mount	installed
+pkg	mscompress	installed
+pkg	mtools	installed
+pkg	mtr-tiny	installed
+pkg	mutter-common	installed
+pkg	mutter-common-bin	installed
+pkg	nano	installed
+pkg	nautilus	installed
+pkg	nautilus-data	installed
+pkg	nautilus-sendto	installed
+pkg	ncurses-base	installed
+pkg	ncurses-bin	installed
+pkg	netbase	installed
+pkg	netcat-openbsd	installed
+pkg	netplan-generator	installed
+pkg	netplan.io	installed
+pkg	networkd-dispatcher	installed
+pkg	network-manager	installed
+pkg	network-manager-config-connectivity-ubuntu	installed
+pkg	network-manager-l10n	installed
+pkg	network-manager-openvpn	installed
+pkg	network-manager-openvpn-gnome	installed
+pkg	network-manager-pptp	installed
+pkg	network-manager-pptp-gnome	installed
+pkg	nftables	installed
+pkg	ninja-build	installed
+pkg	nm-connection-editor	installed
+pkg	node-abbrev	installed
+pkg	node-acorn	installed
+pkg	node-agent-base	installed
+pkg	node-ajv	installed
+pkg	node-ajv-keywords	installed
+pkg	node-ampproject-remapping	installed
+pkg	node-ansi-escapes	installed
+pkg	node-ansi-regex	installed
+pkg	node-ansi-styles	installed
+pkg	node-anymatch	installed
+pkg	node-aproba	installed
+pkg	node-archy	installed
+pkg	node-are-we-there-yet	installed
+pkg	node-argparse	installed
+pkg	node-arrify	installed
+pkg	node-assert	installed
+pkg	node-async	installed
+pkg	node-async-each	installed
+pkg	node-auto-bind	installed
+pkg	node-babel7	installed
+pkg	node-babel7-runtime	installed
+pkg	node-babel-helper-define-polyfill-provider	installed
+pkg	node-babel-plugin-add-module-exports	installed
+pkg	node-babel-plugin-lodash	installed
+pkg	node-babel-plugin-polyfill-corejs2	installed
+pkg	node-babel-plugin-polyfill-corejs3	installed
+pkg	node-babel-plugin-polyfill-regenerator	installed
+pkg	node-balanced-match	installed
+pkg	node-base	installed
+pkg	node-base64-js	installed
+pkg	node-binary-extensions	installed
+pkg	node-brace-expansion	installed
+pkg	node-braces	installed
+pkg	node-browserslist	installed
+pkg	node-builtins	installed
+pkg	node-cacache	installed
+pkg	node-cache-base	installed
+pkg	node-camelcase	installed
+pkg	node-caniuse-lite	installed
+pkg	node-chalk	installed
+pkg	node-chokidar	installed
+pkg	node-chownr	installed
+pkg	node-chrome-trace-event	installed
+pkg	node-ci-info	installed
+pkg	node-cjs-module-lexer	installed
+pkg	node-cli-boxes	installed
+pkg	node-cli-cursor	installed
+pkg	node-cli-table	installed
+pkg	node-cli-truncate	installed
+pkg	node-cliui	installed
+pkg	node-clone	installed
+pkg	node-clone-deep	installed
+pkg	node-collection-visit	installed
+pkg	node-color-convert	installed
+pkg	node-color-name	installed
+pkg	node-colors	installed
+pkg	node-columnify	installed
+pkg	node-commander	installed
+pkg	node-commondir	installed
+pkg	node-component-emitter	installed
+pkg	node-concat-stream	installed
+pkg	node-console-control-strings	installed
+pkg	node-convert-source-map	installed
+pkg	node-copy-concurrently	installed
+pkg	node-core-js	installed
+pkg	node-core-js-compat	installed
+pkg	node-core-js-pure	installed
+pkg	node-corepack	installed
+pkg	node-core-util-is	installed
+pkg	node-coveralls	installed
+pkg	node-css-loader	installed
+pkg	node-css-selector-tokenizer	installed
+pkg	node-data-uri-to-buffer	installed
+pkg	node-debbundle-es-to-primitive	installed
+pkg	node-debug	installed
+pkg	node-decamelize	installed
+pkg	node-decompress-response	installed
+pkg	node-deep-equal	installed
+pkg	node-deep-is	installed
+pkg	node-defaults	installed
+pkg	node-defined	installed
+pkg	node-define-properties	installed
+pkg	node-define-property	installed
+pkg	node-del	installed
+pkg	node-delegates	installed
+pkg	node-depd	installed
+pkg	node-diff	installed
+pkg	node-doctrine	installed
+pkg	node-electron-to-chromium	installed
+pkg	node-encoding	installed
+pkg	node-enhanced-resolve	installed
+pkg	node-envinfo	installed
+pkg	node-err-code	installed
+pkg	node-errno	installed
+pkg	node-error-ex	installed
+pkg	node-es6-error	installed
+pkg	node-es-abstract	installed
+pkg	node-escape-string-regexp	installed
+pkg	node-escodegen	installed
+pkg	node-eslint-scope	installed
+pkg	node-eslint-utils	installed
+pkg	node-eslint-visitor-keys	installed
+pkg	node-es-module-lexer	installed
+pkg	node-espree	installed
+pkg	node-esprima	installed
+pkg	node-esquery	installed
+pkg	node-esrecurse	installed
+pkg	node-estraverse	installed
+pkg	node-esutils	installed
+pkg	node-events	installed
+pkg	node-execa	installed
+pkg	node-fancy-log	installed
+pkg	node-fast-deep-equal	installed
+pkg	node-fast-levenshtein	installed
+pkg	node-fetch	installed
+pkg	node-file-entry-cache	installed
+pkg	node-fill-range	installed
+pkg	node-find-cache-dir	installed
+pkg	node-find-up	installed
+pkg	node-flat-cache	installed
+pkg	node-flatted	installed
+pkg	node-foreground-child	installed
+pkg	node-for-in	installed
+pkg	node-for-own	installed
+pkg	node-fs-readdir-recursive	installed
+pkg	node-fs-write-stream-atomic	installed
+pkg	node-functional-red-black-tree	installed
+pkg	node-function-bind	installed
+pkg	node-gauge	installed
+pkg	node-get-caller-file	installed
+pkg	node-get-stream	installed
+pkg	node-get-value	installed
+pkg	node-glob	installed
+pkg	node-globals	installed
+pkg	node-globby	installed
+pkg	node-glob-parent	installed
+pkg	node-got	installed
+pkg	node-graceful-fs	installed
+pkg	node-growl	installed
+pkg	node-gyp	installed
+pkg	node-has-flag	installed
+pkg	node-has-unicode	installed
+pkg	node-has-value	installed
+pkg	node-has-values	installed
+pkg	node-hosted-git-info	installed
+pkg	node-http-proxy-agent	installed
+pkg	node-https-proxy-agent	installed
+pkg	node-iconv-lite	installed
+pkg	node-icss-utils	installed
+pkg	node-ieee754	installed
+pkg	node-iferr	installed
+pkg	node-ignore	installed
+pkg	node-imurmurhash	installed
+pkg	node-indent-string	installed
+pkg	node-inherits	installed
+pkg	node-ini	installed
+pkg	node-interpret	installed
+pkg	node-ip	installed
+pkg	node-ip-regex	installed
+pkg	node-isarray	installed
+pkg	node-is-arrayish	installed
+pkg	node-is-binary-path	installed
+pkg	node-is-buffer	installed
+pkg	node-is-descriptor	installed
+pkg	node-isexe	installed
+pkg	node-is-extendable	installed
+pkg	node-is-extglob	installed
+pkg	node-is-glob	installed
+pkg	node-is-number	installed
+pkg	node-isobject	installed
+pkg	node-is-path-cwd	installed
+pkg	node-is-path-inside	installed
+pkg	node-is-plain-obj	installed
+pkg	node-is-plain-object	installed
+pkg	node-is-primitive	installed
+pkg	node-is-stream	installed
+pkg	node-istanbul	installed
+pkg	node-is-windows	installed
+pkg	node-jest-debbundle	installed
+pkg	node-jest-worker	installed
+pkg	nodejs	installed
+pkg	nodejs-doc	installed
+pkg	node-jsesc	installed
+pkg	node-json5	installed
+pkg	node-json-buffer	installed
+pkg	node-jsonify	installed
+pkg	node-jsonparse	installed
+pkg	node-json-parse-better-errors	installed
+pkg	node-json-schema	installed
+pkg	node-json-schema-traverse	installed
+pkg	node-json-stable-stringify	installed
+pkg	node-js-tokens	installed
+pkg	node-js-yaml	installed
+pkg	node-kind-of	installed
+pkg	node-lcov-parse	installed
+pkg	node-levn	installed
+pkg	node-llhttp	installed
+pkg	node-loader-runner	installed
+pkg	node-locate-path	installed
+pkg	node-lodash	installed
+pkg	node-lodash-packages	installed
+pkg	node-log-driver	installed
+pkg	node-long	installed
+pkg	node-lowercase-keys	installed
+pkg	node-lru-cache	installed
+pkg	node-make-dir	installed
+pkg	node-map-visit	installed
+pkg	node-memfs	installed
+pkg	node-memory-fs	installed
+pkg	node-merge-stream	installed
+pkg	node-micromatch	installed
+pkg	node-mime	installed
+pkg	node-mime-types	installed
+pkg	node-mimic-fn	installed
+pkg	node-mimic-response	installed
+pkg	node-minimatch	installed
+pkg	node-minimist	installed
+pkg	node-minipass	installed
+pkg	node-mixin-deep	installed
+pkg	node-mkdirp	installed
+pkg	node-move-concurrently	installed
+pkg	node-ms	installed
+pkg	node-mute-stream	installed
+pkg	node-n3	installed
+pkg	node-negotiator	installed
+pkg	node-neo-async	installed
+pkg	node-nopt	installed
+pkg	node-normalize-package-data	installed
+pkg	node-normalize-path	installed
+pkg	node-npm-bundled	installed
+pkg	node-npmlog	installed
+pkg	node-npm-package-arg	installed
+pkg	node-npm-run-path	installed
+pkg	node-object-assign	installed
+pkg	node-object-inspect	installed
+pkg	node-object-visit	installed
+pkg	node-once	installed
+pkg	node-opener	installed
+pkg	node-optimist	installed
+pkg	node-optionator	installed
+pkg	node-osenv	installed
+pkg	node-parse-json	installed
+pkg	node-pascalcase	installed
+pkg	node-path-dirname	installed
+pkg	node-path-exists	installed
+pkg	node-path-is-absolute	installed
+pkg	node-path-is-inside	installed
+pkg	node-path-scurry	installed
+pkg	node-path-type	installed
+pkg	node-p-cancelable	installed
+pkg	node-picocolors	installed
+pkg	node-pify	installed
+pkg	node-pkg-dir	installed
+pkg	node-p-limit	installed
+pkg	node-p-locate	installed
+pkg	node-p-map	installed
+pkg	node-postcss	installed
+pkg	node-postcss-modules-extract-imports	installed
+pkg	node-postcss-modules-values	installed
+pkg	node-postcss-value-parser	installed
+pkg	node-prelude-ls	installed
+pkg	node-process-nextick-args	installed
+pkg	node-progress	installed
+pkg	node-promise-inflight	installed
+pkg	node-promise-retry	installed
+pkg	node-promzard	installed
+pkg	node-prr	installed
+pkg	node-punycode	installed
+pkg	node-quick-lru	installed
+pkg	node-randombytes	installed
+pkg	node-re2	installed
+pkg	node-read	installed
+pkg	node-readable-stream	installed
+pkg	node-readdirp	installed
+pkg	node-read-package-json	installed
+pkg	node-read-pkg	installed
+pkg	node-rechoir	installed
+pkg	node-regenerate	installed
+pkg	node-regenerate-unicode-properties	installed
+pkg	node-regenerator-runtime	installed
+pkg	node-regenerator-transform	installed
+pkg	node-regexpp	installed
+pkg	node-regexpu-core	installed
+pkg	node-regjsgen	installed
+pkg	node-regjsparser	installed
+pkg	node-repeat-string	installed
+pkg	node-require-directory	installed
+pkg	node-require-from-string	installed
+pkg	node-resolve	installed
+pkg	node-resolve-cwd	installed
+pkg	node-resolve-from	installed
+pkg	node-restore-cursor	installed
+pkg	node-resumer	installed
+pkg	node-retry	installed
+pkg	node-rimraf	installed
+pkg	node-run-queue	installed
+pkg	node-safe-buffer	installed
+pkg	node-schema-utils	installed
+pkg	node-semver	installed
+pkg	node-serialize-javascript	installed
+pkg	node-set-blocking	installed
+pkg	node-set-immediate-shim	installed
+pkg	node-set-value	installed
+pkg	node-shebang-command	installed
+pkg	node-shebang-regex	installed
+pkg	node-shell-quote	installed
+pkg	node-signal-exit	installed
+pkg	node-slash	installed
+pkg	node-slice-ansi	installed
+pkg	node-source-list-map	installed
+pkg	node-source-map	installed
+pkg	node-source-map-support	installed
+pkg	node-spdx-correct	installed
+pkg	node-spdx-exceptions	installed
+pkg	node-spdx-expression-parse	installed
+pkg	node-spdx-license-ids	installed
+pkg	node-sprintf-js	installed
+pkg	node-ssri	installed
+pkg	node-stack-utils	installed
+pkg	node-string-decoder	installed
+pkg	node-string-width	installed
+pkg	node-strip-ansi	installed
+pkg	node-strip-bom	installed
+pkg	node-strip-eof	installed
+pkg	node-strip-json-comments	installed
+pkg	node-supports-color	installed
+pkg	node-tap	installed
+pkg	node-tapable	installed
+pkg	node-tape	installed
+pkg	node-tap-mocha-reporter	installed
+pkg	node-tap-parser	installed
+pkg	node-tar	installed
+pkg	node-terser	installed
+pkg	node-text-table	installed
+pkg	node-through	installed
+pkg	node-time-stamp	installed
+pkg	node-to-fast-properties	installed
+pkg	node-to-regex-range	installed
+pkg	node-tslib	installed
+pkg	node-type-check	installed
+pkg	node-typedarray	installed
+pkg	node-undici	installed
+pkg	node-unicode-canonical-property-names-ecmascript	installed
+pkg	node-unicode-match-property-ecmascript	installed
+pkg	node-unicode-match-property-value-ecmascript	installed
+pkg	node-unicode-property-aliases-ecmascript	installed
+pkg	node-union-value	installed
+pkg	node-unique-filename	installed
+pkg	node-unset-value	installed
+pkg	node-util	installed
+pkg	node-util-deprecate	installed
+pkg	node-uuid	installed
+pkg	node-v8-compile-cache	installed
+pkg	node-v8flags	installed
+pkg	node-validate-npm-package-license	installed
+pkg	node-validate-npm-package-name	installed
+pkg	node-watchpack	installed
+pkg	node-wcwidth.js	installed
+pkg	node-webassemblyjs	installed
+pkg	node-webpack-sources	installed
+pkg	node-which	installed
+pkg	node-wide-align	installed
+pkg	node-widest-line	installed
+pkg	node-wordwrap	installed
+pkg	node-wrap-ansi	installed
+pkg	node-wrappy	installed
+pkg	node-write	installed
+pkg	node-write-file-atomic	installed
+pkg	node-ws	installed
+pkg	node-xtend	installed
+pkg	node-y18n	installed
+pkg	node-yallist	installed
+pkg	node-yaml	installed
+pkg	node-yargs	installed
+pkg	node-yargs-parser	installed
+pkg	npm	installed
+pkg	ntfs-3g	installed
+pkg	numactl	installed
+pkg	obsidian	installed
+pkg	openprinting-ppds	installed
+pkg	openssh-client	installed
+pkg	openssl	installed
+pkg	openssl-provider-legacy	installed
+pkg	open-vm-tools	installed
+pkg	open-vm-tools-desktop	installed
+pkg	openvpn	installed
+pkg	orca	installed
+pkg	os-prober	installed
+pkg	p11-kit	installed
+pkg	p11-kit-modules	installed
+pkg	packagekit	installed
+pkg	papers	installed
+pkg	papers-common	installed
+pkg	papirus-colors	installed
+pkg	papirus-icon-theme	installed
+pkg	parted	installed
+pkg	passwd	installed
+pkg	patch	installed
+pkg	pci.ids	installed
+pkg	pciutils	installed
+pkg	pcmciautils	installed
+pkg	perl	installed
+pkg	perl-base	installed
+pkg	perl-modules-5.40	installed
+pkg	perl-openssl-defaults	installed
+pkg	pinentry-curses	installed
+pkg	pinentry-gnome3	installed
+pkg	pipewire	installed
+pkg	pipewire-alsa	installed
+pkg	pipewire-audio	installed
+pkg	pipewire-bin	installed
+pkg	pipewire-pulse	installed
+pkg	pkexec	installed
+pkg	pkgconf	installed
+pkg	pkgconf-bin	installed
+pkg	pkg-config	installed
+pkg	plymouth	installed
+pkg	plymouth-label	installed
+pkg	plymouth-theme-spinner	installed
+pkg	plymouth-theme-ubuntu-text	installed
+pkg	pnp.ids	installed
+pkg	policykit-desktop-privileges	installed
+pkg	polkitd	installed
+pkg	poppler-data	installed
+pkg	poppler-utils	installed
+pkg	powermgmt-base	installed
+pkg	power-profiles-daemon	installed
+pkg	ppp	installed
+pkg	pptp-linux	installed
+pkg	printer-driver-brlaser	installed
+pkg	printer-driver-c2esp	installed
+pkg	printer-driver-foo2zjs	installed
+pkg	printer-driver-foo2zjs-common	installed
+pkg	printer-driver-hpcups	installed
+pkg	printer-driver-m2300w	installed
+pkg	printer-driver-min12xxw	installed
+pkg	printer-driver-pnm2ppa	installed
+pkg	printer-driver-postscript-hp	installed
+pkg	printer-driver-ptouch	installed
+pkg	printer-driver-pxljr	installed
+pkg	printer-driver-sag-gdi	installed
+pkg	printer-driver-splix	installed
+pkg	procps	installed
+pkg	psmisc	installed
+pkg	ptyxis	installed
+pkg	publicsuffix	installed
+pkg	python3	installed
+pkg	python3.14	installed
+pkg	python3.14-dev	installed
+pkg	python3.14-gdbm	installed
+pkg	python3.14-minimal	installed
+pkg	python3.14-venv	installed
+pkg	python3-apport	installed
+pkg	python3-apt	installed
+pkg	python3-aptdaemon	installed
+pkg	python3-aptdaemon.gtk3widgets	installed
+pkg	python3-attr	installed
+pkg	python3-autocommand	installed
+pkg	python3-babel	installed
+pkg	python3-bcrypt	installed
+pkg	python3-blinker	installed
+pkg	python3-bpfcc	installed
+pkg	python3-brlapi	installed
+pkg	python3-cairo	installed
+pkg	python3-certifi	installed
+pkg	python3-cffi-backend	installed
+pkg	python3-chardet	installed
+pkg	python3-click	installed
+pkg	python3-commandnotfound	installed
+pkg	python3-configobj	installed
+pkg	python3-cryptography	installed
+pkg	python3-cups	installed
+pkg	python3-cupshelpers	installed
+pkg	python3-dasbus	installed
+pkg	python3-dbus	installed
+pkg	python3-debconf	installed
+pkg	python3-debian	installed
+pkg	python3-defer	installed
+pkg	python3-dev	installed
+pkg	python3-distro	installed
+pkg	python3-distro-info	installed
+pkg	python3-distupgrade	installed
+pkg	python3-gdbm	installed
+pkg	python3-gi	installed
+pkg	python3-httplib2	installed
+pkg	python3-ibus-1.0	installed
+pkg	python3-idna	installed
+pkg	python3-inflect	installed
+pkg	python3-jaraco.context	installed
+pkg	python3-jaraco.functools	installed
+pkg	python3-jaraco.text	installed
+pkg	python3-jinja2	installed
+pkg	python3-jsonpatch	installed
+pkg	python3-json-pointer	installed
+pkg	python3-jsonschema	installed
+pkg	python3-jsonschema-specifications	installed
+pkg	python3-jwt	installed
+pkg	python3-launchpadlib	installed
+pkg	python3-lazr.restfulclient	installed
+pkg	python3-lazr.uri	installed
+pkg	python3-linkify-it	installed
+pkg	python3-louis	installed
+pkg	python3-markdown-it	installed
+pkg	python3-markupsafe	installed
+pkg	python3-mdurl	installed
+pkg	python3-minimal	installed
+pkg	python3-more-itertools	installed
+pkg	python3-netaddr	installed
+pkg	python3-netplan	installed
+pkg	python3-oauthlib	installed
+pkg	python3-olefile	installed
+pkg	python3-packaging	installed
+pkg	python3-passlib	installed
+pkg	python3-pexpect	installed
+pkg	python3-pil	installed
+pkg	python3-pip	installed
+pkg	python3-pip-whl	installed
+pkg	python3-pkg-resources	installed
+pkg	python3-problem-report	installed
+pkg	python3-psutil	installed
+pkg	python3-ptyprocess	installed
+pkg	python3-pygments	installed
+pkg	python3-pyparsing	installed
+pkg	python3-referencing	installed
+pkg	python3-requests	installed
+pkg	python3-rich	installed
+pkg	python3-rpds-py	installed
+pkg	python3-serial	installed
+pkg	python3-setproctitle	installed
+pkg	python3-setuptools	installed
+pkg	python3-setuptools-whl	installed
+pkg	python3-software-properties	installed
+pkg	python3-speechd	installed
+pkg	python3-sss	installed
+pkg	python3-systemd	installed
+pkg	python3-typeguard	installed
+pkg	python3-typing-extensions	installed
+pkg	python3-uc-micro	installed
+pkg	python3-update-manager	installed
+pkg	python3-urllib3	installed
+pkg	python3-venv	installed
+pkg	python3-wadllib	installed
+pkg	python3-wheel	installed
+pkg	python3-xdg	installed
+pkg	python3-xkit	installed
+pkg	python3-yaml	installed
+pkg	python3-zipp	installed
+pkg	python-apt-common	installed
+pkg	python-babel-localedata	installed
+pkg	readline-common	installed
+pkg	resources	installed
+pkg	rfkill	installed
+pkg	rime-data-bopomofo	installed
+pkg	rime-data-cangjie5	installed
+pkg	rime-data-luna-pinyin	installed
+pkg	rime-data-stroke	installed
+pkg	rime-data-terra-pinyin	installed
+pkg	rime-essay	installed
+pkg	rime-prelude	installed
+pkg	ripgrep	installed
+pkg	rpcsvc-proto	installed
+pkg	rsync	installed
+pkg	rsyslog	installed
+pkg	rtkit	installed
+pkg	rust-coreutils	installed
+pkg	rygel	installed
+pkg	samba-libs	installed
+pkg	sane-airscan	installed
+pkg	sane-utils	installed
+pkg	sbsigntool	installed
+pkg	screen	installed
+pkg	seahorse	installed
+pkg	secureboot-db	installed
+pkg	sed	installed
+pkg	sensible-utils	installed
+pkg	sgml-base	installed
+pkg	sgml-data	installed
+pkg	shared-mime-info	installed
+pkg	shim-signed	installed
+pkg	snapd	installed
+pkg	socat	installed
+pkg	software-properties-common	installed
+pkg	sound-icons	installed
+pkg	sound-theme-freedesktop	installed
+pkg	speech-dispatcher	installed
+pkg	speech-dispatcher-audio-plugins	installed
+pkg	speech-dispatcher-espeak-ng	installed
+pkg	spice-vdagent	installed
+pkg	squashfs-tools	installed
+pkg	ssl-cert	installed
+pkg	sssd	installed
+pkg	sssd-ad	installed
+pkg	sssd-ad-common	installed
+pkg	sssd-common	installed
+pkg	sssd-ipa	installed
+pkg	sssd-krb5	installed
+pkg	sssd-krb5-common	installed
+pkg	sssd-ldap	installed
+pkg	sssd-proxy	installed
+pkg	strace	installed
+pkg	sudo	installed
+pkg	sudo-common	installed
+pkg	sudo-rs	installed
+pkg	switcheroo-control	installed
+pkg	syslinux-common	installed
+pkg	syslinux-efi	installed
+pkg	sysprof	installed
+pkg	sysstat	installed
+pkg	system-config-printer-common	installed
+pkg	system-config-printer-udev	installed
+pkg	systemd	installed
+pkg	systemd-cryptsetup	installed
+pkg	systemd-hwe-hwdb	installed
+pkg	systemd-oomd	installed
+pkg	systemd-resolved	installed
+pkg	systemd-sysv	installed
+pkg	sysvinit-utils	installed
+pkg	tar	installed
+pkg	tcl	installed
+pkg	tcl8.6	installed
+pkg	tcpdump	installed
+pkg	tecla	installed
+pkg	telnet	installed
+pkg	terser	installed
+pkg	thermald	installed
+pkg	time	installed
+pkg	tinysparql	installed
+pkg	tnftp	installed
+pkg	tpm-udev	installed
+pkg	trace-cmd	installed
+pkg	tzdata	installed
+pkg	ubuntu-advantage-desktop-daemon	installed
+pkg	ubuntu-desktop-minimal	installed
+pkg	ubuntu-docs	installed
+pkg	ubuntu-drivers-common	installed
+pkg	ubuntu-insights	installed
+pkg	ubuntu-kernel-accessories	installed
+pkg	ubuntu-keyring	installed
+pkg	ubuntu-minimal	installed
+pkg	ubuntu-pro-client	installed
+pkg	ubuntu-pro-client-l10n	installed
+pkg	ubuntu-release-upgrader-core	installed
+pkg	ubuntu-release-upgrader-gtk	installed
+pkg	ubuntu-report	installed
+pkg	ubuntu-session	installed
+pkg	ubuntu-settings	installed
+pkg	ubuntu-standard	installed
+pkg	ubuntu-wallpapers	installed
+pkg	ubuntu-wallpapers-resolute	installed
+pkg	ucf	installed
+pkg	udev	installed
+pkg	udisks2	installed
+pkg	ufw	installed
+pkg	unattended-upgrades	installed
+pkg	unzip	installed
+pkg	update-inetd	installed
+pkg	update-manager	installed
+pkg	update-manager-core	installed
+pkg	update-notifier	installed
+pkg	update-notifier-common	installed
+pkg	upower	installed
+pkg	usb.ids	installed
+pkg	usb-modeswitch	installed
+pkg	usb-modeswitch-data	installed
+pkg	usbmuxd	installed
+pkg	usbutils	installed
+pkg	user-session-migration	installed
+pkg	util-linux	installed
+pkg	uuid-runtime	installed
+pkg	vim	installed
+pkg	vim-common	installed
+pkg	vim-runtime	installed
+pkg	vim-tiny	installed
+pkg	wabt	installed
+pkg	wamerican	installed
+pkg	wbritish	installed
+pkg	webpack	installed
+pkg	webp-pixbuf-loader	installed
+pkg	wget	installed
+pkg	whiptail	installed
+pkg	whoopsie	installed
+pkg	whoopsie-preferences	installed
+pkg	wireless-regdb	installed
+pkg	wireplumber	installed
+pkg	wpasupplicant	installed
+pkg	wsdd	installed
+pkg	x11-common	installed
+pkg	x11-utils	installed
+pkg	x11-xkb-utils	installed
+pkg	x11-xserver-utils	installed
+pkg	xauth	installed
+pkg	xbrlapi	installed
+pkg	xcursor-themes	installed
+pkg	xdg-dbus-proxy	installed
+pkg	xdg-desktop-portal	installed
+pkg	xdg-desktop-portal-gnome	installed
+pkg	xdg-desktop-portal-gtk	installed
+pkg	xdg-terminal-exec	installed
+pkg	xdg-user-dirs	installed
+pkg	xdg-user-dirs-gtk	installed
+pkg	xdg-utils	installed
+pkg	xfonts-base	installed
+pkg	xfonts-encodings	installed
+pkg	xfonts-utils	installed
+pkg	xkb-data	installed
+pkg	xml-core	installed
+pkg	xorriso	installed
+pkg	xserver-common	installed
+pkg	xwayland	installed
+pkg	xxd	installed
+pkg	xz-utils	installed
+pkg	yaru-theme-gnome-shell	installed
+pkg	yaru-theme-gtk	installed
+pkg	yaru-theme-icon	installed
+pkg	yaru-theme-sound	installed
+pkg	yelp	installed
+pkg	yelp-xsl	installed
+pkg	zenity	installed
+pkg	zenity-common	installed
+pkg	zerofree	installed
+pkg	zip	installed
+pkg	zlib1g	installed
+pkg	zlib1g-dev	installed
+pkg	zstd	installed
+gset	org.gnome.desktop.interface accent-color	'purple'
+gset	org.gnome.desktop.interface avatar-directories	@as []
+gset	org.gnome.desktop.interface can-change-accels	false
+gset	org.gnome.desktop.interface clock-format	'24h'
+gset	org.gnome.desktop.interface clock-show-date	true
+gset	org.gnome.desktop.interface clock-show-seconds	false
+gset	org.gnome.desktop.interface clock-show-weekday	false
+gset	org.gnome.desktop.interface color-scheme	'prefer-dark'
+gset	org.gnome.desktop.interface cursor-blink	true
+gset	org.gnome.desktop.interface cursor-blink-time	1200
+gset	org.gnome.desktop.interface cursor-blink-timeout	10
+gset	org.gnome.desktop.interface cursor-size	24
+gset	org.gnome.desktop.interface cursor-theme	'Yaru'
+gset	org.gnome.desktop.interface document-font-name	'Inter 11'
+gset	org.gnome.desktop.interface enable-animations	true
+gset	org.gnome.desktop.interface enable-hot-corners	false
+gset	org.gnome.desktop.interface font-antialiasing	'rgba'
+gset	org.gnome.desktop.interface font-hinting	'slight'
+gset	org.gnome.desktop.interface font-name	'Inter 11'
+gset	org.gnome.desktop.interface font-rendering	'automatic'
+gset	org.gnome.desktop.interface font-rgba-order	'rgb'
+gset	org.gnome.desktop.interface gtk-color-palette	'black:white:gray50:red:purple:blue:light blue:green:yellow:orange:lavender:brown:goldenrod4:dodger blue:pink:light green:gray10:gray30:gray75:gray90'
+gset	org.gnome.desktop.interface gtk-color-scheme	''
+gset	org.gnome.desktop.interface gtk-enable-primary-paste	false
+gset	org.gnome.desktop.interface gtk-im-module	''
+gset	org.gnome.desktop.interface gtk-im-preedit-style	'callback'
+gset	org.gnome.desktop.interface gtk-im-status-style	'callback'
+gset	org.gnome.desktop.interface gtk-key-theme	'Default'
+gset	org.gnome.desktop.interface gtk-theme	'Yaru'
+gset	org.gnome.desktop.interface gtk-timeout-initial	200
+gset	org.gnome.desktop.interface gtk-timeout-repeat	20
+gset	org.gnome.desktop.interface icon-theme	'Papirus-Dark'
+gset	org.gnome.desktop.interface locate-pointer	false
+gset	org.gnome.desktop.interface menubar-accel	'F10'
+gset	org.gnome.desktop.interface menubar-detachable	false
+gset	org.gnome.desktop.interface menus-have-tearoff	false
+gset	org.gnome.desktop.interface monospace-font-name	'JetBrains Mono 11'
+gset	org.gnome.desktop.interface overlay-scrolling	true
+gset	org.gnome.desktop.interface scaling-factor	uint32 0
+gset	org.gnome.desktop.interface show-battery-percentage	false
+gset	org.gnome.desktop.interface text-scaling-factor	1.0
+gset	org.gnome.desktop.interface toolbar-detachable	false
+gset	org.gnome.desktop.interface toolbar-icons-size	'large'
+gset	org.gnome.desktop.interface toolbar-style	'both-horiz'
+gset	org.gnome.desktop.interface toolkit-accessibility	false
+gset	org.gnome.desktop.background color-shading-type	'solid'
+gset	org.gnome.desktop.background picture-opacity	100
+gset	org.gnome.desktop.background picture-options	'zoom'
+gset	org.gnome.desktop.background picture-uri	'file:///home/dsyfb437/.local/share/backgrounds/azusa/mascot-light-2880x1800.jpg'
+gset	org.gnome.desktop.background picture-uri-dark	'file:///home/dsyfb437/.local/share/backgrounds/azusa/mascot-dark-2880x1800.jpg'
+gset	org.gnome.desktop.background primary-color	'#023c88'
+gset	org.gnome.desktop.background secondary-color	'#5789ca'
+gset	org.gnome.desktop.background show-desktop-icons	true
+gset	org.gnome.desktop.wm.preferences action-double-click-titlebar	'toggle-maximize'
+gset	org.gnome.desktop.wm.preferences action-middle-click-titlebar	'lower'
+gset	org.gnome.desktop.wm.preferences action-right-click-titlebar	'menu'
+gset	org.gnome.desktop.wm.preferences audible-bell	true
+gset	org.gnome.desktop.wm.preferences auto-raise	false
+gset	org.gnome.desktop.wm.preferences auto-raise-delay	500
+gset	org.gnome.desktop.wm.preferences button-layout	':minimize,maximize,close'
+gset	org.gnome.desktop.wm.preferences disable-workarounds	false
+gset	org.gnome.desktop.wm.preferences focus-mode	'click'
+gset	org.gnome.desktop.wm.preferences focus-new-windows	'smart'
+gset	org.gnome.desktop.wm.preferences mouse-button-modifier	'<Super>'
+gset	org.gnome.desktop.wm.preferences num-workspaces	4
+gset	org.gnome.desktop.wm.preferences raise-on-click	true
+gset	org.gnome.desktop.wm.preferences resize-with-right-button	false
+gset	org.gnome.desktop.wm.preferences theme	'Adwaita'
+gset	org.gnome.desktop.wm.preferences titlebar-font	'Inter Bold 11'
+gset	org.gnome.desktop.wm.preferences titlebar-uses-system-font	false
+gset	org.gnome.desktop.wm.preferences visual-bell	false
+gset	org.gnome.desktop.wm.preferences visual-bell-type	'fullscreen-flash'
+gset	org.gnome.desktop.wm.preferences workspace-names	@as []
+gset	org.gnome.Ptyxis audible-bell	true
+gset	org.gnome.Ptyxis cursor-blink-mode	'system'
+gset	org.gnome.Ptyxis cursor-shape	'block'
+gset	org.gnome.Ptyxis default-columns	uint32 80
+gset	org.gnome.Ptyxis default-profile-uuid	'7152f2a583f538da55fa90516b00811c'
+gset	org.gnome.Ptyxis default-rows	uint32 24
+gset	org.gnome.Ptyxis disable-padding	false
+gset	org.gnome.Ptyxis enable-a11y	true
+gset	org.gnome.Ptyxis enable-zoom-scroll-ctrl	true
+gset	org.gnome.Ptyxis font-name	'JetBrains Mono 11'
+gset	org.gnome.Ptyxis ignore-osc-title	false
+gset	org.gnome.Ptyxis inhibit-logout	true
+gset	org.gnome.Ptyxis interface-style	'dark'
+gset	org.gnome.Ptyxis new-tab-position	'last'
+gset	org.gnome.Ptyxis profile-uuids	['7152f2a583f538da55fa90516b00811c']
+gset	org.gnome.Ptyxis prompt-on-close	true
+gset	org.gnome.Ptyxis restore-session	true
+gset	org.gnome.Ptyxis restore-window-size	true
+gset	org.gnome.Ptyxis scrollbar-policy	'system'
+gset	org.gnome.Ptyxis tab-middle-click	'close'
+gset	org.gnome.Ptyxis text-blink-mode	'always'
+gset	org.gnome.Ptyxis toast-on-copy-clipboard	true
+gset	org.gnome.Ptyxis use-system-font	false
+gset	org.gnome.Ptyxis visual-bell	true
+gset	org.gnome.Ptyxis visual-process-leader	true
+gset	org.gnome.Ptyxis window-size	(uint32 141, uint32 30)
+gset	org.gnome.Ptyxis word-char-exceptions	@ms nothing
+gset	ptyxis-profile backspace-binding	'ascii-delete'
+gset	ptyxis-profile bold-is-bright	false
+gset	ptyxis-profile cell-height-scale	1.0
+gset	ptyxis-profile cell-width-scale	1.0
+gset	ptyxis-profile cjk-ambiguous-width	'narrow'
+gset	ptyxis-profile custom-command	''
+gset	ptyxis-profile custom-links	[('(?i)(Closes|Helps|Mitigates|RFP|ITP): ?#?(\\d+)', 'https://bugs.debian.org/$2'), ('(?i)LP:? ?#?(\\d+)', 'https://launchpad.net/bugs/$1')]
+gset	ptyxis-profile default-container	'session'
+gset	ptyxis-profile delete-binding	'delete-sequence'
+gset	ptyxis-profile exit-action	'close'
+gset	ptyxis-profile label	''
+gset	ptyxis-profile limit-scrollback	true
+gset	ptyxis-profile login-shell	false
+gset	ptyxis-profile opacity	1.0
+gset	ptyxis-profile palette	'azusa'
+gset	ptyxis-profile preserve-container	'always'
+gset	ptyxis-profile preserve-directory	'safe'
+gset	ptyxis-profile scroll-on-keystroke	true
+gset	ptyxis-profile scroll-on-output	false
+gset	ptyxis-profile scrollback-lines	10000
+gset	ptyxis-profile use-custom-command	false
+gset	ptyxis-profile use-proxy	true
 file	/etc/os-release	ab0f3d2f6d181f68
 file	/etc/lsb-release	00973a5ea5d2be86
 file	/etc/issue	ce87936abae430f2
 file	/etc/issue.net	ce87936abae430f2
-grubcolor	GRUB_COLOR_NORMAL="light-gray/#181430"
-grubcolor	GRUB_COLOR_HIGHLIGHT="#ece8f6/#b296cc"
+grubcolor	GRUB_COLOR_NORMAL	"light-gray/#181430"
+grubcolor	GRUB_COLOR_HIGHLIGHT	"#ece8f6/#b296cc"
 bin	azusa-abstract	present
 bin	azusa-apply	present
+bin	azusa-diff	present
 bin	azusa-fetch	present
+bin	azusa-icons	present
 bin	azusa-logo	present
 bin	azusa-mascot	present
 bin	azusa-palette	present
+bin	azusa-verify	present
 bin	azusa-wallpaper	present
-wallpaper	abstract-dusk-2880x1800.jpg	present
-wallpaper	abstract-veil-2880x1800.jpg	present
-wallpaper	mascot-dark-2880x1800.jpg	present
-wallpaper	mascot-light-2880x1800.jpg	present
-user-wallpaper	mascot-dark-2880x1800.jpg	present
-user-wallpaper	mascot-light-2880x1800.jpg	present
+wallpaper-user	mascot-dark-2880x1800.jpg	present
+wallpaper-user	mascot-light-2880x1800.jpg	present
 file	ptyxis-palette	5f90990c7e164b5f
 file	kitty-config	485412b0dac29c55
 font	Inter	Inter
 font	JetBrains Mono	JetBrains Mono
 font	Noto Sans CJK SC	Noto Sans CJK SC
-icon	folder-color	#5d399b
+icon	folder-color	#7e57c2
