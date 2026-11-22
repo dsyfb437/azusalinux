@@ -134,7 +134,7 @@ sudo ./bin/azusa-apply --grub --apply  # GRUB 配色 + update-grub
 sudo apt install fonts-inter fastfetch papirus-icon-theme
 
 # 2. 用户级：终端配色、字体、强调色、壁纸、图标主题（不需要 sudo）
-./bin/azusa-mascot            # 生成壁纸
+./bin/azusa-mascot
 python3 bin/azusa-apply --all --apply
 
 # 3. 系统级：文件夹染色 + GRUB 配色（需要 sudo）

@@ -33,7 +33,7 @@ sudo ./azusa-setup --apply
 ## 3. 验收
 
 ```bash
-azusa-verify
+./bin/azusa-verify
 ```
 
 **期望：0 项失败。** 如果有失败项，把输出贴回来——那就是流程缺的东西。

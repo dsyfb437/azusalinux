@@ -7,6 +7,15 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PREFIX="${PREFIX:-/usr/local}"
+
+# 装到 /usr/local 必须有 root；早点说清楚，别让人看到 install 的报错才反应过来
+if [ "$PREFIX" = "/usr/local" ] && [ "$(id -u)" -ne 0 ]; then
+    echo "install.sh: 装到 /usr/local 需要 root" >&2
+    echo "  sudo ./install.sh" >&2
+    echo "或者装到用户目录（确保 ~/.local/bin 在 PATH）:" >&2
+    echo "  PREFIX=\$HOME/.local ./install.sh" >&2
+    exit 1
+fi
 SHARE="$PREFIX/share/azusalinux"
 
 install -d "$PREFIX/bin" "$SHARE"
