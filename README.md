@@ -106,6 +106,40 @@ sudo ./bin/azusa-apply --grub --apply  # GRUB 配色 + update-grub
 软件靠它判断怎么对待你。写对了，`lsb_release -a`、系统设置、neofetch
 就都认你是 AzusaLinux；写错了，一堆软件会退回 Ubuntu 分支。
 
+
+## 镜像构建（mkosi）
+
+```bash
+sudo apt install mkosi mmdebstrap
+sudo mkosi --directory iso-mkosi -m https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ \
+    --root-password azusa -f build
+```
+
+产物 `iso-mkosi/azusalinux_0.4.raw`：GPT + ESP 512M + root 1.6G，UEFI + GRUB。
+`mkosi.extra/` 里的文件会覆盖进镜像根目录（os-release、motd、skel、壁纸、自检服务）。
+
+**验证方式不是看文件，而是真的启动一次**：
+
+```bash
+qemu-system-x86_64 -machine q35 -m 2048 \
+  -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE_4M.fd \
+  -drive if=pflash,format=raw,file=vars.fd \
+  -drive file=azusalinux_0.4.raw,format=raw,if=virtio \
+  -display none -serial file:serial.log
+```
+
+镜像内的 `azusa-selftest.service` 会打印 os-release / uname / whoami 到串口，然后关机。
+这一步抓出过 `StandardOutput=ttyS0` 的语法错误——看文件是发现不了的。
+
+### 层级
+
+| 层级 | 判据 | 状态 |
+|---|---|---|
+| L0 | 手工调好一台机器 | ✅ |
+| L0.75 | 脚本 + 状态差分验证 | ✅ |
+| L0.9 | 从清单构建、可引导、启动自检通过 | ✅ |
+| L1 | 从 ISO 安装到硬盘（有安装器） | ❌ |
+
 ## 相关项目
 
 - [zh-env](../zh-env) —— 中文环境自检工具，以后可以作为可选包进 `defaults/`
