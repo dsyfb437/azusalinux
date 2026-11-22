@@ -48,7 +48,7 @@ def main() -> int:
     f_mono = load_font(15)
 
     d.text((40, 32), f"{pal['name']} 色板", font=f_title, fill=hex_to_rgb(pal["dark"]["text"]))
-    d.text((40, 70), "由 8 张角色立绘统计得出", font=f_body,
+    d.text((40, 70), "由 8 张参考立绘统计得出", font=f_body,
            fill=hex_to_rgb(pal["dark"]["muted"]))
 
     x0 = 40
