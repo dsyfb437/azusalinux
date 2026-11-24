@@ -6,21 +6,25 @@
 
 ## 构建
 
-在 Linux 环境安装 `build-essential`、`debhelper`、`xorriso`、`dpkg-dev`、
-`python3-pil`、`python3-yaml`。建议使用 `git archive` 导出的源码，避免 CRLF 进入脚本。
-先构建 deb，并准备已校验的官方 Ubuntu 26.04.1 Desktop amd64 ISO：
+在独立的 Ubuntu 26.04 amd64 构建环境中安装 `build-essential`、`debhelper`、`xorriso`、
+`dpkg-dev`、`python3-pil`、`python3-yaml`。从指定 Git 提交用 `git archive` 导出源码，
+避免本地改动和 CRLF 进入构建。先从 Ubuntu 发布目录下载官方 26.04.1 Desktop amd64 镜像和
+`SHA256SUMS`、`SHA256SUMS.gpg`，验证签名后再核对镜像的 SHA256。
+官方签名密钥和验证方法见 [Ubuntu 镜像校验指南](https://ubuntu.com/tutorials/how-to-verify-ubuntu)。
 
 ```bash
 dpkg-buildpackage -b -us -uc
 SRC_ISO=/path/to/ubuntu-26.04.1-desktop-amd64.iso \
 DEBS=/path/to/azusa-debs \
-SOURCE_REVISION="$(git rev-parse HEAD)" \
-OUT=/path/to/azusalinux-0.1.1-amd64.iso \
+SOURCE_REVISION="<已导出源码的完整 Git 提交 SHA>" \
+OUT=/path/to/azusalinux-amd64.iso \
 bash iso-remaster/build.sh all
 ```
 
 `DEBS` 必须包含 `azusa-tools`、`azusa-artwork`、`azusa-settings`、`azusa-desktop`、
 `azusa-icons`、`azusa-release` 六个同版本包。每个包只能出现一份。
+制作与已发布软件包同版本的镜像时，用已签名 Azusa 软件源中的原始 deb 作为 `DEBS` 输入，
+使镜像与软件源交付相同的包文件。接入方式见[软件更新指南](updates.md)。
 构建器通过 deb 内部的 Package/Architecture 字段校验；缺包、重复包、损坏包和
 不支持的架构会使构建失败。输出路径不得与输入镜像相同。
 
@@ -35,9 +39,9 @@ bash iso-remaster/build.sh all
 1. 把镜像中的 deb 复制到目标系统。
 2. 在目标系统更新 APT 索引。
 3. 在目标系统内部的 shell 展开 `/root/azusa-debs/azusa-*.deb`，一次安装所有本地包。
-4. 由 `azusa-release` 包安装系统身份和登录横幅，并用 dpkg-divert 保留 Ubuntu 原件。
-5. 执行 `update-grub`，使已安装系统的菜单使用新身份。
-6. 清理临时 deb；旧版身份脚本不再注入或执行。
+4. 写入 Azusa 软件源配置和配套公钥，使用 `Signed-By` 限定公钥的用途。
+5. 由 `azusa-release` 包安装系统身份和登录横幅，并用 dpkg-divert 保留 Ubuntu 原件。
+6. 执行 `update-grub`，使已安装系统的菜单使用新身份，再清理临时 deb。
 
 必须在目标系统内部展开通配符：安装器的 `/root` 与目标系统的 `/root` 是不同目录。
 安装命令必须包含完整包集，避免因遗漏依赖而失败。
