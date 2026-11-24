@@ -1,0 +1,20 @@
+name: Validate packages and ISO tooling
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Install build dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential debhelper dpkg-dev python3-pil python3-yaml xorriso
+      - name: Run ISO regression tests
+        run: /usr/bin/python3 -m unittest discover -s tests -v
+      - name: Build and validate the release packages
+        run: |
+          export PATH=/usr/bin:/bin:$PATH
+          dpkg-buildpackage -b -us -uc
+          bash iso-remaster/check-debs.sh ..

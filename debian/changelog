@@ -1,3 +1,11 @@
+azusalinux (0.1.1) resolute; urgency=medium
+
+  * Fix unattended installation of the complete local package set.
+  * Add package-managed release identity protected with dpkg diversions.
+  * Validate ISO builds and provide installation and upgrade acceptance tests.
+
+ -- azusa <dsyfb437@users.noreply.github.com>  Tue, 24 Nov 2026 14:30:00 +0800
+
 azusalinux (0.1.0) resolute; urgency=medium
 
   * Initial packaging: azusa-tools, azusa-artwork.

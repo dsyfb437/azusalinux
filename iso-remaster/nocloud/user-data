@@ -14,5 +14,6 @@ autoinstall:
   late-commands:
     - cp -r /cdrom/azusa-debs /target/root/azusa-debs
     - curtin in-target -- apt-get update
-    - curtin in-target -- apt-get install -y /root/azusa-debs/azusa-tools_0.1.0_all.deb /root/azusa-debs/azusa-artwork_0.1.0_all.deb /root/azusa-debs/azusa-settings_0.1.0_all.deb /root/azusa-debs/azusa-desktop_0.1.0_all.deb
+    - curtin in-target -- sh -ec 'apt-get install -y /root/azusa-debs/azusa-*.deb'
+    - curtin in-target -- update-grub
     - curtin in-target -- rm -rf /root/azusa-debs

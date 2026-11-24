@@ -1,0 +1,7 @@
+*.sh text eol=lf
+debian/** text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+azusa-setup text eol=lf
+bin/* text eol=lf
+iso-remaster/nocloud/* text eol=lf

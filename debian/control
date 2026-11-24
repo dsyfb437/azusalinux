@@ -31,7 +31,7 @@ Description: AzusaLinux desktop defaults
 
 Package: azusa-desktop
 Architecture: all
-Depends: ${misc:Depends}, azusa-tools, azusa-artwork, azusa-settings, fastfetch
+Depends: ${misc:Depends}, azusa-release (= ${binary:Version}), azusa-tools, azusa-artwork, azusa-settings, fastfetch
 Description: AzusaLinux desktop (metapackage)
  Installs the AzusaLinux tools, artwork and desktop defaults on Ubuntu.
 
@@ -42,3 +42,11 @@ Description: Azusa folder colours for Papirus
  An icon theme inheriting Papirus-Dark that overrides only the folder icons
  with Papirus' built-in violet variants, so folder colours survive upgrades
  of papirus-icon-theme (unlike running papirus-folders over the system theme).
+
+Package: azusa-release
+Architecture: all
+Depends: ${misc:Depends}, base-files
+Description: AzusaLinux release identity
+ Package-managed operating system identity and login banners. Package-specific
+ dpkg diversions preserve the Ubuntu originals and protect the Azusa identity
+ during base-files upgrades; removing the package restores the vendor files.

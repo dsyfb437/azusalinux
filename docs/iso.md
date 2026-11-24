@@ -1,115 +1,76 @@
 # ISO：官方镜像 + 自动安装
 
-## 思路
-
-不做「从零构建 rootfs」，而是**重打包官方 Ubuntu ISO**，在里面塞两样东西：
-
-1. `/nocloud/user-data` —— autoinstall 配置（主机名、用户、late-commands）
-2. `/azusa-debs/` —— 我们的四个 deb
-
-启动参数追加 `autoinstall ds=nocloud;s=/cdrom/nocloud/`，安装器就会无交互装完系统，
-最后在 `late-commands` 里 `apt install` 我们的包。
-
-好处：**用的是官方安装器和官方包仓库**，不是自制 install 逻辑。
+当前方案使用官方 Ubuntu Desktop ISO，加入 Azusa deb 和 NoCloud 配置，
+通过 xorriso 的 `-boot_image any replay` 保留原镜像的引导结构。
+`iso/` 和 `iso-mkosi/` 是早期方案，当前入口是 `iso-remaster/build.sh`。
 
 ## 构建
 
+在 Linux 环境安装 `build-essential`、`debhelper`、`xorriso`、`dpkg-dev`、
+`python3-pil`、`python3-yaml`。建议使用 `git archive` 导出的源码，避免 CRLF 进入脚本。
+先构建 deb，并准备已校验的官方 Ubuntu 26.04.1 Desktop amd64 ISO：
+
 ```bash
-# 1. 下载官方 ISO（6.2G）并校验
-curl -O https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/26.04.1/ubuntu-26.04.1-desktop-amd64.iso
-sha256sum -c  # 对比 SHA256SUMS
-
-# 2. 解包 → 注入 → 重打包
-cd iso-remaster
-SRC_ISO=.../ubuntu-26.04.1-desktop-amd64.iso DEBS=/tmp/azusa-debs ./build.sh all
+dpkg-buildpackage -b -us -uc
+SRC_ISO=/path/to/ubuntu-26.04.1-desktop-amd64.iso \
+DEBS=/path/to/azusa-debs \
+SOURCE_REVISION="$(git rev-parse HEAD)" \
+OUT=/path/to/azusalinux-0.1.1-amd64.iso \
+bash iso-remaster/build.sh all
 ```
 
-产物 `build/azusalinux-0.1-amd64.iso`，卷标 `AZUSALINUX`。
+`DEBS` 必须包含 `azusa-tools`、`azusa-artwork`、`azusa-settings`、`azusa-desktop`、
+`azusa-icons`、`azusa-release` 六个同版本包。每个包只能出现一份。
+构建器通过 deb 内部的 Package/Architecture 字段校验；缺包、重复包、损坏包和
+不支持的架构会使构建失败。输出路径不得与输入镜像相同。
 
-## 关键实现点
+`/azusa-build.json` 记录源码修订、输入镜像与各包 SHA256。0.1.1 本次实际输入是
+此前的本地修复镜像，输入链见验证记录和发布附件 `BUILD-MANIFEST.json`。
 
-- **El Torito 参数**从原 ISO 反向导出：`xorriso -report_el_torito as_mkisofs`，
-  重打包时原样使用，保证 BIOS + EFI 双启动都能引导。
-- 该参数是多行、带引号的 shell 片段，**必须先合并成一行再 eval**，
-  否则每一行会被当成独立命令。
-- 只往 ISO 里**加文件**，不动 `casper/filesystem.squashfs`，所以 `md5sum.txt` 仍然有效。
-- `nocloud` 的两个文件要**分别 cp**，用一条 cp 传两个源时曾出现只拷进去一个。
+也可以分步运行 `extract`、`prepare`、`pack`。重复 `prepare` 会清理注入目录中的旧 deb，
+逐条补齐启动项参数，并在打包时重新生成文件校验清单。
 
-## 安装后的状态
+## 安装末尾执行什么
 
-autoinstall 的 `late-commands` 会：
+1. 把镜像中的 deb 复制到目标系统。
+2. 在目标系统更新 APT 索引。
+3. 在目标系统内部的 shell 展开 `/root/azusa-debs/azusa-*.deb`，一次安装所有本地包。
+4. 由 `azusa-release` 包安装系统身份和登录横幅，并用 dpkg-divert 保留 Ubuntu 原件。
+5. 执行 `update-grub`，使已安装系统的菜单使用新身份。
+6. 清理临时 deb；旧版身份脚本不再注入或执行。
 
+必须在目标系统内部展开通配符：安装器的 `/root` 与目标系统的 `/root` 是不同目录。
+不要只列举旧版本的四个 deb。v0.1.0 因遗漏 `azusa-icons` 而在末尾返回 APT 错误码 100。
+
+新用户默认名和密码均为 `azusa`，主机名为 `azusalinux`，安装需要联网。
+镜像会自动分区，测试应使用独立的空白虚拟磁盘。
+
+## 验证
+
+```bash
+python3 -m unittest discover -s tests -v
 ```
-cp -r /cdrom/azusa-debs /target/root/azusa-debs
-curtin in-target -- apt-get update
-curtin in-target -- apt-get install -y /root/azusa-debs/*.deb
-rm -rf /root/azusa-debs
+
+九项测试覆盖缺包、重复包、混合版本、错误架构、损坏包、重复准备镜像和目标 shell 的通配符展开，
+以及真实 xorriso 构建、解包、验证校验清单和引导目录的往返流程。
+它们不能替代完整安装：还必须验证镜像启动、安装完成、移除 ISO 后从虚拟硬盘启动、
+登录、六个包的安装状态以及 GNOME 的实际默认值。
+本轮结果见 [L1 验证记录](l1-validation.md)。
+
+完整安装后，在新用户的桌面终端中执行独立验收：
+
+```bash
+bash /path/to/azusalinux/tests/verify-installed.sh
 ```
 
-装出来的系统：主机名 `azusalinux`，用户 `azusa`（密码 `azusa`），
-四个包已安装，新用户登录即是紫色强调色 + Inter 字体 + Azusa 壁纸。
+它以 22 项检查验证系统身份、六个包、图形目标、桌面默认值、字体实际解析、壁纸和图标文件，
+并实际运行调色板、吉祥物和系统信息工具。
 
-## 还没做的
+## 当前边界
 
-- 桌面首次登录会走 GNOME 初始设置，壁纸/强调色要重新登录一次才完全生效
-- 紫色文件夹图标仍是 `papirus-folders` 手工染色，干净安装不会带上（B4 未做）
-- 安装器界面是英文（subiquity 的 locale 不影响安装界面语言）
-
-## 两个已修的坑（都是实测暴露的）
-
-### EFI 分区偏移
-
-原 ISO 的 `-e` 参数写死了 EFI 分区的起始 LBA（`appended_partition_2_start_3162499s`）。
-重打包后 ISO 变大，EFI 分区实际落到 LBA 3163984，死偏移就指向了错误数据，
-UEFI 启动报 `can't find command 'grub_platform'`，而 **BIOS 启动正常**——
-所以只要不测 UEFI 就发现不了。
-
-修法：把 `-e` 换成 `--interval:appended_partition_2:all::`，让 xorriso 自己解析实际位置。
-
-### 紫色文件夹（B4）
-
-`papirus-folders` 是直接改 `papirus-icon-theme` 包里的文件，升级即还原。
-改成独立主题 `Azusa-Papirus`：
-
-- `Inherits=Papirus-Dark,Papirus,Adwaita,hicolor`
-- 只在 5 个尺寸的 `places/` 下放 385 个相对软链，指向 Papirus 自带的 violet 变体
-- 命名是**前缀式**（`folder-violet-documents.svg`），不是后缀式——第一版全拼错，405 个里只有 1 个能解析
-- 有 4 个名字（`folder-violet-desktop` 等）在 Papirus 里没有对应变体，已从清单剔除
-- 包只有 4.6 KB
-
-## 当前状态
-
-| 项 | 状态 |
-|---|---|
-| ISO 能打出来 | ✅ 6.1G，含 5 个 deb + autoinstall seed |
-| BIOS 启动 | ✅ 用户已在 VMware 里装成功 |
-| UEFI 启动 | ✅ 内核启动、autoinstall 参数传入（QEMU + OVMF 实测） |
-| autoinstall 触发 | ✅ cmdline 里有 `autoinstall ds=nocloud;s=/cdrom/nocloud/`，cloud-init 服务启动 |
-| 无人值守安装到完成 | ⚠️ **未在本机 QEMU 跑完**：机器负载过高后关机中断 |
-
-### 为什么没跑完完整安装
-
-本机只有 11G 内存，QEMU 里同时跑 6G ISO + 4G 虚拟机和构建任务时会把宿主机拖到卡死。
-关掉完整安装测试是对的。**用 VMware 装机验证更省资源**：分配 4G 内存、
-20G 磁盘、固件选 BIOS，从 ISO 启动后会自动进入安装流程。
-
-### 排查记录：一个让我误判很久的坑
-
-前面的结论一度写成「UEFI 启动失败，内核起不来」。**那是错的。**
-
-真实情况：内核一直在正常启动，但官方 ISO 的 cmdline 带 `quiet`，
-内核日志被压掉，而**官方 ISO 本来也不把日志输出到串口**。
-我拿「串口没有输出」当成了「没有启动」，于是把引导链上每一环都怀疑了一遍。
-
-定位方法：在 `grub.cfg` 的菜单项里插 `echo`，确认 `linux` / `initrd` 命令
-返回正常（A/B/C/D 四个标记都打印出来），再把 `quiet splash` 换成 `loglevel=7`
-——内核日志立刻出现在串口里。
-
-教训：**静默不等于失败**。调试启动问题，先确保你有一条能看见的通道
-（`console=ttyS0` + `loglevel=7`），再去怀疑别的。
-
-### 关于 `ds=nocloud;s=...` 里的分号
-
-一度怀疑 GRUB 把 `;` 当命令分隔符、截断了后面的 `console=` 参数。
-实测：加不加引号，内核 cmdline 里 `ds=nocloud;s=/cdrom/nocloud/` 都完整保留，
-后面参数也都在。**分号不是问题**。引号保留着无害，但不必要。
+- BIOS 与 UEFI 的完整安装验证分别记录，不能从其中一个推断另一个。
+- Ptyxis 配色仍需手动应用；首次 GNOME 登录可能出现初始设置向导。
+- `azusa-release` 使用包管理的链接和 diversion 保护身份；移除时恢复 Ubuntu 原件。
+  `tests/test-release-lifecycle.sh` 已在可丢弃的 Ubuntu 基线虚拟机中实测升级、
+  base-files 重装、重复安装、移除恢复、purge 后重装。此脚本有修改性，仅供测试虚拟机使用。
+- 修改源码不会自动更新 GitHub Release 中已经上传的 ISO。
