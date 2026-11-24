@@ -64,10 +64,14 @@ tasksel 早就有 `task-chinese-s-desktop`**，而且实测 fontconfig 回退链
 | L0.75 | 脚本 + 状态差分验证 | ✅ |
 | L0.9 | 从清单构建、可引导 | ✅ |
 | L0.95 | deb 化，可装可卸 | ✅ |
-| L1 | 从 ISO 安装 | ✅ |
+| L1 | 从 ISO 安装、移除 ISO 后启动并登录 | ✅ 修复镜像已在 VMware + BIOS 完整验证，见 [记录](l1-validation.md) |
 | L1.1 | 紫色文件夹独立主题 | ✅ |
 
 ## 验证方式（重要）
+
+当前 ISO 的验收入口是 `tests/verify-installed.sh`，需要在完整安装后的新用户会话中运行；
+完整测试记录见 [L1 验证记录](l1-validation.md)。下面的 `azusa-verify` 和状态差分
+记录来自早期手工恢复方案，不能代替当前 deb/ISO 的安装验收。
 
 不要只检查「文件在不在」，要真的执行一遍：
 

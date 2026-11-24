@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+case "$1" in
+    install|upgrade)
+        for path in /usr/lib/os-release /etc/lsb-release /etc/issue /etc/issue.net; do
+            owner=$(dpkg-divert --listpackage "$path")
+            if [ "$owner" != azusa-release ]; then
+                dpkg-divert --package azusa-release --add --rename \
+                    --divert "$path.ubuntu" "$path"
+            fi
+        done
+        ;;
+esac
+#DEBHELPER#

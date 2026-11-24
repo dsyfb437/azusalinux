@@ -1,0 +1,4 @@
+usr/share/azusalinux/release/os-release usr/lib/os-release
+usr/share/azusalinux/release/lsb-release etc/lsb-release
+usr/share/azusalinux/release/issue etc/issue
+usr/share/azusalinux/release/issue.net etc/issue.net

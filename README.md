@@ -11,6 +11,10 @@
 
 最新镜像见 [Releases](https://github.com/dsyfb437/azusalinux/releases)。
 
+**v0.1.0 的已发布镜像存在自动安装漏包问题**：安装末尾没有安装 `azusa-icons`，
+会因依赖无法满足而失败。源码已修复；修复镜像的完整安装验证结果见
+[L1 验证记录](docs/l1-validation.md)。旧 Release 附件不会随源码修改自动更新。
+
 因为 GitHub 单个附件上限 2GB，6.1G 的镜像分成 4 卷发布：
 
 ```bash
@@ -20,14 +24,14 @@ sha256sum -c SHA256SUMS
 
 ## 安装
 
-1. 新建虚拟机：**4G 内存、20G 磁盘、固件类型选 BIOS**（UEFI 也能启动，但安装流程只在 BIOS 下验证过）
+1. 新建空白虚拟机：**4G 内存、40G 磁盘、固件类型选 BIOS**（UEFI 完整安装尚未验证）
 2. 挂载 ISO 启动
 3. 安装是全自动的（Ubuntu autoinstall）：自动分区、建用户、装系统
 4. 装完后登录：用户 `azusa`，密码 `azusa`
 
 > 安装过程会联网下载软件包，请确保虚拟机可以访问网络。
 
-也可以用物理机/U 盘安装。装完是一个标准的 Ubuntu 桌面，只是默认值换成了 Azusa 的。
+镜像会自动分区。当前请先在空白虚拟机中测试，不要连接需要保留数据的磁盘。
 
 ## 系统里有什么
 
@@ -64,7 +68,7 @@ sudo azusa-apply --system --apply # GRUB 配色、文件夹颜色
 
 ## 已知限制
 
-- **安装过程未在本机完整跑完**：宿主机内存不足会卡死，只在 VMware 里验证过装机成功
+- 完整安装的验证范围与实际结果见 [L1 验证记录](docs/l1-validation.md)
 - 安装器界面是英文（subiquity 的界面语言不受 autoinstall 的 locale 影响）
 - 首次登录会走 GNOME 初始设置，壁纸/强调色可能要重新登录一次才完全生效
 - 终端配色（Ptyxis）需要手动跑一次 `azusa-apply --terminal`
@@ -74,7 +78,7 @@ sudo azusa-apply --system --apply # GRUB 配色、文件夹颜色
 
 - x86_64
 - 4G 内存（安装时）、2G 内存（使用）
-- 20G 磁盘
+- 40G 磁盘（完整安装的验证配置）
 - 安装时需要网络
 
 ## 开发
