@@ -15,5 +15,7 @@ autoinstall:
     - cp -r /cdrom/azusa-debs /target/root/azusa-debs
     - curtin in-target -- apt-get update
     - curtin in-target -- sh -ec 'apt-get install -y /root/azusa-debs/azusa-*.deb'
+    - install -D -m 0644 /cdrom/nocloud/apt/azusalinux-archive-keyring.asc /target/etc/apt/keyrings/azusalinux-archive-keyring.asc
+    - install -m 0644 /cdrom/nocloud/apt/azusalinux.sources /target/etc/apt/sources.list.d/azusalinux.sources
     - curtin in-target -- update-grub
     - curtin in-target -- rm -rf /root/azusa-debs

@@ -174,6 +174,10 @@ class IsoPackagesTest(unittest.TestCase):
         self.assertEqual(verified.returncode, 0, verified.stdout + verified.stderr)
         self.assertEqual((unpacked / "nocloud/user-data").read_bytes(),
                          (ROOT / "iso-remaster/nocloud/user-data").read_bytes())
+        for name in ("azusalinux-archive-keyring.asc", "azusalinux.sources"):
+            path = Path("nocloud/apt") / name
+            self.assertEqual((unpacked / path).read_bytes(),
+                             (ROOT / "iso-remaster" / path).read_bytes())
         self.assertFalse((unpacked / "nocloud/azusa-setup").exists())
         manifest = json.loads((unpacked / "azusa-build.json").read_text())
         self.assertEqual({p["name"] for p in manifest["packages"]}, set(PACKAGES))

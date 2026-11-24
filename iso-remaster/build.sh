@@ -35,8 +35,7 @@ prepare)
     bash "$HERE/check-debs.sh" "$DEBS"
     test -f "$ISO_ROOT/boot/grub/grub.cfg"
     mkdir -p "$ISO_ROOT/nocloud" "$ISO_ROOT/azusa-debs"
-    cp "$HERE/nocloud/user-data" "$ISO_ROOT/nocloud/user-data"
-    cp "$HERE/nocloud/meta-data" "$ISO_ROOT/nocloud/meta-data"
+    cp -r "$HERE/nocloud/." "$ISO_ROOT/nocloud/"
     rm -f "$ISO_ROOT/nocloud/azusa-setup"
     # Re-running prepare must not retain packages from an older build.
     if [ "$(realpath "$DEBS")" != "$(realpath "$ISO_ROOT/azusa-debs")" ]; then
