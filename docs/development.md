@@ -64,7 +64,7 @@ tasksel 早就有 `task-chinese-s-desktop`**，而且实测 fontconfig 回退链
 | L0.75 | 脚本 + 状态差分验证 | ✅ |
 | L0.9 | 从清单构建、可引导 | ✅ |
 | L0.95 | deb 化，可装可卸 | ✅ |
-| L1 | 从 ISO 安装、移除 ISO 后启动并登录 | ✅ 修复镜像已在 VMware + BIOS 完整验证，见 [记录](l1-validation.md) |
+| L1 | 从 ISO 安装、移除 ISO 后启动并登录 | ✅ 0.1.1 已在 VMware + BIOS/UEFI 完整验证，见 [记录](l1-validation.md) |
 | L1.1 | 紫色文件夹独立主题 | ✅ |
 
 ## 验证方式（重要）
@@ -101,10 +101,10 @@ tasksel 早就有 `task-chinese-s-desktop`**，而且实测 fontconfig 回退链
 - **GRUB 配色是死配置**：`GRUB_COLOR_NORMAL` / `GRUB_COLOR_HIGHLIGHT`
   在 grub2-common 2.14 里根本没有被读取；实际菜单颜色由
   `/etc/grub.d/05_debian_theme` 按发行版名分支决定，AzusaLinux 会落到 Debian 的蓝色分支。
-- **os-release 会被 base-files 升级冲掉**：`/usr/lib/os-release` 属于 base-files
-  且不是 conffile，改完迟早被覆盖。发行版级的做法需要 dpkg-divert 或独立包。
+- **身份升级保护已在 0.1.1 修复**：新增 `azusa-release`，通过包管理的链接与
+  dpkg-divert 保护四个身份文件，移除包时恢复 Ubuntu 原件；生命周期实测见验证记录。
 - **Ptyxis 调色板无法自动选中**：Profile 是可重定位 schema，普通 gsettings override
-  选不中实例，需要 `azusa-apply --terminal` 手动设置。
+  选不中实例，需要 `azusa-apply --terminal --apply` 手动设置。
 
 ## 构建
 
