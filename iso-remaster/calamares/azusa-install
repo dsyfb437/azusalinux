@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+if (( EUID != 0 )); then
+    exec sudo -n env "DISPLAY=${DISPLAY:?}" "XAUTHORITY=${XAUTHORITY:?}" \
+        QT_QPA_PLATFORM=xcb /usr/local/bin/azusa-install
+fi
+
+# Keep the target image mounts private to this installer process.
+if [[ ${1:-} != --mounted-namespace ]]; then
+    exec unshare --mount --propagation private "$0" --mounted-namespace
+fi
+cd /run
+mkdir -p azusa-installer/{base,standard,azusa,target}
+cd azusa-installer
+mount -o loop,ro /cdrom/casper/minimal.squashfs base
+mount -o loop,ro /cdrom/casper/minimal.standard.squashfs standard
+mount -o loop,ro /cdrom/azusa/target.squashfs azusa
+mount -t overlay overlay -o "ro,lowerdir=$PWD/azusa:$PWD/standard:$PWD/base" target
+exec calamares -d
