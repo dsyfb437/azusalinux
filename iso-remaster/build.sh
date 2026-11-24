@@ -65,6 +65,7 @@ PY
     ;;
 pack)
     bash "$HERE/check-debs.sh" "$ISO_ROOT/azusa-debs"
+    python3 "$HERE/write-build-manifest.py" "$SRC_ISO" "$ISO_ROOT/azusa-debs" "$ISO_ROOT/azusa-build.json"
     mkdir -p "$(dirname "$OUT")"
     # 用 -indev/-outdev + -boot_image replay：在原镜像上替换文件，
     # 引导结构由 xorriso 原样复制，不重建 El Torito。
@@ -91,6 +92,7 @@ pack)
         -update_r "$ISO_ROOT/nocloud" /nocloud \
         -update_r "$ISO_ROOT/azusa-debs" /azusa-debs \
         -map "$ISO_ROOT/md5sum.txt" /md5sum.txt \
+        -map "$ISO_ROOT/azusa-build.json" /azusa-build.json \
         -boot_image any replay -commit 2>&1 | tail -2
     ls -lh "$OUT"
     ;;

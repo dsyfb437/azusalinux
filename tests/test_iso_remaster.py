@@ -1,5 +1,6 @@
 """Regression tests for the package set and target-shell expansion used by the ISO."""
 import os
+import json
 from pathlib import Path
 import shlex
 import shutil
@@ -174,6 +175,9 @@ class IsoPackagesTest(unittest.TestCase):
         self.assertEqual((unpacked / "nocloud/user-data").read_bytes(),
                          (ROOT / "iso-remaster/nocloud/user-data").read_bytes())
         self.assertFalse((unpacked / "nocloud/azusa-setup").exists())
+        manifest = json.loads((unpacked / "azusa-build.json").read_text())
+        self.assertEqual({p["name"] for p in manifest["packages"]}, set(PACKAGES))
+        self.assertEqual({p["version"] for p in manifest["packages"]}, {"0.2.0"})
         self.assertEqual(len(list((unpacked / "azusa-debs").glob("*.deb"))), len(PACKAGES))
         report = subprocess.run(["xorriso", "-indev", str(output),
                                  "-report_el_torito", "plain"],
