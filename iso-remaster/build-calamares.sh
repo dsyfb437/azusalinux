@@ -66,6 +66,12 @@ build_layer() {
         test -s "$root/boot/initrd.img"
     else
         "${apt[@]}" -y --no-install-recommends install calamares rsync squashfs-tools dosfstools e2fsprogs
+        local version plugin
+        version=$(chroot "$root" dpkg-query -W -f='${source:Version}' calamares)
+        bash "$here/build-partition-module.sh" "$version" "$work/partition-build"
+        plugin=libcalamares_viewmodule_partition.so
+        install -m644 "$work/partition-build/obj/src/modules/partition/$plugin" \
+            "$root/usr/lib/x86_64-linux-gnu/calamares/modules/partition/$plugin"
         local config="$here/calamares"
         install -d "$root/etc/calamares"
         cp -r "$config"/{branding,modules,settings.conf} "$root/etc/calamares/"

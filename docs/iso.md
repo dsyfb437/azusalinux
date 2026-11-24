@@ -7,10 +7,21 @@
 开发版从 Live 桌面打开 AzusaLinux 安装器。安装器在用户确认后写盘，
 目标系统包含 GNOME、六个 Azusa 软件包以及签名 APT 源。安装所需文件都在镜像内。
 
-本地候选镜像在 BIOS 双盘测试中出现引导目标不一致：将第二块磁盘选为安装目标后，
-安装摘要仍列出第一块磁盘作为 GRUB 写入位置。该配置目前仅用于隔离虚拟机测试。
+在 BIOS 模式选择“抹除磁盘”时，安装器将系统和 GRUB 写入同一块选定磁盘。
+写盘前可在摘要中核对磁盘设备名。测试布局、保护盘校验和固件配置见
+[Calamares 安装验收](calamares-validation.md)。
 
-在 Ubuntu 26.04 amd64 构建机上准备 `xorriso`、`squashfs-tools`、`dpkg` 和 `util-linux`。
+在独立的 Ubuntu 26.04 amd64 构建机上，给 Ubuntu 主仓库及更新仓库启用源码索引
+（在 `ubuntu.sources` 对应的 `Types` 行使用 `deb deb-src`），然后安装构建依赖。
+
+```bash
+sudo apt-get update
+sudo apt-get install build-essential xorriso squashfs-tools dpkg-dev util-linux patch
+sudo apt-get build-dep calamares
+```
+
+构建脚本取得与 Live 安装器相同版本的 Ubuntu 源码，应用 Azusa 的 BIOS 整盘安装补丁，
+并将重新编译的分区模块放入 Live 层。
 从下文所述的已校验官方 ISO 和同版本 Azusa deb 构建。工作目录需要使用支持
 OverlayFS 的 Linux 文件系统，最后一个参数指定将由脚本创建的新目录。
 

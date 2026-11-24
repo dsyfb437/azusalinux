@@ -1,0 +1,21 @@
+--- a/src/modules/partition/gui/ChoicePage.cpp
++++ b/src/modules/partition/gui/ChoicePage.cpp
+@@ -733,7 +733,7 @@
+     {
+         if ( !m_isEfi )
+         {
+-            if ( m_bootloaderComboBox.isNull() )
++            if ( m_config->installChoice() == InstallChoice::Erase || m_bootloaderComboBox.isNull() )
+             {
+                 auto d_p = selectedDevice();
+                 if ( d_p )
+@@ -1140,7 +1140,8 @@
+         layout->addWidget( m_afterPartitionBarsView );
+         layout->addWidget( m_afterPartitionLabelsView );
+ 
+-        if ( !m_isEfi )
++        // Erasing a disk installs both the system and its BIOS bootloader there.
++        if ( !m_isEfi && choice != InstallChoice::Erase )
+         {
+             layout->addWidget( createBootloaderPanel() );
+         }
