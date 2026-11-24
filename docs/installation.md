@@ -24,8 +24,7 @@
 | `SHA256SUMS` | 完整 ISO 和四个分卷的 SHA256 |
 | `Merge-ISO.ps1` | Windows 合并与校验助手，可选 |
 
-GitHub 单个附件大小限制使镜像需要分卷。发布页自动提供的 Source code（zip/tar.gz）
-是项目源码，不能用作安装镜像。
+GitHub 单个附件大小限制使镜像需要分卷。
 
 ## 合并与校验
 
