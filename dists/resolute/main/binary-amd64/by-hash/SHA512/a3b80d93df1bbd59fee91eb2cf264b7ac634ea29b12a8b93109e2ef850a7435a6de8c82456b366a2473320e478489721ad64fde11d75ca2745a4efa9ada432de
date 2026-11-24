@@ -1,0 +1,242 @@
+Package: azusa-artwork
+Architecture: all
+Version: 0.1.1
+Priority: optional
+Section: misc
+Source: azusalinux
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Installed-Size: 732
+Filename: pool/main/a/azusalinux/azusa-artwork_0.1.1_all.deb
+Size: 685152
+MD5sum: 4f2e14982450fef11a226a0fd7a96918
+SHA1: 4da382605a615006ee0caed9eb2710caff7eaa73
+SHA256: ac42dd68e446545db6ae085fab118f1345330007f0e789b6d8ed2b256009d784
+SHA512: 31e66617cd7d48012c24a01f2ebfcdc9a0f5e361b67c21b990d38a6d05a07e8e3bd6f2a6bfeac297cbd669100d4302afbc1585d714ca72d78fae22b68851c7a3
+Homepage: https://github.com/dsyfb437/azusalinux
+Description: AzusaLinux wallpapers
+ Mascot wallpapers (light and dark) generated from the AzusaLinux palette,
+ registered in the GNOME wallpaper picker.
+
+Package: azusa-artwork
+Architecture: all
+Version: 0.1.2
+Priority: optional
+Section: misc
+Source: azusalinux
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Installed-Size: 732
+Filename: pool/main/a/azusalinux/azusa-artwork_0.1.2_all.deb
+Size: 685238
+MD5sum: ad195e3ba70f3eafd0a595b9b15de7f3
+SHA1: ac47dd5cede0cbbaff8250f661b416a0f18bc7fa
+SHA256: 00fdfb9b7bf6c7985ae03ebac6855e0d8b5fa0598892a66bdae5b16a3a904522
+SHA512: 50a67ae4fdbd9d57640eb0316ea7fcf94ce119962978db3b0bc3afaad1f5dc354f7b291fa27f96ae89af2a2550c40e327305e236d2d5ae4cc325d57bc124b68b
+Homepage: https://github.com/dsyfb437/azusalinux
+Description: AzusaLinux wallpapers
+ Mascot wallpapers (light and dark) generated from the AzusaLinux palette,
+ registered in the GNOME wallpaper picker.
+
+Package: azusa-desktop
+Architecture: all
+Version: 0.1.1
+Priority: optional
+Section: misc
+Source: azusalinux
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Installed-Size: 8
+Depends: azusa-release (= 0.1.1), azusa-tools, azusa-artwork, azusa-settings, fastfetch
+Filename: pool/main/a/azusalinux/azusa-desktop_0.1.1_all.deb
+Size: 1442
+MD5sum: 9b10769f7bee9d28c64cd2801298b688
+SHA1: d985ca44d739f1805f542b93d4f328dee7fd41a6
+SHA256: 1f2a233605a013c3071ecda661a6f70382372ea441e3afb6408bc613131a4ff3
+SHA512: d69784f13e483a9f9c553941787d3b49ff63d8f0771c74762e0b1f14aa2b28890bf3d1163dc49aac7848f3c80866dfa33fc6aa60306b9b1df53cf4663259ff35
+Homepage: https://github.com/dsyfb437/azusalinux
+Description: AzusaLinux desktop (metapackage)
+ Installs the AzusaLinux tools, artwork and desktop defaults on Ubuntu.
+
+Package: azusa-desktop
+Architecture: all
+Version: 0.1.2
+Priority: optional
+Section: misc
+Source: azusalinux
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Installed-Size: 8
+Depends: azusa-release (= 0.1.2), azusa-tools, azusa-artwork, azusa-settings, fastfetch
+Filename: pool/main/a/azusalinux/azusa-desktop_0.1.2_all.deb
+Size: 1536
+MD5sum: 04a8c38b00dca01834e71499238c1811
+SHA1: b8b7900736628801a3b1a12cbbc0821d5bcc8439
+SHA256: c2e012e0888227aec5467e1e3a436c38fa101f3a148d902ecc022a6ce02f7735
+SHA512: d2a3d84ac2af8f6cee593bddff2f13cdea84a52b93810d75d42e5c6ebe88a76bf62ea50cd99cb0bebea7a5dc0b1455c6e083b45297d2bb675d754b8d0a1767aa
+Homepage: https://github.com/dsyfb437/azusalinux
+Description: AzusaLinux desktop (metapackage)
+ Installs the AzusaLinux tools, artwork and desktop defaults on Ubuntu.
+
+Package: azusa-icons
+Architecture: all
+Version: 0.1.1
+Priority: optional
+Section: misc
+Source: azusalinux
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Installed-Size: 406
+Depends: papirus-icon-theme
+Filename: pool/main/a/azusalinux/azusa-icons_0.1.1_all.deb
+Size: 4662
+MD5sum: 31afab83c7c01cad9a6023b9c5a425fd
+SHA1: 75bb24e4f21c3895f343899ec89a3a9de6695b61
+SHA256: 8d6dab41a91d1d526f468d2f4115833fbe94196b3fd17349985cdc53c60ff085
+SHA512: 41e2bb94014145744a85a7f1b0a9307b7b77fbf3b33f8cc579b55d7eb2e8a914d227043c45c15174c410c51e4373f7498d8678b1b469b405d387c37e1bd54e5a
+Homepage: https://github.com/dsyfb437/azusalinux
+Description: Azusa folder colours for Papirus
+ An icon theme inheriting Papirus-Dark that overrides only the folder icons
+ with Papirus' built-in violet variants, so folder colours survive upgrades
+ of papirus-icon-theme (unlike running papirus-folders over the system theme).
+
+Package: azusa-icons
+Architecture: all
+Version: 0.1.2
+Priority: optional
+Section: misc
+Source: azusalinux
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Installed-Size: 406
+Depends: papirus-icon-theme
+Filename: pool/main/a/azusalinux/azusa-icons_0.1.2_all.deb
+Size: 4790
+MD5sum: 3d042dcfb8a7fb5f36a49756498737dd
+SHA1: 5be38f71f1a1be782af1b5ce84ecfe5284195b07
+SHA256: 5e1d2e6000683e78cf4fd1be97292d9658a542e68c558b87453e96b0e037ba29
+SHA512: b9e877f869fc36240b38b02e3f526b0814d8fc0ef42aa795502a8da9d19c8dddfbc2ad9c49e7cac0f919e29f5372a9f6370cfae17dab433116e1ba41853b4677
+Homepage: https://github.com/dsyfb437/azusalinux
+Description: Azusa folder colours for Papirus
+ An icon theme inheriting Papirus-Dark that overrides only the folder icons
+ with Papirus' built-in violet variants, so folder colours survive upgrades
+ of papirus-icon-theme (unlike running papirus-folders over the system theme).
+
+Package: azusa-release
+Architecture: all
+Version: 0.1.1
+Priority: optional
+Section: misc
+Source: azusalinux
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Installed-Size: 23
+Depends: base-files
+Filename: pool/main/a/azusalinux/azusa-release_0.1.1_all.deb
+Size: 2394
+MD5sum: 756b3afa7f018b00bf3584fc5a3176a1
+SHA1: ca5054f14805ffa6cac44824315611d7ab49fb0f
+SHA256: 2a83d1e093315a935479d1449ff96ab759f9831e910cbcc3fea6a65f3d86101f
+SHA512: a3b5d503248a7e56f2324a0c637bfa87f52ddc4a6d4c37869e3e759bc2ad0e222ab928d455b1679b4bc33a22eb52d9df11f493b73e860e38d6f4f97e16deee6e
+Homepage: https://github.com/dsyfb437/azusalinux
+Description: AzusaLinux release identity
+ Package-managed operating system identity and login banners. Package-specific
+ dpkg diversions preserve the Ubuntu originals and protect the Azusa identity
+ during base-files upgrades; removing the package restores the vendor files.
+
+Package: azusa-release
+Architecture: all
+Version: 0.1.2
+Priority: optional
+Section: misc
+Source: azusalinux
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Installed-Size: 23
+Depends: base-files
+Filename: pool/main/a/azusalinux/azusa-release_0.1.2_all.deb
+Size: 2488
+MD5sum: c122a0ee03d76c914d31cc6b3f8e4dab
+SHA1: 32f34e887276ac62d8dc6ebdf18c569d80f75bd0
+SHA256: 108885238f803f04f0ef77245ecfd72b36a7bff0ea26d974e0f5e2ea30f2b9b8
+SHA512: bec7b672da101763484c3a635c774e912efc24c6c15399acf9a1e9b732e4fc9640d08af069f7dd9ab469ce43cf35982827491e3c07da1bf466d3d0c9d24916d4
+Homepage: https://github.com/dsyfb437/azusalinux
+Description: AzusaLinux release identity
+ Package-managed operating system identity and login banners. Package-specific
+ dpkg diversions preserve the Ubuntu originals and protect the Azusa identity
+ during base-files upgrades; removing the package restores the vendor files.
+
+Package: azusa-settings
+Architecture: all
+Version: 0.1.1
+Priority: optional
+Section: misc
+Source: azusalinux
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Installed-Size: 16
+Depends: dconf-gsettings-backend | gsettings-backend, azusa-artwork, azusa-icons, fonts-inter, fonts-jetbrains-mono
+Filename: pool/main/a/azusalinux/azusa-settings_0.1.1_all.deb
+Size: 2298
+MD5sum: 096111544a703d50ea35501763d7798f
+SHA1: a003433f181b1e31c92053fc9f5fee14eb661e5e
+SHA256: 81a9d12a345d7ebb7986692492646ac41917ac7ae6be26d7090cb81c4a2fbc7f
+SHA512: 9f1ac7b24d782251a32e80999a58e5275be39d5ba45865f1ecd918a2e9e31f233318f719164837c1818a00c54fc15f38925ff10233591694a52521e7056d4dad
+Homepage: https://github.com/dsyfb437/azusalinux
+Description: AzusaLinux desktop defaults
+ GSettings overrides for accent colour, fonts, wallpaper and icon theme,
+ plus system-wide kitty colours and a Ptyxis palette for new users.
+
+Package: azusa-settings
+Architecture: all
+Version: 0.1.2
+Priority: optional
+Section: misc
+Source: azusalinux
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Installed-Size: 16
+Depends: dconf-gsettings-backend | gsettings-backend, azusa-artwork, azusa-icons, fonts-inter, fonts-jetbrains-mono
+Filename: pool/main/a/azusalinux/azusa-settings_0.1.2_all.deb
+Size: 2394
+MD5sum: 59878d2c422fbad0bf8b66d4717d67f4
+SHA1: 12a6e5ccb3baa4aeef5830284c5b499fdff130a3
+SHA256: d7f0bb2f749941aae5576981b79bf08c3482d1f3c55f3ddf28f330b0287eca7f
+SHA512: e7bfbbf39a4b6d2d88ec8848017cd12f16104194981bc86012d6f4e8aef13cc50c1697f7d749417ba80dec68914513e748dd29a22011f83429c2fa29e3b4fc13
+Homepage: https://github.com/dsyfb437/azusalinux
+Description: AzusaLinux desktop defaults
+ GSettings overrides for accent colour, fonts, wallpaper and icon theme,
+ plus system-wide kitty colours and a Ptyxis palette for new users.
+
+Package: azusa-tools
+Architecture: all
+Version: 0.1.1
+Priority: optional
+Section: misc
+Source: azusalinux
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Installed-Size: 3362
+Depends: python3, python3-pil
+Recommends: fastfetch
+Filename: pool/main/a/azusalinux/azusa-tools_0.1.1_all.deb
+Size: 2940770
+MD5sum: 50c527dd56ac15f5f1cf010a40df9302
+SHA1: 3276952cc154d0866edffd98f63fedcbf89f6f97
+SHA256: 41c8ada9936c4d3f98726aec828b2216519d7c4fdbb20711b85b62670657cdcb
+SHA512: ae268e1ccd720bfcfe0fc0a38e27e17ab61691f5a764420230f808156603d1607534497646a1104538f72927cfa7bbc7b0852a8301b8e771705a27e7883a1300
+Homepage: https://github.com/dsyfb437/azusalinux
+Description: AzusaLinux command-line tools
+ azusa-fetch, azusa-logo, azusa-palette, azusa-apply and the wallpaper
+ generators, with the shared palette and mascot under /usr/share/azusalinux.
+
+Package: azusa-tools
+Architecture: all
+Version: 0.1.2
+Priority: optional
+Section: misc
+Source: azusalinux
+Maintainer: azusa <dsyfb437@users.noreply.github.com>
+Installed-Size: 3363
+Depends: python3, python3-pil
+Recommends: fastfetch
+Filename: pool/main/a/azusalinux/azusa-tools_0.1.2_all.deb
+Size: 2941134
+MD5sum: 1d8d8ed62dd965e50758b9e28c73e8bb
+SHA1: 92a1dd1a59d5239e51d70531a5ca7450e63cc0e4
+SHA256: 6ab5e344b09c323dc09840c17ee11eb15dc990dbcfabd7d99d48a314662f9a29
+SHA512: 0cc16d273070e1e4936f4dfdb95f120387b15164476dd2212ac2369881930db4658bd6b98ecdb7aaf29ed580564da04504bad5d1ddcc7001469cea99872e7f16
+Homepage: https://github.com/dsyfb437/azusalinux
+Description: AzusaLinux command-line tools
+ azusa-fetch, azusa-logo, azusa-palette, azusa-apply and the wallpaper
+ generators, with the shared palette and mascot under /usr/share/azusalinux.
+
