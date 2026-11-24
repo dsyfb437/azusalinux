@@ -1,0 +1,42 @@
+{
+  "source_revision": "2006d84e14d5abe91912f16cf396d4450529d0b2",
+  "base_iso_sha256": "4b8e6b97ed4f64c2643bfcbf1329bdf2db418792ca57633beea644cfe39f5897",
+  "packages": [
+    {
+      "name": "azusa-artwork",
+      "version": "0.1.1",
+      "architecture": "all",
+      "sha256": "ac42dd68e446545db6ae085fab118f1345330007f0e789b6d8ed2b256009d784"
+    },
+    {
+      "name": "azusa-desktop",
+      "version": "0.1.1",
+      "architecture": "all",
+      "sha256": "1f2a233605a013c3071ecda661a6f70382372ea441e3afb6408bc613131a4ff3"
+    },
+    {
+      "name": "azusa-icons",
+      "version": "0.1.1",
+      "architecture": "all",
+      "sha256": "8d6dab41a91d1d526f468d2f4115833fbe94196b3fd17349985cdc53c60ff085"
+    },
+    {
+      "name": "azusa-release",
+      "version": "0.1.1",
+      "architecture": "all",
+      "sha256": "2a83d1e093315a935479d1449ff96ab759f9831e910cbcc3fea6a65f3d86101f"
+    },
+    {
+      "name": "azusa-settings",
+      "version": "0.1.1",
+      "architecture": "all",
+      "sha256": "81a9d12a345d7ebb7986692492646ac41917ac7ae6be26d7090cb81c4a2fbc7f"
+    },
+    {
+      "name": "azusa-tools",
+      "version": "0.1.1",
+      "architecture": "all",
+      "sha256": "41c8ada9936c4d3f98726aec828b2216519d7c4fdbb20711b85b62670657cdcb"
+    }
+  ]
+}

@@ -1,7 +1,9 @@
+> 历史资料：保留原始过程记录，不作为当前安装或构建指南。当前入口见[文档目录](../README.md)。
+
 # 历史记录：本地 0.1 修复镜像
 
 此记录针对旧的本地中间镜像；当前 0.1.1 的包数量、身份保护与验收结果以
-[L1 验证记录](l1-validation.md) 为准。
+[L1 验证记录](../l1-validation.md) 为准。
 
 日期：2026-11-24（Asia/Shanghai）。环境：Windows 宿主机、VMware Workstation、
 BIOS、2 vCPU、4 GB 内存、40 GB 独立空白虚拟磁盘、NAT 网络。

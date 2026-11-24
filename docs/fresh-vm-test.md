@@ -1,96 +1,53 @@
-# 干净 VM 验证清单
+# 测试指南
 
-> 本文主要记录早期在现有 Ubuntu 上应用脚本的恢复测试。
-> 当前 ISO 的完整安装验证见 [L1 验证记录](l1-validation.md)，
-> 安装后使用 `tests/verify-installed.sh`，不沿用下文旧图标主题和用户壁纸路径的期望值。
+本指南适用于当前 deb 与 ISO 安装路径。已发布版本的测试结果见
+[0.1.1 验证报告](l1-validation.md)，早期手工恢复测试见[历史资料](history/README.md)。
 
-目的：验证 README 里的恢复流程在**一台跟别处无关的系统**上成立。
-现在这套东西是在一台机器上手工长出来的，只有跑通这一步，才算"可复现"。
+## 构建回归
 
-## 0. 建 VM
-
-- Ubuntu **26.04 Desktop**，全新安装
-- 磁盘 ≥ 40G，内存 ≥ 4G
-- **不要**在安装时勾选额外软件，保持默认
-- 装完先别改任何设置
-
-## 1. 把代码带进去
+在已安装构建依赖的 Linux 环境中运行：
 
 ```bash
-git clone https://github.com/dsyfb437/azusalinux.git
-cd azusalinux
+python3 -m unittest discover -s tests -v
+dpkg-buildpackage -b -us -uc
+bash iso-remaster/check-debs.sh ..
 ```
 
-（离线环境才用 tar.gz 备用包。）
+回归覆盖包集、版本、架构、重复准备、目标 shell 通配符展开，以及真实 xorriso 引导镜像往返。
 
-## 2. 按 README 跑
+## 完整安装
+
+使用独立空白虚拟磁盘，分别验证 BIOS 与 UEFI。记录 ISO 的 SHA256、
+虚拟机配置、固件类型、Secure Boot 状态和安装日志。
+
+1. 从最终 ISO 启动，等待安装及所有 late-commands 成功。
+2. 正常关机，取消挂载或禁用虚拟光驱。
+3. 从虚拟硬盘冷启动，完成串口或控制台密码登录。
+4. 完成图形密码登录，检查实际桌面与中文输入。
+5. 在新用户桌面终端运行：
 
 ```bash
-sudo apt install fonts-inter fonts-jetbrains-mono fastfetch papirus-icon-theme
-./bin/azusa-mascot
-python3 bin/azusa-apply --all --apply
-sudo ./bin/azusa-apply --system --apply
-sudo ./azusa-setup --apply
-./install.sh
+bash /path/to/azusalinux/tests/verify-installed.sh
 ```
 
-## 3. 验收（两层证据）
+该脚本只读检查身份、包状态、GNOME 默认值、字体解析、壁纸、图标及工具执行。
+还需单独确认根分区来源、实际固件类型、图形会话状态和失败服务。
 
-第一层：自检表
+## 升级回归
+
+在已安装的测试系统中执行常规系统更新，再次启动和登录后重复安装验收。
+重装 base-files 前后比较四个身份文件的内容，确认发行标识不被覆盖。
+
+身份包的移除恢复测试会修改系统，**仅在可丢弃的 Ubuntu 基线虚拟机中运行**：
 
 ```bash
-./bin/azusa-verify
+sudo env AZUSA_TEST_VM=1 bash tests/test-release-lifecycle.sh /path/to/release-debs
 ```
 
-第二层：和开发机做状态差分——这才是独立证据
+脚本验证安装/升级、base-files 重装、幂等安装、移除恢复厂商文件及 purge 后重装。
 
-```bash
-./bin/azusa-diff compare docs/state-baseline.tsv <(./bin/azusa-diff dump)
-```
+## 保存结果
 
-期望：`[gset]` / `[file]` / `[font]` / `[icon]` / `[bin]` 全部无差异；
-`[pkg]` 只报「非必需包差异」的数量（开发工具噪音）；
-`[pkg(必需)]` 必须为空。
-
-**期望：0 项失败。** 如果有失败项，把输出贴回来——那就是流程缺的东西。
-
-## 常见失败点
-
-| 现象 | 原因 |
-|---|---|
-| gsettings 全部跳过 | 用 SSH 跑的，没有 DBus 会话；必须在桌面终端的图形会话里跑 |
-| `Ptyxis profile 配色` 失败 | 新机器 profile uuid 不同，脚本会自动读，一般不会；若失败看 uuid 是否为空 |
-| `文件夹颜色` 失败 | `--system` 没加 sudo |
-| `壁纸文件` 缺失 | `azusa-mascot` 没跑，或跑的时候不在仓库目录 |
-| apt 装不上 | 检查网络 / 源 |
-
-## 这项测试**不能**验证什么
-
-- 图形效果好不好看（只能人眼看）
-- 显卡驱动、HiDPI、多显示器
-- GRUB 菜单（`azusa-verify` 读不到时是 skip，需要重启看）
-
-## 通过了之后
-
-L0.5 → 具备做 L1（ISO）的前提：所有改动都有脚本可复现。
-
-## deb 验收（2026-11-22）
-
-在已有测试 VM（Ubuntu 26.04，主机名 `test`）里跑 `verify-deb.sh`，
-用**新建用户**隔离此前的用户级手工改动。
-
-| 检查项 | 结果 |
-|---|---|
-| `sudo apt install azusa-*.deb` | ✅ 4 个包正常安装 |
-| 新用户 `accent-color` | ✅ `'purple'` |
-| 新用户 `font-name` | ✅ `'Inter 11'` |
-| 新用户 `icon-theme` | ✅ `'Papirus-Dark'` |
-| 新用户 `picture-uri-dark` | ✅ Azusa 壁纸 |
-| `/etc/xdg/kitty/kitty.conf` | ✅ |
-| `20_azusa-settings.gschema.override` | ✅ |
-| 壁纸 XML 注册 | ✅ |
-| `apt purge` 后新用户 | ✅ `'orange'`（回退干净） |
-
-已知小问题：`azusa-fetch` 检查显示 `/usr/local/bin/azusa-fetch`——那是这台 VM
-早前跑 `install.sh` 留下的，优先级高于包里的 `/usr/bin/azusa-fetch`。
-干净环境不会有这个问题；要复测需先 `sudo rm /usr/local/bin/azusa*`。
+版本报告应记录镜像与源码版本、测试环境、通过/失败项目及未测试范围。
+保存原始日志和截图，公开资料中避免包含密码、令牌或无关的个人路径。
+启动到 Live 桌面不能作为完整安装通过的依据。

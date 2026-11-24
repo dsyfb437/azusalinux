@@ -24,8 +24,8 @@ bash iso-remaster/build.sh all
 构建器通过 deb 内部的 Package/Architecture 字段校验；缺包、重复包、损坏包和
 不支持的架构会使构建失败。输出路径不得与输入镜像相同。
 
-`/azusa-build.json` 记录源码修订、输入镜像与各包 SHA256。0.1.1 本次实际输入是
-此前的本地修复镜像，输入链见验证记录和发布附件 `BUILD-MANIFEST.json`。
+`/azusa-build.json` 记录源码修订、输入镜像与各包 SHA256。0.1.1 使用了此前的
+本地修复镜像作为输入，详见[版本构建清单](releases/0.1.1-build.json)和[验证报告](l1-validation.md)。
 
 也可以分步运行 `extract`、`prepare`、`pack`。重复 `prepare` 会清理注入目录中的旧 deb，
 逐条补齐启动项参数，并在打包时重新生成文件校验清单。
@@ -40,7 +40,7 @@ bash iso-remaster/build.sh all
 6. 清理临时 deb；旧版身份脚本不再注入或执行。
 
 必须在目标系统内部展开通配符：安装器的 `/root` 与目标系统的 `/root` 是不同目录。
-不要只列举旧版本的四个 deb。v0.1.0 因遗漏 `azusa-icons` 而在末尾返回 APT 错误码 100。
+安装命令必须包含完整包集，避免因遗漏依赖而失败。
 
 新用户默认名和密码均为 `azusa`，主机名为 `azusalinux`，安装需要联网。
 镜像会自动分区，测试应使用独立的空白虚拟磁盘。
@@ -55,7 +55,7 @@ python3 -m unittest discover -s tests -v
 以及真实 xorriso 构建、解包、验证校验清单和引导目录的往返流程。
 它们不能替代完整安装：还必须验证镜像启动、安装完成、移除 ISO 后从虚拟硬盘启动、
 登录、六个包的安装状态以及 GNOME 的实际默认值。
-本轮结果见 [L1 验证记录](l1-validation.md)。
+已发布版本的结果见[验证报告](l1-validation.md)。
 
 完整安装后，在新用户的桌面终端中执行独立验收：
 

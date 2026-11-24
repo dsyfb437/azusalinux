@@ -10,12 +10,12 @@ L1 在下述 VMware 测试范围内完成。
 - SHA256：`69132f27a2d86410992c079882c6ef56526e27757c5e3b8c8b730c5e086e2f31`。
 - 构建源码：`2006d84e14d5abe91912f16cf396d4450529d0b2`，通过 git archive 导出，六个 deb 均为 0.1.1 / all。
 - 输入为此前的本地修复镜像，SHA256：`4b8e6b97ed4f64c2643bfcbf1329bdf2db418792ca57633beea644cfe39f5897`。
-- `BUILD-MANIFEST.json`（ISO 内为 `/azusa-build.json`）记录输入链、源码和每个包的 SHA256。
+- [版本构建清单](releases/0.1.1-build.json)（ISO 内为 `/azusa-build.json`）记录输入链、源码和每个包的 SHA256。
 - 挂载最终完整 ISO 执行 `md5sum --quiet -c md5sum.txt`，退出码 0。
 - 四个发布分卷重新拼接后 SHA256 与完整 ISO 一致；Windows `Merge-ISO.ps1` 也已实际合并并校验通过。
 
 后续提交仅整理文档和下载合并助手，不改变本次镜像内的运行时源码。历史中间镜像的
-独立记录见 [本地 0.1 修复镜像](l1-validation-0.1-local.md)，不能混用于本次版本。
+独立记录见 [本地 0.1 修复镜像](history/l1-validation-0.1-local.md)，不能混用于本次版本。
 
 ## 安装修复
 
@@ -69,9 +69,9 @@ nihao 并选词，实际得到“你好”；有截图与输入框内容文件�
 
 ## 证据与边界
 
-本机证据目录：`D:\azusalinux-0.1.1-tests\evidence`；保留两套安装器 info/debug 日志、
-串口记录、22 项检查、无光驱冷启动证明、升级日志和桌面/中文输入截图。
-发布附件包含镜像分卷、SHA256SUMS、六包压缩包、构建清单、合并助手与验证记录。
+原始资料由维护者保留，包括两套安装器 info/debug 日志、串口记录、22 项检查、
+无光驱冷启动证明和升级日志。公开截图：[桌面](images/desktop.png)、[中文输入](images/chinese-input.png)。
+Release 提供镜像分卷、SHA256SUMS 和 Windows 合并助手；构建清单及验证报告保存在仓库中。
 
 验收机启用了串口 getty，额外安装 python3-evdev，并运行临时 GTK 输入测试程序以自动
 验证图形交互；这些是测试配置，未加入 ISO。Live 会话在安装后重启时曾等待约 90 秒
