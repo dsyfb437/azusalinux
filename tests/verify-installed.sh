@@ -2,6 +2,7 @@
 # Read-only acceptance check, run as the new user after installing from the ISO.
 set -uo pipefail
 failed=0
+expected_hostname=${1:-azusalinux}
 
 check() {
     local name="$1"
@@ -38,7 +39,7 @@ font_available() {
 
 check 'os-release syntax and Azusa identity' sh -c \
     '. /etc/os-release && [ "$ID" = azusalinux ] && [ "$UBUNTU_CODENAME" = resolute ]'
-check 'hostname' test "$(hostname)" = azusalinux
+check 'hostname' test "$(hostname)" = "$expected_hostname"
 for package in azusa-tools azusa-artwork azusa-settings azusa-desktop azusa-icons azusa-release; do
     check "package $package" package_installed "$package"
 done

@@ -16,7 +16,7 @@
 
 ```bash
 sudo apt-get update
-sudo apt-get install build-essential xorriso squashfs-tools dpkg-dev util-linux patch
+sudo apt-get install build-essential xorriso squashfs-tools dpkg-dev util-linux patch python3-pil fonts-dejavu-core
 sudo apt-get build-dep calamares
 ```
 
@@ -35,6 +35,7 @@ sha256sum -c SHA256SUMS
 
 输出为 `azusalinux-calamares.iso`。构建时需要联网下载 Ubuntu 依赖。
 安装器使用独立的 Live 层，写入硬盘的系统由官方桌面层和 Azusa 目标层组成。
+目标层包含 Azusa GRUB 主题、Plymouth 开机画面和 GDM 登录标识。
 
 ## NoCloud 自动安装镜像
 
@@ -100,6 +101,8 @@ python3 -m unittest discover -s tests -v
 ```bash
 bash /path/to/azusalinux/tests/verify-installed.sh
 ```
+
+Calamares 安装时如自定义了主机名，把该名称作为脚本的第一个参数传入。
 
 它以 22 项检查验证系统身份、六个包、图形目标、桌面默认值、字体实际解析、壁纸和图标文件，
 并实际运行调色板、吉祥物和系统信息工具。

@@ -34,3 +34,20 @@ SHA256 为 `794e640915a2d72868cfe18f49ffdb5283a7ff9f7d2ff485aa06bf2b9ebbce4d`。
 最终 ISO 的文件校验清单全部通过。Live 层的分区模块与基于 Ubuntu Calamares
 `3.3.14-0ubuntu25.26.04.1` 源码编译出的模块逐字节一致。
 仓库已有的 9 项 ISO 重制回归测试全部通过。
+
+## 启动与首次登录
+
+本轮测试镜像为 `azusalinux-calamares-stage4-final-amd64.iso`。
+SHA256 为 `e2525adae42d7ed1292e6b46b926afdad366ede534d2c00d13ed60455706954a`。
+镜像文件校验清单通过，生成的 initramfs 包含 Azusa Plymouth 主题及标识。
+第③阶段的双盘保护与取消写盘记录使用上文列明的 RC2。
+
+GRUB 默认显示菜单 3 秒，保留高级引导选项。已安装系统的 Plymouth 和 GDM 使用
+AzusaLinux 字标。GNOME 初始设置的欢迎页使用系统名称，Ubuntu 数据共享、
+外观和应用商店页面仍沿用上游文案。安装镜像的 Live 开机画面使用 Ubuntu 样式。
+
+用这张镜像在两块新建的 35 GiB 虚拟磁盘上分别完成 BIOS 和 UEFI 单盘安装，
+UEFI 测试关闭 Secure Boot。关闭虚拟机并断开光驱后，两台机器均从硬盘显示
+Azusa GRUB 菜单、Plymouth 开机画面及 GDM 登录页。通过密码进入中文和英文
+GNOME 会话，完成首次设置后分别执行 `tests/verify-installed.sh`，两台均为
+22 项通过、0 项失败。

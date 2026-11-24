@@ -57,6 +57,9 @@ build_layer() {
             "$root/etc/apt/keyrings/azusalinux-archive-keyring.asc"
         install -m644 "$here/nocloud/apt/azusalinux.sources" "$root/etc/apt/sources.list.d/"
         rm -f "$root/etc/apt/sources.list.d/cdrom.sources"
+        python3 "$here/branding/render-logo.py" "$here/../branding/mascot/azusa-v2.png" \
+            "$work/output/azusa-logo.png"
+        bash "$here/branding/install-target.sh" "$root" "$work/output/azusa-logo.png"
         test -s "$root/boot/vmlinuz"
         local kernel
         kernel=$(basename "$(readlink "$root/boot/vmlinuz")")
