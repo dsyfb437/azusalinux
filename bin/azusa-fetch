@@ -16,6 +16,19 @@ if [ -z "$ROOT" ]; then
     fi
 fi
 
+if [[ "${1:-}" == --version && "$#" == 1 ]]; then
+    if [ -r "$ROOT/dist/version" ]; then
+        read -r version < "$ROOT/dist/version"
+    elif [ -r "$ROOT/debian/changelog" ]; then
+        version="$(sed -n '1s/^[^ ]* (\([^)]*\)).*/\1/p' "$ROOT/debian/changelog")"
+    else
+        printf 'azusa-fetch: version unavailable\n' >&2
+        exit 1
+    fi
+    printf 'azusa-fetch %s\n' "$version"
+    exit
+fi
+
 python3 "$(dirname "${BASH_SOURCE[0]}")/azusa-logo" "$@" \
   || python3 "$ROOT/bin/azusa-logo" "$@"
 

@@ -9,7 +9,7 @@ AzusaLinux 使用 deb 包交付桌面资源与配置，通过重打包 Ubuntu De
 | `bin/` | 命令行工具及桌面配置工具 |
 | `branding/` | 色板、吉祥物和 fastfetch 资源 |
 | `debian/` | 六个 deb 包的元数据和维护脚本 |
-| `packaging/` | 壁纸、图标和发行标识生成器 |
+| `packaging/` | 壁纸、图标、发行标识和签名 APT 仓库构建 |
 | `iso-remaster/` | 当前 ISO 构建入口与自动安装配置 |
 | `tests/` | 构建回归、安装验收和身份包生命周期检查 |
 | `docs/` | 使用、开发及版本验证文档 |
@@ -37,6 +37,24 @@ GRUB 配色仍有上游兼容问题，不应把写入配置变量等同于实际
 
 构建产物存放于忽略的目录，不应提交进源码仓库。Linux 脚本使用 LF 换行；
 从 Windows 环境交付构建源码时，使用 git archive 导出 Git 中的内容。
+
+## 发布 APT 更新
+
+在 Linux 中安装 `apt-utils` 和 `gnupg`，准备六个同版本 deb。每次更新使用新的版本号。
+可按发布顺序传入多套 deb 目录，每套都应包含完整的六个包。
+
+```bash
+bash packaging/build-apt-repo.sh "$output" "$signing_fingerprint" "$previous_debs" "$new_debs"
+```
+
+`output` 必须尚未创建。`signing_fingerprint` 是维护者的完整签名密钥指纹。口令保护的密钥可设
+`AZUSA_SIGNING_PASSPHRASE_STDIN=1`，从标准输入单独提供一行口令。
+
+将构建目录中的公开文件提交到 GitHub Pages 的 `gh-pages` 根目录。不覆盖同版本 deb 的内容，
+并保留旧版本包和 `by-hash` 文件，供仍在读取旧索引的客户端完成下载。
+部署后先在旧版测试机确认 `apt update`、`apt policy` 和实际升级。
+私钥、口令和吊销证书由维护者离线备份。密钥到期前应先发布新公钥并验证旧版客户端的接入路径。
+客户端配置见[软件更新指南](updates.md)。
 
 ## 文档与发布约定
 

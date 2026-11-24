@@ -1,3 +1,10 @@
+azusalinux (0.1.2) resolute; urgency=medium
+
+  * Add azusa-fetch --version for installed package verification.
+  * Build a signed APT repository for AzusaLinux package updates.
+
+ -- azusa <dsyfb437@users.noreply.github.com>  Tue, 24 Nov 2026 19:45:00 +0800
+
 azusalinux (0.1.1) resolute; urgency=medium
 
   * Fix unattended installation of the complete local package set.
