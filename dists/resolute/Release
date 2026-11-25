@@ -2,19 +2,19 @@ Acquire-By-Hash: yes
 Architectures: amd64
 Codename: resolute
 Components: main
-Date: Tue, 24 Nov 2026 11:51:14 +0000
+Date: Wed, 25 Nov 2026 04:42:34 +0000
 Label: AzusaLinux
 Origin: AzusaLinux
 Suite: resolute
 MD5Sum:
- 2df734f5609658ac7d8a12014ab70c0e            10216 main/binary-amd64/Packages
- 9f05b2a9d29dd00c9c7c0e6d36d81355             3245 main/binary-amd64/Packages.gz
+ 834065634831eda454488f2d00157205            15248 main/binary-amd64/Packages
+ e3191f94e566b88a54a2ab533b433244             4547 main/binary-amd64/Packages.gz
 SHA1:
- 68a9850db4fcd647e8f9542c31a88aaf18c6126e            10216 main/binary-amd64/Packages
- 9d46fc95f50dc231660dfd248684ec2d7d13c7bb             3245 main/binary-amd64/Packages.gz
+ d03a24139a6917058d09a6523862bd7f76425271            15248 main/binary-amd64/Packages
+ 79ea352600647922c7858e59604ac2417d1711fa             4547 main/binary-amd64/Packages.gz
 SHA256:
- 7e69f9bc8fdb4a11c716469f89983da5dd0b4fa2ce4e5ff5d8da1b1495eeef08            10216 main/binary-amd64/Packages
- c8798b16f99b004cc89a0f5b2f95606e75d20df94dbeb07f54c0998719ae3357             3245 main/binary-amd64/Packages.gz
+ a921695051f5b99729d27b6139f8f4a928f8f16e0e98a0bda88183ba2b3f90a5            15248 main/binary-amd64/Packages
+ 11a178aeb892d887279ec4de3d2ec9d46e5a3d8bad8266e632ed661a568c9269             4547 main/binary-amd64/Packages.gz
 SHA512:
- a3b80d93df1bbd59fee91eb2cf264b7ac634ea29b12a8b93109e2ef850a7435a6de8c82456b366a2473320e478489721ad64fde11d75ca2745a4efa9ada432de            10216 main/binary-amd64/Packages
- 517d47af7d185c7c2523abdc1f32429b72bd6ffd3487ab7e96d762fc71c0b7a418942e6c74ce02099f49a8c47ddf791d589834bbe18c8b4a444229c94eb1eef6             3245 main/binary-amd64/Packages.gz
+ f162e203ec47bdd7df79238e0e07ab41f1350dedbd7decbb458ea9936aa8293b2333cc70af2930544cac62376cf221f46d4fbc5b0638f40015a3092c7c10d529            15248 main/binary-amd64/Packages
+ 1683d045a1128203d18d614c56cdcfd155858d9aa3129ac313d2b36ae56b6c65f212e39cea0799680b9b11496b0a3df82507099d5c78102bd9fa0c7396ba791f             4547 main/binary-amd64/Packages.gz
