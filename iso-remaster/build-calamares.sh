@@ -47,7 +47,7 @@ build_layer() {
     mkdir -p "$root/run/build"/{lists,archives}/partial
     "${apt[@]}" update
     if [[ $name == target ]]; then
-        local packages=(grub-efi-amd64-bin efibootmgr)
+        local packages=(grub-pc grub-efi-amd64-signed shim-signed efibootmgr)
         local file
         for file in "$debs"/azusa-*.deb; do
             cp "$file" "$root/run/build/"
