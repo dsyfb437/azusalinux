@@ -1,0 +1,10 @@
+[Unit]
+Description=Watch exported Snap desktop entries for icon updates
+
+[Path]
+PathChanged=/var/lib/snapd/desktop/applications
+PathModified=/var/lib/snapd/desktop/applications
+Unit=azusa-icons.service
+
+[Install]
+WantedBy=multi-user.target

@@ -5,5 +5,7 @@ bin/azusa-apply usr/bin
 bin/azusa-mascot usr/bin
 bin/azusa-abstract usr/bin
 bin/azusa-wallpaper usr/bin
-branding usr/share/azusalinux
+branding/palette.json usr/share/azusalinux/branding
+branding/mascot usr/share/azusalinux/branding
+branding/fastfetch usr/share/azusalinux/branding
 build/root/dist/* usr/share/azusalinux/dist

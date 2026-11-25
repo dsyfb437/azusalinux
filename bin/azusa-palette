@@ -26,7 +26,8 @@ def _find_root() -> Path:
     candidates = []
     if os.environ.get("AZUSA_ROOT"):
         candidates.append(Path(os.environ["AZUSA_ROOT"]))
-    candidates.append(Path(__file__).resolve().parent.parent)
+    prefix = Path(__file__).resolve().parent.parent
+    candidates.extend((prefix, prefix / "share" / "azusalinux"))
     candidates.append(Path("/usr/local/share/azusalinux"))
     candidates.append(Path("/usr/share/azusalinux"))
     for c in candidates:

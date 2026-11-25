@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>日志</title>
+  <path fill="#344758" d="M12 7h36q6 0 6 6v36q0 7-6 7H15q-6 0-6-6V11Z"/>
+  <rect x="13" y="10" width="37" height="42" rx="2" fill="#edf2f0"/>
+  <rect x="14" y="10" width="6" height="42" rx="0" fill="#9676c1"/>
+  <path fill="none" stroke="#344758" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M26 21h16m-16 9h16m-16 9h10"/>
+  <path fill="none" stroke="#708a9b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M8 17h7m-7 13h7m-7 13h7"/>
+</svg>

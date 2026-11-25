@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>移动存储</title>
+  <path fill="#344758" d="M14 12h34l8 25v14q0 5-6 5H13q-6 0-6-5V37Z"/>
+  <path fill="#edf2f0" d="M17 15h28l7 21H11Z"/>
+  <rect x="11" y="40" width="41" height="12" rx="3" fill="#708a9b"/>
+  <rect x="16" y="44" width="16" height="3" rx="1" fill="#243746"/>
+  <circle cx="45" cy="46" r="2" fill="#b8a4d6"/>
+  <path fill="#9676c1" d="M32 15h9l3 8H29Z"/>
+</svg>

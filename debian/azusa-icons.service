@@ -1,0 +1,14 @@
+[Unit]
+Description=Refresh themed launchers for Ubuntu desktop system Snaps
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/libexec/azusa-snap-icons.py
+ProtectSystem=strict
+ProtectHome=true
+RuntimeDirectory=azusa-icons
+RuntimeDirectoryPreserve=yes
+
+[Install]
+WantedBy=multi-user.target

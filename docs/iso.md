@@ -1,10 +1,45 @@
-# ISO：官方镜像 + 自动安装
+# ISO 构建
 
-当前方案使用官方 Ubuntu Desktop ISO，加入 Azusa deb 和 NoCloud 配置，
-通过 xorriso 的 `-boot_image any replay` 保留原镜像的引导结构。
-`iso/` 和 `iso-mkosi/` 是早期方案，当前入口是 `iso-remaster/build.sh`。
+两个构建入口都基于官方 Ubuntu Desktop ISO，用 xorriso 保留 BIOS 和 UEFI 引导结构。
 
-## 构建
+## Calamares 交互式安装镜像
+
+开发版从 Live 桌面打开 AzusaLinux 安装器。安装器在用户确认后写盘，
+目标系统包含 GNOME、六个 Azusa 软件包以及签名 APT 源。安装所需文件都在镜像内。
+
+在 BIOS 模式选择“抹除磁盘”时，安装器将系统和 GRUB 写入同一块选定磁盘。
+写盘前可在摘要中核对磁盘设备名。测试布局、保护盘校验和固件配置见
+[Calamares 安装验收](calamares-validation.md)。
+
+在独立的 Ubuntu 26.04 amd64 构建机上，给 Ubuntu 主仓库及更新仓库启用源码索引
+（在 `ubuntu.sources` 对应的 `Types` 行使用 `deb deb-src`），然后安装构建依赖。
+
+```bash
+sudo apt-get update
+sudo apt-get install build-essential xorriso squashfs-tools dpkg-dev util-linux patch python3-pil fonts-dejavu-core librsvg2-bin
+sudo apt-get build-dep calamares
+```
+
+构建脚本取得与 Live 安装器相同版本的 Ubuntu 源码，应用 Azusa 的 BIOS 整盘安装补丁，
+并将重新编译的分区模块放入 Live 层。
+从下文所述的已校验官方 ISO 和同版本 Azusa deb 构建。工作目录需要使用支持
+OverlayFS 的 Linux 文件系统，最后一个参数指定将由脚本创建的新目录。
+
+```bash
+sudo bash iso-remaster/build-calamares.sh \
+  /path/to/ubuntu-26.04.1-desktop-amd64.iso \
+  /path/to/azusa-debs /var/tmp/azusa-calamares-build
+cd /var/tmp/azusa-calamares-build
+sha256sum -c SHA256SUMS
+```
+
+输出为 `azusalinux-calamares.iso`。构建时需要联网下载 Ubuntu 依赖。
+安装器使用独立的 Live 层，写入硬盘的系统由官方桌面层和 Azusa 目标层组成。
+目标层包含 Azusa GRUB 主题、Plymouth 开机画面和 GDM 登录标识。
+
+## NoCloud 自动安装镜像
+
+`iso-remaster/build.sh` 用于构建带有自动分区和预设账户的镜像。以下步骤适用于该入口。
 
 在独立的 Ubuntu 26.04 amd64 构建环境中安装 `build-essential`、`debhelper`、`xorriso`、
 `dpkg-dev`、`python3-pil`、`python3-yaml`。从指定 Git 提交用 `git archive` 导出源码，
@@ -66,6 +101,8 @@ python3 -m unittest discover -s tests -v
 ```bash
 bash /path/to/azusalinux/tests/verify-installed.sh
 ```
+
+Calamares 安装时如自定义了主机名，把该名称作为脚本的第一个参数传入。
 
 它以 22 项检查验证系统身份、六个包、图形目标、桌面默认值、字体实际解析、壁纸和图标文件，
 并实际运行调色板、吉祥物和系统信息工具。

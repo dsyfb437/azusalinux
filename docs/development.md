@@ -10,7 +10,7 @@ AzusaLinux 使用 deb 包交付桌面资源与配置，通过重打包 Ubuntu De
 | `branding/` | 色板、吉祥物和 fastfetch 资源 |
 | `debian/` | 六个 deb 包的元数据和维护脚本 |
 | `packaging/` | 壁纸、图标、发行标识和签名 APT 仓库构建 |
-| `iso-remaster/` | 当前 ISO 构建入口与自动安装配置 |
+| `iso-remaster/` | ISO 构建入口、Calamares 配置与目标系统启动主题 |
 | `tests/` | 构建回归、安装验收和身份包生命周期检查 |
 | `docs/` | 使用、开发及版本验证文档 |
 | `iso/`、`iso-mkosi/` | 早期构建方案，非当前构建入口 |
@@ -20,13 +20,13 @@ AzusaLinux 使用 deb 包交付桌面资源与配置，通过重打包 Ubuntu De
 软件包清单和构建命令见[软件包指南](packages.md)。
 
 - GNOME 默认值由 azusa-settings 的 GSettings override 提供，已有用户配置优先。
-- Azusa-Papirus 继承 Papirus-Dark，以独立主题覆盖文件夹图标。
+- Azusa-Papirus 提供系统工具、桌面入口和随强调色变化的文件夹图标，其余图标从 Papirus-Dark 等父主题继承。[系统图标](app-icons.md)
 - 系统身份由 azusa-release 管理，使用 dpkg-divert 保护 Ubuntu 原件。
 - Ptyxis 的配置档需要在用户会话中选择调色板，不能仅依赖全局 override。
 - 色板数据来自 `branding/palette.json`，修改方式见[配色设计](color.md)。
 
 旧的 `azusa-setup` 和手工恢复脚本不属于当前 ISO 安装路径。
-GRUB 配色仍有上游兼容问题，不应把写入配置变量等同于实际菜单已改变。
+Calamares 镜像将 GRUB 图形主题写入目标层，安装时由 `grub-mkconfig` 载入。
 
 ## 构建与验证
 

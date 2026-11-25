@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>应用中心</title>
+  <path fill="#344758" d="M11 21h9v-3a12 12 0 0 1 24 0v3h9l4 30q0 5-5 5H12q-6 0-5-5Z"/>
+  <path fill="none" stroke="#b9ced7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M24 22v-4a8 8 0 0 1 16 0v4"/>
+  <path fill="#edf2f0" d="M13 24h38l3 26q0 3-3 3H13q-3 0-3-3Z"/>
+  <path fill="#9676c1" d="m32 28 11 6-11 6-11-6Z"/>
+  <path fill="#344758" d="m21 37 9 5v8l-9-5Z"/>
+  <path fill="#708a9b" d="m34 42 9-5v8l-9 5Z"/>
+</svg>

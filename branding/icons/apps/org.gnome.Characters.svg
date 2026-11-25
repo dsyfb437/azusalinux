@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>字符</title>
+  <rect x="7" y="13" width="35" height="37" rx="4" fill="#708a9b"/>
+  <rect x="16" y="7" width="40" height="46" rx="5" fill="#344758"/>
+  <rect x="19" y="10" width="34" height="39" rx="3" fill="#edf2f0"/>
+  <path fill="#9676c1" d="m35 16 4 10 10 3-10 4-4 11-4-11-10-4 10-3Z"/>
+  <path fill="#fbfaf4" d="m35 25 2 4-2 5-2-5Z"/>
+</svg>

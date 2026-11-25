@@ -1,0 +1,4 @@
+#sidebarApp QPushButton#aboutButton,
+#sidebarApp QPushButton#debugButton {
+    color: #ece8f6;
+}

@@ -1,0 +1,23 @@
+componentName: azusa
+windowPlacement: center
+windowExpanding: normal
+sidebar: widget
+navigation: widget
+slideshow: lake.qml
+slideshowAPI: 1
+style:
+  SidebarBackground: "#211b3d"
+  SidebarText: "#ece8f6"
+  SidebarTextCurrent: "#ffffff"
+  SidebarBackgroundCurrent: "#70577f"
+strings:
+  productName: AzusaLinux
+  shortProductName: AzusaLinux
+  versionedName: AzusaLinux
+  shortVersionedName: AzusaLinux
+  bootloaderEntryName: AzusaLinux
+images:
+  productBanner: lake-banner.jpg
+  productIcon: azusa.png
+  productLogo: azusa.png
+  productWelcome: azusa.png

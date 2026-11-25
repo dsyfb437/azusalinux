@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>备份</title>
+  <path fill="#344758" d="M8 26 17 9h31l9 17v23q0 6-6 6H13q-6 0-6-6Z"/>
+  <path fill="#b9ced7" d="m11 25 8-13h27l7 13Z"/>
+  <rect x="10" y="28" width="44" height="23" rx="3" fill="#edf2f0"/>
+  <path fill="#9676c1" d="M26 12h8l5 13h-9Z"/>
+  <path fill="none" stroke="#344758" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M22 39a9 9 0 1 1 9 10m-9-16v7h7"/>
+</svg>

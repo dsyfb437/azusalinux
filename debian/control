@@ -19,8 +19,8 @@ Package: azusa-artwork
 Architecture: all
 Depends: ${misc:Depends}
 Description: AzusaLinux wallpapers
- Mascot wallpapers (light and dark) generated from the AzusaLinux palette,
- registered in the GNOME wallpaper picker.
+ Light and dark lake landscapes and mascot illustrations for the GNOME
+ wallpaper picker.
 
 Package: azusa-settings
 Architecture: all
@@ -37,11 +37,10 @@ Description: AzusaLinux desktop (metapackage)
 
 Package: azusa-icons
 Architecture: all
-Depends: ${misc:Depends}, papirus-icon-theme
-Description: Azusa folder colours for Papirus
- An icon theme inheriting Papirus-Dark that overrides only the folder icons
- with Papirus' built-in violet variants, so folder colours survive upgrades
- of papirus-icon-theme (unlike running papirus-folders over the system theme).
+Depends: ${misc:Depends}, papirus-icon-theme, python3-gi, gir1.2-glib-2.0
+Description: AzusaLinux system and desktop icons
+ Original system launcher, device and desktop icons with matching Papirus
+ folders. GNOME accent colours select a coordinated theme for each user.
 
 Package: azusa-release
 Architecture: all

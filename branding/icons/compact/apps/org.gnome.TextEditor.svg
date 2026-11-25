@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>文本编辑器</title>
+  <path fill="#344758" d="M10 5h29l13 13v40H10Z"/>
+  <path fill="#edf2f0" d="M14 9h23l11 11v34H14Z"/>
+  <path fill="none" stroke="#344758" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M20 21h13m-13 9h14"/>
+  <path fill="#344758" d="m24 49 3-12 22-22 10 9-23 22Z"/>
+  <path fill="#b8a4d6" d="m31 38 17-17 5 5-18 16Z"/>
+</svg>

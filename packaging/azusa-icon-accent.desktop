@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=AzusaLinux icon colours
+Exec=/usr/bin/python3 /usr/libexec/azusa-icon-accent.py
+OnlyShowIn=GNOME;
+NoDisplay=true

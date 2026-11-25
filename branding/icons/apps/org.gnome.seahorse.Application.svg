@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>密码和密钥</title>
+  <path fill="#344758" d="M12 12q10-11 22-3 11 7 7 19l-3 5 18 18-1 6h-8l-5-5v-6h-6l-7-8q-14 3-21-7-5-11 4-19Z"/>
+  <path fill="#b9ced7" d="m33 30 19 21v3h-4l-5-5v-6h-6l-6-8Z"/>
+  <circle cx="24" cy="22" r="14" fill="#9676c1"/>
+  <circle cx="21" cy="19" r="5" fill="#fbfaf4"/>
+  <path fill="#b8a4d6" d="m27 30 5-6 3 3-5 6Z"/>
+</svg>

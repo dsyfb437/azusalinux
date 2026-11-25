@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
+<wallpapers>
+  <wallpaper>
+    <name>Azusa Lake — Dawn and Night</name>
+    <name xml:lang="zh_CN">朝雾与夜湖</name>
+    <filename>/usr/share/backgrounds/azusa/lake-dawn.jpg</filename>
+    <filename-dark>/usr/share/backgrounds/azusa/lake-night.jpg</filename-dark>
+    <options>zoom</options>
+  </wallpaper>
+  <wallpaper>
+    <name>Lakeside Stitches</name>
+    <name xml:lang="zh_CN">湖畔针脚</name>
+    <filename>/usr/share/backgrounds/azusa/lake-stitch.jpg</filename>
+    <options>zoom</options>
+  </wallpaper>
+</wallpapers>

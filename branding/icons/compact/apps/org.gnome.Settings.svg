@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>设置</title>
+  <rect x="6" y="6" width="52" height="52" rx="8" fill="#344758"/>
+  <rect x="10" y="10" width="44" height="44" rx="5" fill="#edf2f0"/>
+  <path fill="#9676c1" d="M14 10h19l-4 5H10Z"/>
+  <path fill="none" stroke="#344758" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" d="M17 25h30m-30 15h30"/>
+  <rect x="20" y="18" width="10" height="14" rx="3" fill="#344758"/>
+  <rect x="34" y="33" width="10" height="14" rx="3" fill="#344758"/>
+  <rect x="23" y="21" width="4" height="8" rx="1" fill="#b8a4d6"/>
+  <rect x="37" y="36" width="4" height="8" rx="1" fill="#b8a4d6"/>
+</svg>

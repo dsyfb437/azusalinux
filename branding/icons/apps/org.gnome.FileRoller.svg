@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>文件压缩器</title>
+  <path fill="#344758" d="M11 9h37l6 6v37l-6 5H12l-4-5V15Z"/>
+  <path fill="#edf2f0" d="M13 12h33l5 5v32H11V15Z"/>
+  <rect x="12" y="49" width="39" height="4" rx="1" fill="#708a9b"/>
+  <path fill="#9676c1" d="M26 12h12v21H26Z"/>
+  <path fill="none" stroke="#fbfaf4" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M27 16h5m0 5h5m-10 5h5"/>
+  <rect x="26" y="32" width="12" height="14" rx="3" fill="#344758"/>
+  <rect x="29" y="36" width="6" height="6" rx="1" fill="#b8a4d6"/>
+</svg>

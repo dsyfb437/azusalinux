@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>回收站（有内容）</title>
+  <path fill="#fbfaf4" d="m17 18 4-12 12 6 8-7 8 9-4 7Z"/>
+  <path fill="#b8a4d6" d="m31 17 10-9 6 7-3 5Z"/>
+  <path fill="#344758" d="M12 20h40l-4 32q-1 5-6 5H21q-5 0-6-5Z"/>
+  <path fill="#edf2f0" d="M16 23h32l-4 28q0 2-3 2H22q-3 0-3-2Z"/>
+  <rect x="9" y="17" width="46" height="7" rx="2" fill="#9676c1"/>
+  <path fill="none" stroke="#708a9b" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" d="m24 29 2 17m7-17v17m8-17-2 17"/>
+</svg>

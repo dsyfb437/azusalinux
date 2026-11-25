@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>文件</title>
+  <path fill="#344758" d="M4 16q0-4 4-4h16l8 8h20v32H8q-4 0-4-4Z"/>
+  <path fill="#edf2f0" d="M10 21h29l5 5H10Z"/>
+  <path fill="#344758" d="M4 28h28l8-6h20l-5 29q-1 5-6 5H12q-5 0-6-5Z"/>
+  <path fill="#edf2f0" d="M8 32h24l9-6h15l-5 25H12Z"/>
+  <path fill="#9676c1" d="M8 31h24l9-6h15l-1 7H42l-8 6H9Z"/>
+  <path fill="#344758" d="M15 43h13l-3 4H15Z"/>
+</svg>

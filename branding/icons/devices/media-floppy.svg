@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>软盘</title>
+  <path fill="#344758" d="M10 7h35l10 10v37q0 3-4 3H12q-5 0-5-5V11Z"/>
+  <path fill="#b9ced7" d="M16 8h25v17H16Z"/>
+  <rect x="31" y="10" width="6" height="12" rx="1" fill="#344758"/>
+  <rect x="14" y="30" width="34" height="23" rx="2" fill="#edf2f0"/>
+  <rect x="14" y="30" width="34" height="6" rx="1" fill="#9676c1"/>
+  <path fill="none" stroke="#708a9b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M20 42h19m-19 6h13"/>
+</svg>
