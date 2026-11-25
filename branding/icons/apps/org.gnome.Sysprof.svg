@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>系统性能分析</title>
+  <path fill="#344758" d="M13 8h32l11 11v30q0 7-7 7H14q-7 0-7-7V15q0-7 6-7Z"/>
+  <path fill="#243746" d="M14 11h30l9 9v28q0 4-4 4H14q-4 0-4-4V16q0-5 4-5Z"/>
+  <path fill="none" stroke="#b8a4d6" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round" d="M14 39h8l6-17 8 23 6-12h8"/>
+  <rect x="15" y="17" width="10" height="2" rx="1" fill="#708a9b"/>
+</svg>

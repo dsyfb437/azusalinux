@@ -1,1 +1,4 @@
-build/icons/Azusa-Papirus usr/share/icons
+build/icons/Azusa-Papirus* usr/share/icons
+packaging/azusa-icon-accent.py usr/libexec
+packaging/azusa-snap-icons.py usr/libexec
+packaging/azusa-icon-accent.desktop etc/xdg/autostart

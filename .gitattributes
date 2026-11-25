@@ -6,5 +6,6 @@ azusa-setup text eol=lf
 bin/* text eol=lf
 iso-remaster/nocloud/* text eol=lf
 iso-remaster/calamares/** text eol=lf
+iso-remaster/calamares/**/*.jpg binary
 iso-remaster/branding/** text eol=lf
 iso-remaster/*.patch text eol=lf whitespace=-blank-at-eol

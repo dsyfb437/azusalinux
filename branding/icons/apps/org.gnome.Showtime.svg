@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>视频播放器</title>
+  <rect x="7" y="15" width="50" height="39" rx="5" fill="#344758"/>
+  <rect x="10" y="23" width="44" height="27" rx="3" fill="#243746"/>
+  <path fill="#344758" d="m7 15 47-8 2 12-47 8Z"/>
+  <path fill="#b8a4d6" d="m10 16 9-2-5 7-4 1Zm16-3 9-2-5 7-9 2Zm16-3 9-2-5 7-9 2Z"/>
+  <path fill="#fbfaf4" d="M27 29v15l14-8Z"/>
+</svg>

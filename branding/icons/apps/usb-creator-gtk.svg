@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>启动盘创建器</title>
+  <path fill="#344758" d="M22 5h20v14h7v30q0 9-9 9H24q-9 0-9-9V19h7Z"/>
+  <rect x="25" y="8" width="14" height="12" rx="0" fill="#b9ced7"/>
+  <path fill="none" stroke="#344758" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M28 12v3m8-3v3"/>
+  <rect x="18" y="22" width="28" height="32" rx="5" fill="#edf2f0"/>
+  <path fill="#9676c1" d="m23 36 9-10 9 10h-6v9h-6v-9Z"/>
+  <rect x="27" y="48" width="10" height="2.5" rx="1" fill="#708a9b"/>
+</svg>

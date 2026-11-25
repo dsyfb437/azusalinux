@@ -20,7 +20,7 @@ AzusaLinux 使用 deb 包交付桌面资源与配置，通过重打包 Ubuntu De
 软件包清单和构建命令见[软件包指南](packages.md)。
 
 - GNOME 默认值由 azusa-settings 的 GSettings override 提供，已有用户配置优先。
-- Azusa-Papirus 继承 Papirus-Dark，以独立主题覆盖文件夹图标。
+- Azusa-Papirus 提供系统工具、桌面入口和随强调色变化的文件夹图标，其余图标从 Papirus-Dark 等父主题继承。[系统图标](app-icons.md)
 - 系统身份由 azusa-release 管理，使用 dpkg-divert 保护 Ubuntu 原件。
 - Ptyxis 的配置档需要在用户会话中选择调色板，不能仅依赖全局 override。
 - 色板数据来自 `branding/palette.json`，修改方式见[配色设计](color.md)。

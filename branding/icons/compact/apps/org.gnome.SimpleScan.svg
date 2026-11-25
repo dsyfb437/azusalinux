@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>文档扫描仪</title>
+  <path fill="#344758" d="m8 33 12-25h36L45 34Z"/>
+  <path fill="#b9ced7" d="m15 30 9-18h26l-8 18Z"/>
+  <path fill="#344758" d="M7 32h47l5 12v12H5V43Z"/>
+  <path fill="#edf2f0" d="M11 36h39l4 7H9Z"/>
+  <rect x="13" y="47" width="26" height="4" rx="1" fill="#9676c1"/>
+</svg>

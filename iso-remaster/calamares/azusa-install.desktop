@@ -3,6 +3,6 @@ Type=Application
 Name=Install AzusaLinux
 Name[zh_CN]=安装 AzusaLinux
 Exec=/usr/local/bin/azusa-install
-Icon=system-software-install
+Icon=azusalinux-logo
 Terminal=false
 Categories=System;

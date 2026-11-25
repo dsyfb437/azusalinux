@@ -51,9 +51,17 @@ expect "强调色" "purple" "$(gs org.gnome.desktop.interface accent-color)"
 expect "配色方案" "prefer-dark" "$(gs org.gnome.desktop.interface color-scheme)"
 expect "界面字体" "Inter 11" "$(gs org.gnome.desktop.interface font-name)"
 expect "等宽字体" "JetBrains Mono 11" "$(gs org.gnome.desktop.interface monospace-font-name)"
-expect "图标主题" "Papirus-Dark" "$(gs org.gnome.desktop.interface icon-theme)"
-contains "深色壁纸" "mascot-dark" "$(gs org.gnome.desktop.background picture-uri-dark)"
-contains "浅色壁纸" "mascot-light" "$(gs org.gnome.desktop.background picture-uri)"
+icon_theme=Papirus-Dark
+if [ -f /usr/share/icons/Azusa-Papirus/index.theme ]; then
+    icon_theme=Azusa-Papirus
+    accent=$(gs org.gnome.desktop.interface accent-color)
+    if [ -f "/usr/share/icons/Azusa-Papirus-$accent/index.theme" ]; then
+        icon_theme="Azusa-Papirus-$accent"
+    fi
+fi
+expect "图标主题" "$icon_theme" "$(gs org.gnome.desktop.interface icon-theme)"
+contains "深色壁纸" "lake-night.jpg" "$(gs org.gnome.desktop.background picture-uri-dark)"
+contains "浅色壁纸" "lake-dawn.jpg" "$(gs org.gnome.desktop.background picture-uri)"
 
 head_ "字体与图标"
 for pkg in fonts-inter fonts-jetbrains-mono fastfetch papirus-icon-theme; do
@@ -75,7 +83,10 @@ else
     bad "界面字体实际可用" "fc-match 回退了，装 fonts-inter"
 fi
 
-if grep -q "#7e57c2" /usr/share/icons/Papirus-Dark/48x48/places/folder.svg 2>/dev/null; then
+if [[ "$icon_theme" == Azusa-Papirus* ]]; then
+    folder="/usr/share/icons/$icon_theme/48x48/places/folder.svg"
+    if [ -s "$folder" ]; then ok "文件夹图标" "$icon_theme"; else bad "文件夹图标" "$folder 缺失"; fi
+elif grep -q "#7e57c2" /usr/share/icons/Papirus-Dark/48x48/places/folder.svg 2>/dev/null; then
     ok "文件夹颜色" "violet (#7e57c2)"
 else
     bad "文件夹颜色" "不是 violet，跑 sudo azusa-apply --system --apply"
@@ -103,7 +114,7 @@ for cmd in azusa-fetch azusa-apply azusa-palette azusa-mascot; do
 done
 
 head_ "文件"
-[ -f "$HOME/.local/share/backgrounds/azusa/mascot-dark-2880x1800.jpg" ] \
+[ -f "$HOME/.local/share/backgrounds/azusa/lake-night.jpg" ] \
     && ok "壁纸文件" "用户目录" || bad "壁纸文件" "缺失"
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/icons/Azusa/index.theme" ] \
     && bad "自定义图标主题" "不该存在（v1 已弃用）" || ok "自定义图标主题" "已清理"

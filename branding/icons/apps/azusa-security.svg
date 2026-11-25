@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>安全中心</title>
+  <path fill="#344758" d="M32 5q10 8 22 9v17q-1 17-22 28Q11 49 10 32V14q12-1 22-9Z"/>
+  <path fill="#edf2f0" d="M32 10q8 5 18 7v14q-1 14-18 23-17-10-18-23V17q10-1 18-7Z"/>
+  <path fill="#b8a4d6" d="M32 13q6 5 15 6v11q0 12-15 20Z"/>
+  <path fill="none" stroke="#344758" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" d="m21 31 8 8 15-17"/>
+</svg>

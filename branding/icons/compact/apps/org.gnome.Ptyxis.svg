@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>终端</title>
+  <path fill="#344758" d="M6 8h42l11 11v35H6Z"/>
+  <path fill="#edf2f0" d="M10 12h36l9 9v28H10Z"/>
+  <path fill="#344758" d="M14 16h30l7 7v22H14Z"/>
+  <path fill="#9676c1" d="M32 12h14l9 9v5L43 16H29Z"/>
+  <path fill="none" stroke="#edf2f0" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round" d="m20 24 7 7-7 7"/>
+  <path fill="#b8a4d6" d="M32 35h13l-3 5H30Z"/>
+</svg>

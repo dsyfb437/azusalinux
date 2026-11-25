@@ -24,7 +24,7 @@ dpkg-buildpackage -b -us -uc
 | azusa-tools | 命令行与配置工具 |
 | azusa-artwork | 壁纸 |
 | azusa-settings | GNOME 默认设置和终端资源 |
-| azusa-icons | Papirus 衍生图标主题 |
+| azusa-icons | 系统与桌面图标、Papirus 文件夹和 GNOME 强调色联动 |
 
 ## 安装与应用
 

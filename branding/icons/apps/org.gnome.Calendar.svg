@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>日历</title>
+  <rect x="7" y="12" width="50" height="44" rx="6" fill="#344758"/>
+  <rect x="10" y="16" width="44" height="36" rx="3" fill="#fbfaf4"/>
+  <path fill="#9676c1" d="M10 16h44v11H10Z"/>
+  <path fill="none" stroke="#344758" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M19 8v11M44 8v11"/>
+  <rect x="17" y="32" width="7" height="6" rx="1" fill="#b9ced7"/>
+  <rect x="29" y="32" width="7" height="6" rx="1" fill="#344758"/>
+  <rect x="40" y="32" width="7" height="6" rx="1" fill="#b9ced7"/>
+  <rect x="17" y="42" width="7" height="6" rx="1" fill="#b9ced7"/>
+  <rect x="29" y="42" width="7" height="6" rx="1" fill="#9676c1"/>
+</svg>

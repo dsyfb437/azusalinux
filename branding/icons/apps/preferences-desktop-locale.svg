@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>语言支持</title>
+  <path fill="#344758" d="M6 10h37q4 0 4 5v24H24L13 49v-10H9q-4 0-4-4V15Z"/>
+  <path fill="#edf2f0" d="M9 14h34v20H21l-5 5v-5H9Z"/>
+  <path fill="none" stroke="#344758" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M15 20h18m-10-4v3m6 1q-1 8-12 11m2-9q3 6 10 8"/>
+  <path fill="#9676c1" d="M32 26h23q4 0 4 4v18q0 4-4 4h-5v6l-9-6H32q-4 0-4-4V31Z"/>
+  <path fill="none" stroke="#fbfaf4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="m35 45 6-13 6 13m-9-4h6"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>字体</title>
+  <path fill="#344758" d="M14 5h26l12 12v37q0 5-5 5H16q-5 0-5-5V10q0-5 3-5Z"/>
+  <path fill="#fbfaf4" d="M16 8h23l10 11v33q0 3-3 3H17q-3 0-3-3V11q0-3 2-3Z"/>
+  <path fill="#9676c1" d="M38 8v13h11v-3Z"/>
+  <path fill="#344758" d="m19 45 9-22h5l9 22h-6l-2-6H26l-2 6Zm9-11h5l-2.5-7Z"/>
+  <path fill="none" stroke="#9676c1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M20 49h19"/>
+</svg>

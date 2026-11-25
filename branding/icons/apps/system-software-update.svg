@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>软件更新器</title>
+  <path fill="#344758" d="M13 8h32l11 11v30q0 7-7 7H14q-7 0-7-7V15q0-7 6-7Z"/>
+  <path fill="#edf2f0" d="M14 11h30l9 9v28q0 4-4 4H14q-4 0-4-4V16q0-5 4-5Z"/>
+  <path fill="#344758" d="M17 38a16 16 0 0 1 23-19l4-4v13H31l5-5a11 11 0 0 0-14 14Z"/>
+  <path fill="#9676c1" d="M47 28a16 16 0 0 1-23 18l-5 5V38h14l-5 5a11 11 0 0 0 14-13Z"/>
+</svg>

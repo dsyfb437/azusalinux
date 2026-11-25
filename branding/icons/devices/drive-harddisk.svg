@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>硬盘</title>
+  <path fill="#344758" d="m8 24 6-15h36l7 15v27q0 6-6 6H13q-6 0-6-6Z"/>
+  <path fill="#b9ced7" d="m12 24 5-12h30l6 12Z"/>
+  <rect x="11" y="27" width="42" height="25" rx="3" fill="#edf2f0"/>
+  <rect x="17" y="33" width="30" height="5" rx="2" fill="#344758"/>
+  <rect x="17" y="44" width="12" height="3" rx="1" fill="#708a9b"/>
+  <rect x="41" y="44" width="6" height="3" rx="1" fill="#9676c1"/>
+</svg>

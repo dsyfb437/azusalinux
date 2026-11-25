@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>高级网络配置</title>
+  <path fill="none" stroke="#344758" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M32 23v12m-17 8v-9h34v9"/>
+  <rect x="19" y="6" width="26" height="20" rx="3" fill="#344758"/>
+  <rect x="22" y="9" width="20" height="12" rx="1" fill="#edf2f0"/>
+  <rect x="26" y="12" width="12" height="5" rx="1" fill="#9676c1"/>
+  <rect x="6" y="40" width="20" height="15" rx="3" fill="#344758"/>
+  <rect x="9" y="43" width="14" height="8" rx="1" fill="#b9ced7"/>
+  <rect x="38" y="40" width="20" height="15" rx="3" fill="#344758"/>
+  <rect x="41" y="43" width="14" height="8" rx="1" fill="#b9ced7"/>
+</svg>

@@ -16,16 +16,16 @@ icon-theme='Azusa-Papirus'
 titlebar-font='Inter Bold 11'
 
 [org.gnome.desktop.background]
-picture-uri='file:///usr/share/backgrounds/azusa/mascot-light-2880x1800.jpg'
-picture-uri-dark='file:///usr/share/backgrounds/azusa/mascot-dark-2880x1800.jpg'
+picture-uri='file:///usr/share/backgrounds/azusa/lake-dawn.jpg'
+picture-uri-dark='file:///usr/share/backgrounds/azusa/lake-night.jpg'
 picture-options='zoom'
 
 [org.gnome.desktop.background:ubuntu]
-picture-uri='file:///usr/share/backgrounds/azusa/mascot-light-2880x1800.jpg'
-picture-uri-dark='file:///usr/share/backgrounds/azusa/mascot-dark-2880x1800.jpg'
+picture-uri='file:///usr/share/backgrounds/azusa/lake-dawn.jpg'
+picture-uri-dark='file:///usr/share/backgrounds/azusa/lake-night.jpg'
 
 [org.gnome.desktop.screensaver:ubuntu]
-picture-uri='file:///usr/share/backgrounds/azusa/mascot-dark-2880x1800.jpg'
+picture-uri='file:///usr/share/backgrounds/azusa/lake-night.jpg'
 
 [org.gnome.Ptyxis]
 font-name='JetBrains Mono 11'

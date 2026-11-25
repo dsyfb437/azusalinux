@@ -15,6 +15,7 @@ VERSION_ID="{version}"
 VERSION="{version}"
 VERSION_CODENAME=azusa
 ID=azusalinux
+LOGO=azusalinux-logo
 ID_LIKE="ubuntu debian"
 UBUNTU_CODENAME=resolute
 HOME_URL="https://azusaaa.com"

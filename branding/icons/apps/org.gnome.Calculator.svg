@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>计算器</title>
+  <rect x="13" y="5" width="38" height="53" rx="6" fill="#344758"/>
+  <rect x="16" y="8" width="32" height="46" rx="4" fill="#edf2f0"/>
+  <rect x="20" y="12" width="24" height="11" rx="2" fill="#243746"/>
+  <path fill="none" stroke="#8bc6be" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M33 18h7"/>
+  <rect x="20" y="28" width="6" height="5" rx="1.5" fill="#708a9b"/>
+  <rect x="29" y="28" width="6" height="5" rx="1.5" fill="#708a9b"/>
+  <rect x="20" y="36" width="6" height="5" rx="1.5" fill="#708a9b"/>
+  <rect x="29" y="36" width="6" height="5" rx="1.5" fill="#708a9b"/>
+  <rect x="20" y="44" width="6" height="5" rx="1.5" fill="#708a9b"/>
+  <rect x="29" y="44" width="6" height="5" rx="1.5" fill="#708a9b"/>
+  <rect x="38" y="28" width="6" height="5" rx="1.5" fill="#9676c1"/>
+  <rect x="38" y="36" width="6" height="13" rx="2" fill="#9676c1"/>
+</svg>

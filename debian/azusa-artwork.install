@@ -1,2 +1,4 @@
 build/wallpapers/mascot-*.jpg usr/share/backgrounds/azusa
+branding/wallpapers/lake-*.jpg usr/share/backgrounds/azusa
 packaging/azusa-wallpapers.xml usr/share/gnome-background-properties
+packaging/azusa-lake-wallpapers.xml usr/share/gnome-background-properties

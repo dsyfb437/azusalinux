@@ -35,7 +35,7 @@ fi
 
 su_do() { sudo "$@"; }
 
-say "1/6 安装依赖"
+say "1/5 安装依赖"
 missing=()
 for p in "${PACKAGES[@]}"; do
     dpkg-query -W -f='${Status}' "$p" 2>/dev/null | grep -q "install ok installed" || missing+=("$p")
@@ -48,23 +48,16 @@ else
     su_do DEBIAN_FRONTEND=noninteractive apt-get install -y "${missing[@]}"
 fi
 
-say "2/6 生成壁纸"
-if [ -f dist/wallpapers/mascot-dark-2880x1800.jpg ]; then
-    ok "已存在，跳过"
-else
-    python3 bin/azusa-mascot
-fi
-
-say "3/6 用户级配置（终端 / 字体 / 强调色 / 壁纸 / 图标主题）"
+say "2/5 用户级配置（终端 / 字体 / 强调色 / 壁纸 / 图标主题）"
 python3 bin/azusa-apply --all --apply
 
-say "4/6 系统级配置（GRUB / 文件夹染色）"
+say "3/5 系统级配置（GRUB / 文件夹染色）"
 su_do ./bin/azusa-apply --system --apply
 
-say "5/6 系统身份"
+say "4/5 系统身份"
 su_do ./azusa-setup --apply
 
-say "6/6 工具装进 PATH"
+say "5/5 工具装进 PATH"
 su_do ./install.sh
 
 say "验收"

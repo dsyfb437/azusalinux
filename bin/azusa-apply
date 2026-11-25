@@ -32,7 +32,8 @@ def _find_root() -> Path:
     candidates = []
     if os.environ.get("AZUSA_ROOT"):
         candidates.append(Path(os.environ["AZUSA_ROOT"]))
-    candidates.append(Path(__file__).resolve().parent.parent)
+    prefix = Path(__file__).resolve().parent.parent
+    candidates.extend((prefix, prefix / "share" / "azusalinux"))
     candidates.append(Path("/usr/local/share/azusalinux"))
     candidates.append(Path("/usr/share/azusalinux"))
     for c in candidates:
@@ -285,13 +286,16 @@ def apply_fonts(apply: bool) -> None:
 def apply_wallpaper(dest_root: Path, apply: bool) -> None:
     """壁纸装到用户目录并设为背景（明暗分开），不需要 root。"""
     wallpaper_dir = dest_root / ".local/share/backgrounds/azusa"
+    source_dir = ROOT / "branding" / "wallpapers"
+    if not source_dir.is_dir():
+        source_dir = ROOT.parent / "backgrounds" / "azusa"
     pairs = {
-        "picture-uri-dark": DIST / "wallpapers/mascot-dark-2880x1800.jpg",
-        "picture-uri": DIST / "wallpapers/mascot-light-2880x1800.jpg",
+        "picture-uri-dark": source_dir / "lake-night.jpg",
+        "picture-uri": source_dir / "lake-dawn.jpg",
     }
     missing = [p.name for p in pairs.values() if not p.exists()]
     if missing:
-        print(f"   {warn(f'缺壁纸 {missing}，先跑 azusa-mascot')}")
+        print(f"   {warn(f'找不到壁纸 {missing}，请检查 {source_dir} 或安装 azusa-artwork')}")
         return
 
     installed: dict[str, Path] = {}
@@ -324,7 +328,17 @@ def apply_wallpaper(dest_root: Path, apply: bool) -> None:
 
 
 def apply_icons(root: Path, apply: bool) -> None:
-    """图标：用 Papirus + 紫色文件夹，而不是自己画。"""
+    """Prefer the installed Azusa theme, including the user's accent variant."""
+    if Path("/usr/share/icons/Azusa-Papirus/index.theme").exists():
+        if not user_session_ok():
+            return
+        _, accent, _ = run(["gsettings", "get", "org.gnome.desktop.interface", "accent-color"])
+        variant = "Azusa-Papirus-" + accent.strip().strip("'")
+        target = variant if Path("/usr/share/icons", variant, "index.theme").exists() else "Azusa-Papirus"
+        if apply:
+            run(["gsettings", "set", "org.gnome.desktop.interface", "icon-theme", target])
+        print(ok(target) if apply else todo(target))
+        return
     rc, status, _ = run(["dpkg-query", "-W", "-f=${Status}", "papirus-icon-theme"])
     if rc != 0 or "install ok installed" not in status:
         print(f"   {warn('未安装 papirus-icon-theme')}")
@@ -353,6 +367,8 @@ def apply_icons(root: Path, apply: bool) -> None:
 
 def recolor_folders(root: Path, apply: bool) -> None:
     """把 Papirus 的文件夹图标染成 violet。写的是 /usr/share/icons，需要 root。"""
+    if Path("/usr/share/icons/Azusa-Papirus/index.theme").exists():
+        return
     script = root / "vendor" / "papirus-folders"
     if not script.exists():
         print(f"   {warn('缺少 vendor/papirus-folders')}")
@@ -415,7 +431,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--grub", action="store_true", help="GRUB 菜单配色")
     parser.add_argument("--fonts", action="store_true", help="界面字体（Inter / JetBrains Mono）")
     parser.add_argument("--wallpaper", action="store_true", help="壁纸装到系统并设为背景")
-    parser.add_argument("--icons", action="store_true", help="Papirus-Dark + 紫色文件夹")
+    parser.add_argument("--icons", action="store_true", help="使用已安装的 Azusa 图标主题或 Papirus")
     parser.add_argument("--apply", action="store_true", help="真正写入（默认只预览）")
     parser.add_argument("--system", action="store_true", help="系统级（GRUB 配色 / 图标染色），需 sudo")
     parser.add_argument("--dest-root", default=None,
@@ -451,9 +467,8 @@ def main(argv: list[str] | None = None) -> int:
     print(c("2", "  " + "─" * 52))
     print(c("2", f"  用户目录 {dest_root}"))
 
-    generate()
-
     if targets["terminal"]:
+        generate()
         print(c("1", "\n  终端"))
         apply_terminal(dest_root, backup_dir, args.apply)
 

@@ -16,7 +16,7 @@
 
 ```bash
 sudo apt-get update
-sudo apt-get install build-essential xorriso squashfs-tools dpkg-dev util-linux patch python3-pil fonts-dejavu-core
+sudo apt-get install build-essential xorriso squashfs-tools dpkg-dev util-linux patch python3-pil fonts-dejavu-core librsvg2-bin
 sudo apt-get build-dep calamares
 ```
 

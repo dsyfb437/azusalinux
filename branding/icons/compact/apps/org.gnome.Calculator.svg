@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>计算器</title>
+  <rect x="12" y="4" width="40" height="56" rx="7" fill="#344758"/>
+  <rect x="16" y="8" width="32" height="47" rx="4" fill="#edf2f0"/>
+  <rect x="20" y="12" width="24" height="12" rx="2" fill="#344758"/>
+  <rect x="20" y="29" width="9" height="7" rx="1" fill="#344758"/>
+  <rect x="20" y="41" width="9" height="7" rx="1" fill="#344758"/>
+  <rect x="34" y="29" width="10" height="19" rx="2" fill="#9676c1"/>
+</svg>

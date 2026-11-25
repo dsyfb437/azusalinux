@@ -18,6 +18,7 @@ echo "601e30fbf5d97759367c632e2c33630665039b7e2158fd068403da3ccf1bda1f  $iso" | 
 mkdir "$work"
 cd "$work"
 mkdir upstream base standard live output
+rsvg-convert -w 256 -h 256 "$here/../branding/logo/azusalinux-logo.svg" -o output/azusalinux-logo.png
 mount -o loop,ro "$iso" upstream
 mount -o loop,ro upstream/casper/minimal.squashfs base
 mount -o loop,ro upstream/casper/minimal.standard.squashfs standard
@@ -57,7 +58,7 @@ build_layer() {
             "$root/etc/apt/keyrings/azusalinux-archive-keyring.asc"
         install -m644 "$here/nocloud/apt/azusalinux.sources" "$root/etc/apt/sources.list.d/"
         rm -f "$root/etc/apt/sources.list.d/cdrom.sources"
-        python3 "$here/branding/render-logo.py" "$here/../branding/mascot/azusa-v2.png" \
+        python3 "$here/branding/render-logo.py" "$work/output/azusalinux-logo.png" \
             "$work/output/azusa-logo.png"
         bash "$here/branding/install-target.sh" "$root" "$work/output/azusa-logo.png"
         test -s "$root/boot/vmlinuz"
@@ -78,8 +79,9 @@ build_layer() {
         local config="$here/calamares"
         install -d "$root/etc/calamares"
         cp -r "$config"/{branding,modules,settings.conf} "$root/etc/calamares/"
-        install -m644 "$here/../branding/mascot/azusa-v2.png" "$root/etc/calamares/branding/azusa/azusa.png"
-        install -m644 "$here/../iso-mkosi/mkosi.extra/usr/share/backgrounds/azusa/mascot-dark-1920x1080.jpg" \
+        install -m644 "$work/output/azusalinux-logo.png" "$root/etc/calamares/branding/azusa/azusa.png"
+        install -Dm644 "$here/../branding/logo/azusalinux-logo.svg" "$root/usr/share/icons/hicolor/scalable/apps/azusalinux-logo.svg"
+        install -m644 "$here/../branding/wallpapers/lake-dawn.jpg" \
             "$root/etc/calamares/branding/azusa/desktop.jpg"
         install -Dm755 "$config/azusa-install" "$root/usr/local/bin/azusa-install"
         install -Dm644 "$config/azusa-install.desktop" "$root/usr/share/applications/azusa-install.desktop"
