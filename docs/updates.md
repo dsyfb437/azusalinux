@@ -5,7 +5,7 @@ Azusa 软件源提供 AzusaLinux 自己维护的 Debian 软件包。Ubuntu 软�
 
 ## 接入软件源
 
-通过 0.1.3 RC1 镜像安装的系统已配置 Azusa 签名软件源，可以直接进入「安装更新」。如果你从 0.1.1 安装且未接入过软件源，请执行下面的命令。它会核对完整公钥指纹，再为该软件源配置独立公钥。
+通过 0.1.3 RC1 或 RC2 镜像安装的系统已配置 Azusa 签名软件源，可以直接进入「安装更新」。如果你从 0.1.1 安装且未接入过软件源，请执行下面的命令。它会核对完整公钥指纹，再为该软件源配置独立公钥。
 
 ```bash
 (
@@ -39,7 +39,7 @@ sudo apt install azusa-desktop azusa-settings azusa-artwork azusa-tools azusa-ic
 azusa-fetch --version
 ```
 
-RC1 对应的软件包版本为 0.1.3，升级后应看到 `azusa-fetch 0.1.3`。重新登录 GNOME 后，可以在「设置 → 外观」中体验图标换色。
+RC1 和 RC2 的 Azusa 软件包版本均为 0.1.3，升级后应看到 `azusa-fetch 0.1.3`。重新登录 GNOME 后，可以在「设置 → 外观」中体验图标换色。
 
 ## 暂停 Azusa 更新
 

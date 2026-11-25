@@ -4,9 +4,9 @@ AzusaLinux 是基于 Ubuntu 26.04 的个人桌面发行版，提供 GNOME 桌面
 
 ![AzusaLinux 桌面](docs/images/rc1-desktop.jpg)
 
-[下载 0.1.3 RC1](https://github.com/dsyfb437/azusalinux/releases/tag/v0.1.3-rc1) · [全新安装](docs/installation.md) · [已有系统升级](docs/updates.md)
+[下载 0.1.3 RC2](https://github.com/dsyfb437/azusalinux/releases/tag/v0.1.3-rc2) · [全新安装](docs/installation.md) · [已有系统升级](docs/updates.md)
 
-RC1 已在 VMware Workstation 上通过 BIOS 和 UEFI 全新安装。初次体验建议使用空白虚拟机，UEFI 模式关闭 Secure Boot。
+RC2 已在 VMware Workstation 上通过传统 BIOS 和开启 Secure Boot 的 UEFI 全新安装。初次体验建议使用空白虚拟机。
 
 [开发文档](docs/README.md) · [问题反馈](https://github.com/dsyfb437/azusalinux/issues)
 

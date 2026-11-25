@@ -1,4 +1,4 @@
-# 安装 AzusaLinux 0.1.3 RC1
+# 安装 AzusaLinux 0.1.3 RC2
 
 ## 准备虚拟机
 
@@ -7,25 +7,25 @@
 | 架构 | x86_64（amd64） |
 | CPU 和内存 | 2 核、4.5 GiB |
 | 磁盘 | 40 GiB 空白虚拟盘 |
-| 固件 | BIOS 或 UEFI。UEFI 验收时关闭 Secure Boot |
+| 固件 | 传统 BIOS，或开启 Secure Boot 的 UEFI 虚拟机 |
 
 ## 下载并校验
 
-从 [0.1.3 RC1 发布页](https://github.com/dsyfb437/azusalinux/releases/tag/v0.1.3-rc1) 下载全部四个 `azusalinux-0.1.3-rc1-amd64.iso.part-00` 至 `.part-03` 分卷和 `SHA256SUMS`，放入同一目录。在该目录运行以下命令。
+从 [0.1.3 RC2 发布页](https://github.com/dsyfb437/azusalinux/releases/tag/v0.1.3-rc2) 下载全部四个 `azusalinux-0.1.3-rc2-amd64.iso.part-00` 至 `.part-03` 分卷和 `SHA256SUMS`，放入同一目录。在该目录运行以下命令。
 
 ### Windows PowerShell
 
 ```powershell
-cmd /c copy /b azusalinux-0.1.3-rc1-amd64.iso.part-00+azusalinux-0.1.3-rc1-amd64.iso.part-01+azusalinux-0.1.3-rc1-amd64.iso.part-02+azusalinux-0.1.3-rc1-amd64.iso.part-03 azusalinux-0.1.3-rc1-amd64.iso
-Get-FileHash .\azusalinux-0.1.3-rc1-amd64.iso -Algorithm SHA256
+cmd /c copy /b azusalinux-0.1.3-rc2-amd64.iso.part-00+azusalinux-0.1.3-rc2-amd64.iso.part-01+azusalinux-0.1.3-rc2-amd64.iso.part-02+azusalinux-0.1.3-rc2-amd64.iso.part-03 azusalinux-0.1.3-rc2-amd64.iso
+Get-FileHash .\azusalinux-0.1.3-rc2-amd64.iso -Algorithm SHA256
 ```
 
-完整 ISO 应为 6,816,071,680 字节，SHA-256 为 `87a01e1e32abb516f57d81e4725ad39454b1e66e6f1996b4fd5b3efb35c4548b`。
+完整 ISO 应为 6,823,346,176 字节，SHA-256 为 `90106bd9f41c8cb2abcb76126e4b09e8b327085c971b85eb51731d785a5e50e7`。
 
 ### Linux
 
 ```bash
-cat azusalinux-0.1.3-rc1-amd64.iso.part-{00,01,02,03} > azusalinux-0.1.3-rc1-amd64.iso
+cat azusalinux-0.1.3-rc2-amd64.iso.part-{00,01,02,03} > azusalinux-0.1.3-rc2-amd64.iso
 sha256sum -c SHA256SUMS
 ```
 
@@ -43,6 +43,6 @@ sha256sum -c SHA256SUMS
 
 按提示完成 GNOME 初始设置。在 **设置 → 外观 → 强调色** 中选择颜色。确认启用中文输入源后，可以用 Super+Space 切换输入法。
 
-若要使用 Azusa 的 Ptyxis 终端配色，运行 `azusa-apply --terminal --apply`，再重新打开终端。RC1 自带签名软件源，更新方法见[软件更新](updates.md)。
+若要使用 Azusa 的 Ptyxis 终端配色，运行 `azusa-apply --terminal --apply`，再重新打开终端。RC2 自带签名软件源，更新方法见[软件更新](updates.md)。
 
-RC1 的验收范围是 VMware 虚拟机。反馈时请附上镜像版本、固件类型、失败步骤与截图或日志。[提交问题](https://github.com/dsyfb437/azusalinux/issues)
+RC2 已在 VMware 中验证，实体机兼容性仍待实测。反馈时请附上镜像版本、固件类型、失败步骤与截图或日志。[提交问题](https://github.com/dsyfb437/azusalinux/issues)
